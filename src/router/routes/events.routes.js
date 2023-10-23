@@ -9,4 +9,4 @@ export default [
         name: 'Single-Event',
         component: () => import('@/pages/events/SingleEvent.vue')
     }
-]
+];

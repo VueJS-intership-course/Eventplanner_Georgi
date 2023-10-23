@@ -1,5 +1,4 @@
 import firebaseData from "../../firebase/firebase-config.js";
-import { getAuth } from 'firebase/auth'
 
 export default {
     async signUp(user) {
@@ -11,8 +10,8 @@ export default {
 
             if (userCredentails && userCredentails.user) {
                 await firebaseData.fireStore
-                    .collection("user-profiles")
-                    .doc(userCredential.user.uid)
+                    .collection("users")
+                    .doc(userCredentails.user.uid)
                     .set({
                         email: user.email,
                         username: user.username,

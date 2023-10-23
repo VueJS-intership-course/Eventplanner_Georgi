@@ -2,9 +2,14 @@ import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
 import highChart from './plugins/highChart';
+import router from './router';
+import { createPinia } from 'pinia';
 
+const pinia = createPinia();
 const app = createApp(App);
 
-app.use(highChart)
+app.use(pinia);
+app.use(router);
+app.use(highChart);
 
-app.mount('#app')
+app.mount('#app');

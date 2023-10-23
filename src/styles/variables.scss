@@ -1,0 +1,12 @@
+$form-color: #9d9de7;
+$form-text-color: #ffffff;
+
+
+@mixin form-auth {
+    background-color: $form-color;
+    position: absolute;
+    padding: 2rem 7rem;
+    border-radius: 10%;
+    left: 35%;
+    top: 20%;
+}

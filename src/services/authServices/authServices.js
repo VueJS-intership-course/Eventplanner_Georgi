@@ -15,6 +15,7 @@ export default {
                     .set({
                         email: user.email,
                         username: user.username,
+                        country: user.country
                     });
             }
         } catch (error) {

@@ -1,11 +1,12 @@
 import firebaseData from "../../firebase/firebase-config.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 
 export default {
     async signUp(user) {
         try {
             const userCredentails = await firebaseData.fireAuth.createUserWithEmailAndPassword(
                 user.email,
-                password
+                user.password
             );
 
             if (userCredentails && userCredentails.user) {
@@ -15,7 +16,7 @@ export default {
                     .set({
                         email: user.email,
                         username: user.username,
-                        country: user.country
+                        timeZone: `${user.country}/${user.city}`
                     });
             }
         } catch (error) {
@@ -33,9 +34,51 @@ export default {
     },
 
 
+    async signInWIthGoogle() {
+        const provider = new GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: 'select_account' });
+
+        const auth = getAuth();
+
+        signInWithPopup(auth, provider)
+            .then(async (result) => {
+                const user = result.user;
+
+                await firebaseData.fireStore.collection('users').add({
+                    email: user.email,
+                    username: user.displayName,
+                    id: user.uid
+                })
+            }).catch((error) => {
+                throw error
+            });
+    },
+
+
+    signInWithFacebook() {
+        const provider = new FacebookAuthProvider();
+        const auth = getAuth();
+
+
+        signInWithPopup(auth, provider)
+            .then(async (result) => {
+                const user = result.user;
+                
+                await firebaseData.fireStore.collection('users').add({
+                    email: user.email,
+                    username: user.displayName,
+                    id: user.uid
+                })
+
+            })
+            .catch((error) => {
+                throw error
+            });
+    },
+
     async logout() {
         try {
-           await firebaseData.fireAuth.signOut()
+            await firebaseData.fireAuth.signOut()
         } catch (error) {
             throw error
         }

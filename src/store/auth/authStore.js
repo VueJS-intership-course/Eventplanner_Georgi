@@ -5,6 +5,12 @@ export const authStore = defineStore('authStore', {
         currentUser: null
     }),
 
+    getters: {
+        isCurrentUserEmpty(state) {
+            return state.currentUser !== null
+        }
+    },
+
     actions: {
         setCurrentUser(user) {
             this.currentUser = user;

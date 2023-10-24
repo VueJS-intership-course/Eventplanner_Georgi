@@ -5,8 +5,9 @@ import highChart from '@/plugins/highChart.js';
 import router from '@/router/index.js';
 import { createPinia } from 'pinia';
 import firebaseData from '@/firebase/firebase-config.js';
-import { authStore } from '@/store/authStore/authStore.js';
+import { authStore } from '@/store/auth/authStore.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -20,6 +21,7 @@ const store = authStore()
 firebaseData.fireAuth.onAuthStateChanged((user) => {
     if (user) {
         store.setCurrentUser(user);
+        console.log(user);
     } else {
         store.setCurrentUser(null);
     }

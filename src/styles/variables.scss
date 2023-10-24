@@ -1,12 +1,20 @@
-$form-color: #9d9de7;
+$form-color: #35557c;
 $form-text-color: #ffffff;
-
+$form-wrong-input:#ce0000;
 
 @mixin form-auth {
     background-color: $form-color;
     position: absolute;
-    padding: 2rem 7rem;
+    padding: 2rem 9rem;
     border-radius: 10%;
     left: 35%;
-    top: 20%;
-}
+    top: 15%;
+
+    h1 {
+        font-weight: bolder;
+    }
+
+    span {
+        color: $form-wrong-input;
+    }
+};

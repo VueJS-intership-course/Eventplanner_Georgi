@@ -1,9 +1,13 @@
 <template>
     <div>
-        <TheHeader/>
+        <TheHeader />
     </div>
     <div>
-        <router-view :key="$route.fullPath"></router-view>
+        <router-view v-slot="{ Component }">
+            <transition name="fade" mode="out-in">
+                <component :is="Component" />
+            </transition>
+        </router-view>
     </div>
 </template>
 
@@ -11,4 +15,14 @@
 import TheHeader from './common-templates/TheHeader.vue';
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>

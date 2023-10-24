@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Form @submit="handleSubmit" :validation-schema="schema" class="d-flex flex-column align-items-center justify-content-center">
+        <Form @submit="signUp" :validation-schema="schema" class="d-flex flex-column align-items-center justify-content-center">
             <h1 class="text-light mb-4">Sign Up</h1>
 
             <div class="mb-3">
@@ -23,15 +23,11 @@
                 <Field type="password" name="rePass" class="form-control" id="passwordRepeat"/>
                 <ErrorMessage name="rePass"/>
             </div>
-            <div class="mb-3">
-                <label for="country" class="form-label text-light">Country</label>
-                <Field type="text" name="country" class="form-control" id="country" />
-                <ErrorMessage name="country"/>
-            </div>
-            <div class="mb-5">
-                <label for="town" class="form-label text-light">Town/City</label>
-                <Field type="text" name="city" class="form-control" id="town" />
-                <ErrorMessage name="city"/>
+            <div class="mb-4">
+                <label for="time-zone" class="form-label text-light">Time zone</label>
+                <select  name="country" class="form-control" id="time-zone" v-model="timeZoneSelcted">
+                    <option v-for="timeZone in constants.allTimeZones" :value="timeZone">{{ timeZone }}</option>
+                </select>
             </div>
             <div class="controls">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -49,10 +45,12 @@ import authServices from '@/services/authServices/authServices.js';
 import { useRouter } from 'vue-router';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
-
+import constants from '../../utils/constants.js'
 /*
    router
 */
+
+console.log(constants.allTimeZones);
 
 const router = useRouter();
 
@@ -88,9 +86,10 @@ const schema = yup.object({
 */
 
 
-const errorMsg = ref('')
+const errorMsg = ref('');
+const timeZoneSelcted = ref('');
 
-const handleSubmit = async (values) => {
+const signUp = async (values) => {
     try {
 
         if (password.value !== rePass.value) {
@@ -101,8 +100,7 @@ const handleSubmit = async (values) => {
             email:values.email,
             username:values.username,
             password:values.password,
-            country:values.country,
-            city:values.city
+            timeZone: timeZoneSelcted.value,
         };
 
         await authServices.signUp(userInfo);

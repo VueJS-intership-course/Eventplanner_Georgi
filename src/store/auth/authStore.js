@@ -8,6 +8,10 @@ export const authStore = defineStore('authStore', {
     getters: {
         isCurrentUserEmpty(state) {
             return state.currentUser !== null
+        },
+
+        isCurrentUserAdmin(state) {
+            return state.currentUser !== null ? state.currentUser.isAdmin : false
         }
     },
 

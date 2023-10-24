@@ -1,5 +1,6 @@
 import firebaseData from "../../firebase/firebase-config.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export default {
     async signUp(user) {
@@ -16,7 +17,7 @@ export default {
                     .set({
                         email: user.email,
                         username: user.username,
-                        timeZone: `${user.country}/${user.city}`
+                        timeZone: user.timeZone
                     });
             }
         } catch (error) {
@@ -55,6 +56,19 @@ export default {
     },
 
 
+    async getUserData(userId) {
+        try {
+            const userDoc = await firebaseData.fireStore.collection('users').doc(userId).get();
+
+            const userData = userDoc.data();
+
+            return userData;
+
+        } catch (error) {
+            console.error('Error retrieving user data:', error);
+            throw error;
+        }
+    },
     signInWithFacebook() {
         const provider = new FacebookAuthProvider();
         const auth = getAuth();
@@ -63,7 +77,7 @@ export default {
         signInWithPopup(auth, provider)
             .then(async (result) => {
                 const user = result.user;
-                
+
                 await firebaseData.fireStore.collection('users').add({
                     email: user.email,
                     username: user.displayName,

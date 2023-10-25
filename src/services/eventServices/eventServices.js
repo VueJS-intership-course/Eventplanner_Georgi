@@ -8,16 +8,21 @@ export default {
             const data = [];
             const querySnapshot = await firebaseData.fireStore.collection("events").get();
 
+
             querySnapshot.forEach((doc) => {
-                const { id, name, ticket, price, date, time, location, imgSrc } = doc.data();
-                const event = new Event(id, name, ticket, price, date, time, location, imgSrc);
+                console.log(doc.data());
+
+                const {date, id, imgSrc, location, name,price, ticket, time} = doc.data()
+                
+                const event = new Event(date, id, imgSrc, location, name,price, ticket, time)
+
                 data.push(event);
             });
 
             return data;
 
         } catch (error) {
-            
+
             throw error;
         }
     },
@@ -31,14 +36,15 @@ export default {
                 id: crypto.randomUUID(),
                 name: eventData.name,
                 ticket: eventData.ticket,
+                time: eventData.time,
                 price: eventData.price,
                 date: eventData.date,
                 location: eventData.location,
                 imgSrc: blobImg
             });
-        
+
         } catch (error) {
-            
+
             throw error;
         }
     }

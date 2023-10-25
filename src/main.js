@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import '@/styles/style.css'
+import '@/styles/style.scss'
 import App from '@/App.vue'
 import highChart from '@/plugins/highChart.js';
 import router from '@/router/index.js';
@@ -9,6 +9,8 @@ import { authStore } from '@/store/auth/authStore.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import authServices from './services/authServices/authServices';
+
+
 
 const pinia = createPinia();
 const app = createApp(App);

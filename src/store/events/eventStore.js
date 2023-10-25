@@ -12,8 +12,8 @@ export const eventStore = defineStore('events', {
             this.events = await eventServices.getAll()
         },
 
-        async addEvent(eventData) {
-            await eventServices.addEvent(eventData)
+        async addEvent(eventData, file) {
+            await eventServices.addEvent(eventData, file)
         }
     }
 })

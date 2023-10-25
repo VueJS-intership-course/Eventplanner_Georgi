@@ -6,12 +6,12 @@
 
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label text-light">Email address</label>
-                <Field type="email" name="email" class="form-control" v-model="email" />
+                <Field type="email" name="email" class="form-control" />
                 <ErrorMessage name="email" />
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label text-light">Password</label>
-                <Field type="password" name="password" class="form-control" v-model="password" />
+                <Field type="password" name="password" class="form-control" />
                 <ErrorMessage name="password" />
             </div>
             <div class="controls">

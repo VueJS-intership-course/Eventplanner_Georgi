@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-info">
+    <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
             <router-link class="navbar-brand text-xl me-7" :to="{ name: 'Home-Page' }">EventApp</router-link>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">

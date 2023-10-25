@@ -1,7 +1,6 @@
 <template>
-    <section class="dark">
-        <div class="container py-3" v-if="store.events !== null && store.events.length">
-            <h1 class="h1 text-center">Find your adventure</h1>
+    <section>
+        <div class="container py-5 d-flex" v-if="store.events !== null && store.events.length">
             <event-card v-for="event in store.events" :event-data="event"></event-card>
         </div>
         <div v-else>
@@ -30,4 +29,7 @@ store.getAllEvents();
 
 
 <style scoped lang="scss">
+.container {
+    gap: 3rem
+}
 </style>

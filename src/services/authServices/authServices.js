@@ -4,6 +4,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export default {
     async signUp(user) {
+        console.log(user)
         try {
             const userCredentails = await firebaseData.fireAuth.createUserWithEmailAndPassword(
                 user.email,

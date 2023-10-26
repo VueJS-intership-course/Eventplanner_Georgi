@@ -1,14 +1,14 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-primary">
+    <nav class="navbar navbar-expand-lg p-2">
         <div class="container-fluid">
-            <router-link class="navbar-brand text-xl me-7" :to="{ name: 'Home-Page' }">EventApp</router-link>
+            <router-link class="navbar-brand text-xl me-7 fw-bold" :to="{ name: 'Home-Page' }">Eventify</router-link>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <router-link class="nav-link text-light me-3" :to="{ name: 'Event-Catalog' }">Events</router-link>
-                    <router-link v-if="!isAuthenticated" class="nav-link text-light me-3" :to="{ name: 'SignUp-Page' }">Sign Up</router-link>
-                    <router-link v-if="!isAuthenticated" class="nav-link text-light me-3" :to="{ name: 'SignIn-Page' }">Sign In</router-link>
-                    <router-link v-if="isAuthenticated" class="nav-link text-light me-3" :to="{ name: 'Profile-Page' }">Profile</router-link>
-                    <button v-if="isAuthenticated" class="nav-link text-light me-3" @click="signOut">Logout</button>
+                    <router-link class="nav-link text-light me-3 fw-bold" :to="{ name: 'Event-Catalog' }">Events</router-link>
+                    <router-link v-if="!isAuthenticated" class="nav-link text-light me-3 fw-bold" :to="{ name: 'SignUp-Page' }">Sign Up</router-link>
+                    <router-link v-if="!isAuthenticated" class="nav-link text-light me-3 fw-bold" :to="{ name: 'SignIn-Page' }">Sign In</router-link>
+                    <router-link v-if="isAuthenticated" class="nav-link text-light me-3 fw-bold" :to="{ name: 'Profile-Page' }">Profile</router-link>
+                    <button v-if="isAuthenticated" class="nav-link text-light me-3 fw-bold" @click="signOut">Logout</button>
                 </div>
             </div>
         </div>
@@ -55,4 +55,15 @@ const isAuthenticated = computed(() => store.isCurrentUserEmpty)
 
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import '../styles/variables.scss';
+.navbar {
+    @include page-background;
+    vertical-align: middle;
+
+    .navbar-brand {
+        font-size: xx-large;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+}
+</style>

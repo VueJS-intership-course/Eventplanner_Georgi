@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import '@/styles/style.scss'
 import App from '@/App.vue'
 import highChart from '@/plugins/highChart.js';
+import TimeConvertor from './plugins/TimeConvertor';
 import router from '@/router/index.js';
 import { createPinia } from 'pinia';
 import firebaseData from '@/firebase/firebase-config.js';
@@ -18,6 +19,7 @@ const app = createApp(App);
 app.use(pinia);
 app.use(router);
 app.use(highChart);
+app.use(TimeConvertor)
 
 const store = authStore()
 

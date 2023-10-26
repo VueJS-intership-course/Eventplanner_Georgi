@@ -23,6 +23,20 @@
 
 <script setup>
 /*
+   imports
+*/
+import { authStore } from '../../store/auth/authStore';
+import moment from 'moment-timezone';
+import tzlookup from 'tz-lookup'
+import { computed, watch } from 'vue';
+
+/*
+   users store
+*/
+
+const store = authStore();
+
+/*
    props
 */
 
@@ -33,12 +47,27 @@ const props = defineProps({
     }
 });
 
-console.log(props.eventData);
+
+
+const eventTimeZone = tzlookup(props.eventData.location[0], props.eventData.location[1])
+
+
+const originalTime = moment.tz(`${props.eventData.date} ${props.eventData.time}`, eventTimeZone);
+
+const isUserEmpty = computed(() => store.currentUser !== null);
+
+watch(() => isUserEmpty, () => {
+    const targetTime = originalTime.tz(store.currentUser.timeZone).format();
+
+    console.log(targetTime)
+})
+
 </script>
 
 
 <style scoped lang="scss">
 .card {
     border-radius: 7%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 </style>

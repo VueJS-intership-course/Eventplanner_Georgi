@@ -3,7 +3,7 @@
         <div v-if="isAddClicked">
             <add-event @close-modal="closeModal"></add-event>
         </div>
-        <div class="wrapper d-flex flex-column mt-4 bg-info">
+        <div class="wrapper d-flex flex-column mt-4">
             <div>
                 <EventControls @open-add="showAdd" />
             </div>
@@ -39,7 +39,9 @@ const closeModal = () => {
 
 
 <style scoped lang="scss">
+@import '../../styles/variables.scss';
 .wrapper {
-    border-radius: 3%;
+    border: 1px solid black;
+    @include page-background
 }
 </style>

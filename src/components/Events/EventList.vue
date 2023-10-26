@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="container py-5 d-flex" v-if="store.events !== null && store.events.length">
-            <event-card v-for="event in store.events" :event-data="event"></event-card>
+            <event-card v-for="event in store.filteredEvents" :key="event.id" :event-data="event"></event-card>
         </div>
         <div v-else>
             <empty-events></empty-events>
@@ -13,7 +13,7 @@
 /*
    imports
 */
-import { eventStore } from '../../store/events/eventStore.js';
+import { eventStore } from '@/store/events/eventStore.js';
 import EventCard from '@/components/Events/EventCard.vue';
 import EmptyEvents from '@/components/Events/EmptyEvents.vue';
 
@@ -24,6 +24,7 @@ import EmptyEvents from '@/components/Events/EmptyEvents.vue';
 const store = eventStore();
 
 store.getAllEvents();
+
 
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg p-2">
         <div class="container-fluid">
-            <router-link class="navbar-brand text-xl me-7 fw-bold" :to="{ name: 'Home-Page' }">Eventify</router-link>
+            <router-link class="navbar-brand text-xl me-7 fw-bold text-light" :to="{ name: 'Home-Page' }">Eventify</router-link>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <router-link class="nav-link text-light me-3 fw-bold" :to="{ name: 'Event-Catalog' }">Events</router-link>
@@ -63,7 +63,7 @@ const isAuthenticated = computed(() => store.isCurrentUserEmpty)
 
     .navbar-brand {
         font-size: xx-large;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-family: $page-important;
     }
 }
 </style>

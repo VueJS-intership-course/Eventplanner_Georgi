@@ -22,7 +22,7 @@ function InitializeMap() {
         target: 'map',
         view: new View({
             center: [0, 0],
-            zoom: 5
+            zoom: 1
         }),
         layers: [new TileLayer({
             source: new OSM()
@@ -37,7 +37,7 @@ function InitializeMap() {
   
 <style scoped>
 .map {
-    width: 800px;
+    width: 900px;
     height: 720px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

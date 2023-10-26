@@ -65,7 +65,7 @@
    imports
 */
 
-import { eventStore } from '../../store/events/eventStore';
+import { eventStore } from '@/store/events/eventStore.js';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 import { ref } from 'vue';

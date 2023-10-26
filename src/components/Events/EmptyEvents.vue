@@ -1,5 +1,5 @@
 <template>
-    <div class="card text-center flex-column justify-content-center align-items-center">
+    <div class="card text-center justify-self-center flex-column justify-content-center align-items-center">
         <div class="card-body">
             <h2 class="card-title text-light font-weight-bold">There are no events yet!</h2>
             <h5 class="card-text text-light mb-4">Please check again later</h5>

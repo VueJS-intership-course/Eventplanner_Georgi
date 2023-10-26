@@ -2,6 +2,7 @@ $form-color: #1e67c0;
 $form-text-color: #ffffff;
 $form-wrong-input:#ce0000;
 $dark-blue:#3c70b1;
+$page-important: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 
 @mixin form-auth {
     background-color: $form-color;

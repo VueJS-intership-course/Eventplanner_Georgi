@@ -3,7 +3,7 @@
         <div v-if="isAddClicked">
             <add-event @close-modal="closeModal"></add-event>
         </div>
-        <div class="wrapper d-flex flex-column mt-4">
+        <div class="wrapper d-flex flex-column flex-wrap mt-4">
             <div>
                 <EventControls @open-add="showAdd" />
             </div>
@@ -18,11 +18,17 @@
 </template>
 
 <script setup>
+/*
+   imports
+*/
 import EventControls from '../../components/Events/EventControls.vue';
 import EventList from '../../components/Events/EventList.vue';
 import AddEvent from '../../components/Events/AddEvent.vue';
 import { ref } from 'vue';
 
+/*
+   add modal handling
+*/
 
 const isAddClicked = ref(false)
 
@@ -43,5 +49,11 @@ const closeModal = () => {
 .wrapper {
     border: 1px solid black;
     @include page-background
+}
+
+
+.introduction {
+    font-weight: bolder;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 </style>

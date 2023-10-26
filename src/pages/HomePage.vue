@@ -1,14 +1,15 @@
 <template>
     <div class="container d-flex flex-column align-items-center justify-conent-center mt-5 p-5">
-        <div>
-            <h1>Home Page</h1>
+        <div class="mb-5">
+            <WelcomeCard/>
         </div>
         <div class="events-map">
+            <h2 class="subHead fw-bold text-center">Find the perfect event for you</h2>
             <MapComp v-if="store.events" @map-ready="mapLoaded" />
             <MapPopup ref="popup" id="journey-info">
                 <template v-if="feature">
                     <h4>{{ feature.getProperties().properties.name }}</h4>
-                    <p>{{ feature.getProperties().properties.date}} / {{ feature.getProperties().properties.time }}</p>
+                    <p>{{ $formatDateInTimeZone(feature.getProperties().properties.location, feature.getProperties().properties.date, feature.getProperties().properties.time) }}</p>
                     <router-link class="btn btn-primary" :to="{name:'Single-Event', params:{id:feature.getProperties().properties.id}}">See details</router-link>
                 </template>
             </MapPopup>
@@ -31,6 +32,7 @@ import Feature from 'ol/Feature';
 import VectorSource from "ol/source/Vector";
 import Point from "ol/geom/Point.js";
 import { ref } from 'vue';
+import WelcomeCard from '../common-templates/WelcomeCard.vue';
 
 /*
    map handling
@@ -90,5 +92,9 @@ const handleMapClick = (coordinate) => {
 @import '../styles/variables.scss';
 .container {
     @include page-background;
+
+    .subHead {
+        text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    }
 }
 </style>

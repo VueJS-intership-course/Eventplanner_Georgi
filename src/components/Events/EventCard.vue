@@ -5,8 +5,8 @@
             <h4 class="card-title fw-bold">{{ eventData.name }}</h4>
             <div class="mb-3">
                 <time :datetime="`${eventData.date} ${eventData.time}`">
-                    <i class="bi bi-calendar-date"></i> {{ eventData.date }} / <i class="bi bi-clock"></i> {{ eventData.time
-                    }}
+                      {{ $formatDateInTimeZone(eventData.location ,eventData.date, eventData.time) }}
+                    <!-- <i class="bi bi-calendar-date"></i> {{ eventData.date }} / <i class="bi bi-clock"></i> {{ eventData.time}} -->
                 </time>
             </div>
             <ul class="list-group bg-dark mb-3">
@@ -25,7 +25,7 @@
 /*
    imports
 */
-import { authStore } from '../../store/auth/authStore';
+import { authStore } from '@/store/auth/authStore.js';
 import moment from 'moment-timezone';
 import tzlookup from 'tz-lookup'
 import { computed, watch } from 'vue';
@@ -49,18 +49,18 @@ const props = defineProps({
 
 
 
-const eventTimeZone = tzlookup(props.eventData.location[0], props.eventData.location[1])
+// const eventTimeZone = tzlookup(props.eventData.location[0], props.eventData.location[1])
 
 
-const originalTime = moment.tz(`${props.eventData.date} ${props.eventData.time}`, eventTimeZone);
+// const originalTime = moment.tz(`${props.eventData.date} ${props.eventData.time}`, eventTimeZone);
 
-const isUserEmpty = computed(() => store.currentUser !== null);
+// const isUserEmpty = computed(() => store.currentUser !== null);
 
-watch(() => isUserEmpty, () => {
-    const targetTime = originalTime.tz(store.currentUser.timeZone).format();
+// watch(() => isUserEmpty, () => {
+//     const targetTime = originalTime.tz(store.currentUser.timeZone).format();
 
-    console.log(targetTime)
-})
+//     console.log(targetTime)
+// })
 
 </script>
 

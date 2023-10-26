@@ -36,10 +36,8 @@
 import { ref } from 'vue';
 import authServices from '@/services/authServices/authServices.js';
 import { useRouter } from 'vue-router';
-import {  ErrorMessage, Field } from 'vee-validate';
-import * as yup from 'yup';
-import constants from '../../utils/constants.js';
-import AutoComplete from '../../common-templates/AutoComplete.vue';
+import constants from '@/utils/constants.js';
+import AutoComplete from '@/common-templates/AutoComplete.vue';
 
 /*
    router
@@ -47,32 +45,6 @@ import AutoComplete from '../../common-templates/AutoComplete.vue';
 
 
 const router = useRouter();
-
-/*
-   validation
-*/
-
-const schema = yup.object({
-    email: yup.string().email("Enter a valid email!").required("This field is required!"),
-    username: yup
-        .string()
-        .required("This field is required!")
-        .min(4, "Username must be at least 4 symbols!"),
-    password: yup
-        .string()
-        .min(8, "Password must be at least 8 symbols!")
-        .required("This field is required!"),
-    rePass: yup
-        .string()
-        .required("This field is required!")
-        .oneOf([yup.ref("password")], "Passwords does not match!"),
-    country: yup
-        .string()
-        .required('This field is required'),
-    city: yup
-        .string()
-        .required('This field is required'),
-})
 
 
 /*

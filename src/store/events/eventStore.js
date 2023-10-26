@@ -11,6 +11,7 @@ export const eventStore = defineStore('events', {
             location: '',
             ticketStatus: '',
         },
+        currentEvent:null
     }),
 
     getters: {
@@ -52,6 +53,10 @@ export const eventStore = defineStore('events', {
 
         async addEvent(eventData, file) {
             await eventServices.addEvent(eventData, file)
+        },
+
+        async getCurrentEvent(eventId) {
+            this.currentEvent = await eventServices.getSingleEvent(eventId)
         },
 
         filterReset() {

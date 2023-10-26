@@ -1,6 +1,6 @@
-import firebaseData from '../../firebase/firebase-config.js';
-import { Event } from '../../utils/classes.js';
-import uploadImage from '../../utils/imageConvertor.js';
+import firebaseData from '@/firebase/firebase-config.js';
+import { Event } from '@/utils/classes.js';
+import uploadImage from '@/utils/imageConvertor.js';
 
 export default {
     async getAll() {
@@ -10,8 +10,6 @@ export default {
 
 
             querySnapshot.forEach((doc) => {
-                console.log(doc.data());
-
                 const {date, id, imgSrc, location, name,price, ticket, time} = doc.data()
                 
                 const event = new Event(date, id, imgSrc, location, name,price, ticket, time)
@@ -47,5 +45,26 @@ export default {
 
             throw error;
         }
+    },
+
+
+    async getSingleEvent(eventId) {
+        try {
+            const eventDoc = await firebaseData.fireStore.collection('events')
+                .where('id', '==', eventId)
+                .get();
+    
+            if (!eventDoc.empty) {
+                const eventData = eventDoc.docs[0].data();
+                return eventData;
+            }
+    
+            return null; 
+    
+        } catch (error) {
+            console.error('Error retrieving event data', error);
+            throw error;
+        }
     }
+    
 }

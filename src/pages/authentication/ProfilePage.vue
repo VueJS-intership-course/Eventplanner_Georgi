@@ -12,16 +12,16 @@
                     </div>
 
                     <div class="text-center mt-3">
-                        <span class="bg-secondary p-1 px-4 rounded text-white ">{{ isAdmin }}</span>
+                        <span class="bg-secondary p-1 px-4 rounded text-white ">{{ userType }}</span>
                         <h5 class="mt-2 mb-0">{{ store.currentUser.username }}</h5>
-                        <span class="mb-5">{{ store.currentUser.email }}</span>
+                        <span class="mb-4">{{ store.currentUser.email }}</span>
                        
-                        <ul class="list-group" v-if="!store.currentUser.isAdmin">
-                            <li class="list-group-item">Tickets bought: {{ store.currentUser.tickets }} </li>
-                            <li class="list-group-item">Total spend money: {{ store.currentUser.total }}</li>
+                        <ul class="list-group mt-4" v-if="!isUserAdmin">
+                            <li class="list-group-item">Tickets bought: {{ store.currentUser.tickets }}$</li>
+                            <li class="list-group-item">Total spend money: {{ store.currentUser.total }}$</li>
                         </ul>
 
-                        <div class="buttons mt-4">
+                        <div v-if="isUserAdmin" class="buttons mt-4">
                             <button class="btn btn-outline-primary px-4">See Budget</button>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
    imports
 */
 import { computed } from 'vue';
-import { authStore } from '../../store/auth/authStore';
+import { authStore } from '../../store/auth/authStore.js';
 
 /*
    store
@@ -48,7 +48,8 @@ import { authStore } from '../../store/auth/authStore';
 const store = authStore();
 
 const isUserLogged = computed(() => store.currentUser !== null)
-const isAdmin = computed(() => store.currentUser.isAdmin ? 'Admin' : 'Client');
+const userType = computed(() => store.currentUser.isAdmin ? 'Admin' : 'Client');
+const isUserAdmin = computed(() => store.isCurrentUserAdmin)
 
 
 </script>

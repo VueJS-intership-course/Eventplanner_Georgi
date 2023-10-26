@@ -3,6 +3,14 @@ $form-text-color: #ffffff;
 $form-wrong-input:#ce0000;
 $dark-blue:#3c70b1;
 $page-important: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+$main-green: #79dd09 !default;
+$main-green-rgb-015: rgba(121, 221, 9, 0.1) !default;
+$main-yellow: #bdbb49 !default;
+$main-yellow-rgb-015: rgba(189, 187, 73, 0.1) !default;
+$main-red: #bd150b !default;
+$main-red-rgb-015: rgba(189, 21, 11, 0.1) !default;
+$main-blue: #0076bd !default;
+$main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
 
 @mixin form-auth {
     background-color: $form-color;

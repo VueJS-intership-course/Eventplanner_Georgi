@@ -24,13 +24,8 @@
 import MapComp from '../components/Map/MapComp.vue';
 import { eventStore } from '../store/events/eventStore';
 import MapPopup from '../components/Map/MapPopup.vue';
+import mapLayers from '../utils/mapLayers.js';
 
-
-import { fromLonLat } from "ol/proj";
-import VectorLayer from "ol/layer/Vector";
-import Feature from 'ol/Feature';
-import VectorSource from "ol/source/Vector";
-import Point from "ol/geom/Point.js";
 import { ref } from 'vue';
 import WelcomeCard from '../common-templates/WelcomeCard.vue';
 
@@ -49,27 +44,12 @@ const popup = ref(null);
 const mapLoaded = (map) => {
     mapInstance.value = map
     mapInstance.value.addOverlay(popup.value.overlay)
-    const layers = createLayer(store.events);
+    const layers = mapLayers.createMultipleLayers(store.events);
     mapInstance.value.addLayer(layers);
     mapInstance.value.on('click', (event) => {
         handleMapClick(event.coordinate)
         popup.value.overlay.setPosition(event.coordinate)
     })
-}
-
-
-const createLayer = (events) => {
-    const features = events.map(item => new Feature({
-        geometry: new Point(fromLonLat([item.location[0], item.location[1]])),
-        properties: item
-    }))
-
-
-    const source = new VectorSource({
-        features: features
-    });
-
-    return new VectorLayer({ source });
 }
 
 const handleMapClick = (coordinate) => {

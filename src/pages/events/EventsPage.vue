@@ -21,9 +21,9 @@
 /*
    imports
 */
-import EventControls from '../../components/Events/EventControls.vue';
-import EventList from '../../components/Events/EventList.vue';
-import AddEvent from '../../components/Events/AddEvent.vue';
+import EventControls from '@/components/Events/EventControls.vue';
+import EventList from '@/components/Events/EventList.vue';
+import AddEvent from '@/components/Events/AddEvent.vue';
 import { ref } from 'vue';
 
 /*

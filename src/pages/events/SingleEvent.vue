@@ -7,8 +7,7 @@
             <div class="">
                 <div class="card-header mb-4">
                     <h2 class="card-title">{{ store.currentEvent.name }}</h2>
-                    <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.location, store.currentEvent.date,
-                        store.currentEvent.time) }}</p>
+                    <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.location, store.currentEvent.date, store.currentEvent.time) }}</p>
                 </div>
                 <div class="card-body mb-4">
                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quis est nam,
@@ -27,7 +26,7 @@
                 <div class="card-footer">
                     <button v-if="!isAdmin" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary">Buy
                         Ticket</button>
-                    <button v-if="isAdmin" class="btn pmd-btn-flat pmd-ripple-effect btn-dark" type="button">Action</button>
+                    <button v-if="isAdmin" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button">Edit</button>
                 </div>
             </div>
         </div>
@@ -41,11 +40,11 @@
 /*
    imports
 */
-import { eventStore } from '../../store/events/eventStore';
-import { authStore } from '../../store/auth/authStore';
+import { eventStore } from '@/store/events/eventStore.js';
+import { authStore } from '@/store/auth/authStore.js';
 import { computed, ref } from 'vue';
-import MapComp from '../../components/Map/MapComp.vue';
-import mapLayers from '../../utils/mapLayers.js';
+import MapComp from '@/components/Map/MapComp.vue';
+import mapLayers from '@/utils/mapLayers.js';
 
 /*
    props
@@ -59,14 +58,14 @@ const props = defineProps({
 })
 
 /*
-   Current Event
+   store -> Current Event
 */
 const store = eventStore();
 
 store.getCurrentEvent(props.id);
 
 /*
-   is user Admin
+   store -> is user Admin
 */
 
 const users = authStore();
@@ -87,17 +86,19 @@ const onMapReady = (map) => {
     const extent = layer.getSource().getExtent();
     mapInstance.value
         .getView()
-        .fit(extent, { duration: 2500, zoom: 1 });
+        .fit(extent, { duration: 2400, zoom: 100 });
 }
 
 </script>
 
 <style scoped lang="scss">
 @import '../../styles/variables.scss';
+
 .signle-event {
     width: 100%;
-    gap:4rem;
+    gap: 4rem;
     @include page-background;
+
     .container {
         justify-content: center;
         align-items: center;

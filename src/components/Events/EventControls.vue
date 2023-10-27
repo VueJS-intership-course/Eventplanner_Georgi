@@ -29,7 +29,7 @@ import { authStore } from '@/store/auth/authStore.js';
 import { computed, ref, watch } from 'vue';
 import EventSearch from '@/components/Events/EventSearch.vue';
 import { eventStore } from '@/store/events/eventStore.js';
-import EventsFilter from './EventsFilter.vue';
+import EventsFilter from '@/components/Events/EventsFilter.vue';
 
 /*
    is user admin
@@ -89,10 +89,9 @@ const closeFilter = () => {
 
 <style scoped lang="scss">
 .event-header {
-    background-color: rgb(62, 62, 78);
 
     .filter-controls {
-        gap:1rem
+        gap: 1rem
     }
 }
 </style>

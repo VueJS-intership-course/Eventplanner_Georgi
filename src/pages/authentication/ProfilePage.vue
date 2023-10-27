@@ -1,11 +1,11 @@
 <template>
-    <div class="container mt-5 vh-100 p-5" v-if="isUserLogged">
+    <div class="container d-flex flex-column justify-content-center mt-4 vh-100 p-5" v-if="isUserLogged">
 
         <div class="row d-flex justify-content-center align-items-center">
 
             <div class="col-md-7">
 
-                <div class="card p-3 py-4 bg-light">
+                <div class="card p-3 py-5 bg-light">
 
                     <div class="text-center">
                         <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" width="100" class="rounded-circle">
@@ -39,7 +39,7 @@
    imports
 */
 import { computed } from 'vue';
-import { authStore } from '../../store/auth/authStore.js';
+import { authStore } from '@/store/auth/authStore.js';
 
 /*
    store
@@ -65,7 +65,6 @@ const isUserAdmin = computed(() => store.isCurrentUserAdmin)
     position: relative;
     overflow: hidden;
     border-radius: 8px;
-    cursor: pointer;
 }
 
 .card:before {

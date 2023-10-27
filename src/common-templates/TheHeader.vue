@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg p-2">
+    <nav class="navbar navbar-expand-lg mb-5 p-2">
         <div class="container-fluid">
             <router-link class="navbar-brand text-xl me-7 fw-bold text-light" :to="{ name: 'Home-Page' }">Eventify</router-link>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
@@ -21,7 +21,7 @@
    imports
 */
 import { computed, ref } from 'vue';
-import authServices from '../services/authServices/authServices.js';
+import authServices from '@/services/authServices/authServices.js';
 import { useRouter } from 'vue-router';
 import {authStore} from '@/store/auth/authStore.js';
 
@@ -63,7 +63,7 @@ const isAuthenticated = computed(() => store.isCurrentUserEmpty)
     vertical-align: middle;
 
     .navbar-brand {
-        font-size: xx-large;
+        font-size: 3.2rem;
         font-family: $page-important;
     }
 }

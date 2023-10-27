@@ -13,12 +13,13 @@
 
 <script setup>
 import TheHeader from './common-templates/TheHeader.vue';
+
 </script>
 
 <style scoped lang="scss">
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.5s ease;
+    transition: opacity 0.3s ease;
 }
 
 .fade-enter-from,

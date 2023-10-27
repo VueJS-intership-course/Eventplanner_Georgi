@@ -1,6 +1,7 @@
 import firebaseData from '@/firebase/firebase-config.js';
 import { Event } from '@/utils/classes.js';
 import uploadImage from '@/utils/imageConvertor.js';
+import authServices from '@/services/authServices/authServices.js';
 
 export default {
     async getAll() {
@@ -10,9 +11,9 @@ export default {
 
 
             querySnapshot.forEach((doc) => {
-                const {date, id, imgSrc, location, name,price, ticket, time} = doc.data()
-                
-                const event = new Event(date, id, imgSrc, location, name,price, ticket, time)
+                const { date, id, imgSrc, location, name, price, ticket, time } = doc.data()
+
+                const event = new Event(date, id, imgSrc, location, name, price, ticket, time)
 
                 data.push(event);
             });
@@ -41,6 +42,8 @@ export default {
                 imgSrc: blobImg
             });
 
+            await authServices.sendAllUsersEmail()
+
         } catch (error) {
 
             throw error;
@@ -53,18 +56,18 @@ export default {
             const eventDoc = await firebaseData.fireStore.collection('events')
                 .where('id', '==', eventId)
                 .get();
-    
+
             if (!eventDoc.empty) {
                 const eventData = eventDoc.docs[0].data();
                 return eventData;
             }
-    
-            return null; 
-    
+
+            return null;
+
         } catch (error) {
             console.error('Error retrieving event data', error);
             throw error;
         }
     }
-    
+
 }

@@ -7,14 +7,12 @@
             <p class="card-text mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur porro, accusamus
                 voluptatibus nihil eius in ad veritatis odit maiores ipsum veniam inventore minus, fugit neque, pariatur
                 dolor omnis. Laborum, aliquid.</p>
-            <RouterLink class="btn btn-primary" :to="{name:'Event-Catalog'}">See events</RouterLink>
+            <RouterLink class="btn btn-primary" :to="{ name: 'Event-Catalog' }">See events</RouterLink>
         </div>
     </div>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style lang="scss" scoped>
 @import '../styles/variables.scss';

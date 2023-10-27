@@ -1,6 +1,7 @@
 import firebaseData from "../../firebase/firebase-config.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import { collection, query, where, getDocs } from 'firebase/firestore';
+import sendCustomEmail from "../../utils/emailSender.js";
 
 export default {
     async signUp(user) {
@@ -70,6 +71,8 @@ export default {
             throw error;
         }
     },
+
+
     signInWithFacebook() {
         const provider = new FacebookAuthProvider();
         const auth = getAuth();
@@ -89,6 +92,23 @@ export default {
             .catch((error) => {
                 throw error
             });
+    },
+
+
+    async sendAllUsersEmail() {
+        try {
+            const querySnapshot = await firebaseData.fireStore.collection("users").get();
+
+            querySnapshot.forEach(async (doc) => {
+                const {email, username } = doc.data();
+                  
+                sendCustomEmail(email, username)
+            });
+
+        } catch (error) {
+            console.error("Error fetching user profiles:", error);
+            throw error;
+        }
     },
 
     async logout() {

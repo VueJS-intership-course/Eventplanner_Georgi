@@ -7,10 +7,10 @@
             <div>
                 <EventControls @open-add="showAdd" />
             </div>
-            <div class="introduction">
+            <!-- <div class="introduction">
                 <h1 class="h1 text-center fw-bolder mb-4 text-center">Find your adventure</h1>
-            </div>
-            <div class="align-self-start p-5">
+            </div> -->
+            <div class="align-self-center p-5">
                 <EventList />
             </div>
         </div>
@@ -47,7 +47,8 @@ const closeModal = () => {
 <style scoped lang="scss">
 @import '../../styles/variables.scss';
 .wrapper {
-    border: 1px solid black;
+    // border: 1px solid black;
+    border-radius: 4%;
     @include page-background
 }
 

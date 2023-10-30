@@ -11,6 +11,7 @@ const router = createRouter({
             component: () => import('@/pages/NotFound.vue'),
         },
     ],
+    linkActiveClass: 'active'
 });
 
 export default router;

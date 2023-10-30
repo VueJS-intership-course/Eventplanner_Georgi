@@ -68,6 +68,22 @@ export default {
             console.error('Error retrieving event data', error);
             throw error;
         }
+    },
+
+
+    async getEventCountryStatitstics() {
+        const data = {};
+        const querySnapshot = await firebaseData.fireStore.collection("events").get();
+
+        querySnapshot.forEach((doc) => {
+            const { country } = doc.data();
+            data[country] = (data[country] || 0) + 1;
+        });
+
+        const result = Object.entries(data).map(([country, count]) => ({ name: country, value: count }));
+
+        console.log(result);
+        return result;
     }
 
 }

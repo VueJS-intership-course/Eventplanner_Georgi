@@ -133,7 +133,7 @@ const addEvent = (values) => {
         store.addEvent(newEvent, img.value)
 
         emits('close-modal')
-
+    
     } catch (error) {
         errorMsg.value = error.message
     }

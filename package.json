@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
+    "@highcharts/map-collection": "^2.1.0",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.1",
     "firebase": "^10.5.0",

@@ -65,6 +65,12 @@ const isAuthenticated = computed(() => store.isCurrentUserEmpty)
     .navbar-brand {
         font-size: 3.2rem;
         font-family: $page-important;
+    };
+
+    .active {
+        text-decoration: underline;
+        text-underline-offset: 0.5rem;
+        text-decoration-thickness: 20%;
     }
 }
 </style>

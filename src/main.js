@@ -11,8 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import authServices from './services/authServices/authServices';
 
-
-
 const pinia = createPinia();
 const app = createApp(App);
 
@@ -20,7 +18,6 @@ app.use(pinia);
 app.use(router);
 app.use(highChart);
 app.use(TimeConvertor)
-
 const store = authStore()
 
 firebaseData.fireAuth.onAuthStateChanged(async (user) => {

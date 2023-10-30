@@ -11,7 +11,8 @@ export const eventStore = defineStore('events', {
             location: '',
             ticketStatus: '',
         },
-        currentEvent:null
+        currentEvent: null,
+        eventStatistic: null
     }),
 
     getters: {
@@ -66,6 +67,10 @@ export const eventStore = defineStore('events', {
                 location: '',
                 ticketStatus: '',
             }
+        },
+
+        async getStatistics() {
+           this.eventStatistic =  await eventServices.getEventCountryStatitstics()
         }
     }
 })

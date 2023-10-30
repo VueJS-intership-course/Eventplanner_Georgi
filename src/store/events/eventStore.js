@@ -11,8 +11,21 @@ export const eventStore = defineStore('events', {
             location: '',
             ticketStatus: '',
         },
+        editedEvent: {
+            name: '',
+            ticket: '',
+            time: '',
+            price: '',
+            date: '',
+            location: '',
+            imgSrc: '',
+            budget: '',
+            country: '',
+        },
+        isEditing: false,
         currentEvent: null,
-        eventStatistic: null
+        eventStatistic: null,
+        isAddClicked: false
     }),
 
     getters: {
@@ -53,11 +66,16 @@ export const eventStore = defineStore('events', {
         },
 
         async addEvent(eventData, file) {
-            await eventServices.addEvent(eventData, file)
+            await eventServices.addEvent(eventData, file);
+            this.getAllEvents();
         },
 
         async getCurrentEvent(eventId) {
             this.currentEvent = await eventServices.getSingleEvent(eventId)
+        },
+
+        async deleteEvent(eventId) {
+            await eventServices.deleteEvent(eventId)
         },
 
         filterReset() {
@@ -69,8 +87,40 @@ export const eventStore = defineStore('events', {
             }
         },
 
+        setEditedEvent() {
+            this.editedEvent = this.currentEvent
+        },
+
+        resetEditedEvent() {
+            this.editedEvent = {
+                name: '',
+                ticket: '',
+                time: '',
+                price: '',
+                date: '',
+                location: '',
+                imgSrc: '',
+                budget: '',
+            }
+        },
+
         async getStatistics() {
-           this.eventStatistic =  await eventServices.getEventCountryStatitstics()
-        }
+            this.eventStatistic = await eventServices.getEventCountryStatitstics()
+        },
+
+        async editEvent(editEvent) {
+            await eventServices.editEvent(editEvent);
+            await this.getCurrentEvent(editEvent.id)
+            this.resetEditedEvent();
+        },
+
+        closeModal() {
+            this.isEditing = false
+        },
+
+        closeAdd() {
+            this.isAddClicked = false;
+        },
+
     }
 })

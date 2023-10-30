@@ -36,6 +36,11 @@ const chartOptions = ref({
     colorAxis: {
         min: 0
     },
+    subtitle: {
+        align: 'left',
+        text: 'Events available by country',
+        verticalAlign: 'middle'
+    },
     series: [
         {
             name: props.name,
@@ -52,7 +57,12 @@ const chartOptions = ref({
             allAreas: true,
             data: props.data
         }
-    ]
+    ],
+    tooltip: {
+        formatter: function () {
+            return  `${this.point.name} has ${this.point.value} events available`
+        }
+    }
 });
 
 </script>

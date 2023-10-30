@@ -1,11 +1,9 @@
 import firebaseData from "../../firebase/firebase-config.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
-import { collection, query, where, getDocs } from 'firebase/firestore';
 import sendCustomEmail from "../../utils/emailSender.js";
 
 export default {
     async signUp(user) {
-        console.log(user)
         try {
             const userCredentails = await firebaseData.fireAuth.createUserWithEmailAndPassword(
                 user.email,
@@ -19,7 +17,9 @@ export default {
                     .set({
                         email: user.email,
                         username: user.username,
-                        timeZone: user.timeZone
+                        timeZone: user.timeZone,
+                        tickets: 0,
+                        total:0
                     });
             }
         } catch (error) {
@@ -38,31 +38,32 @@ export default {
 
 
     async signInWIthGoogle() {
-        const provider = new GoogleAuthProvider();
-        provider.setCustomParameters({ prompt: 'select_account' });
+        try {
+            const provider = new GoogleAuthProvider();
+            provider.setCustomParameters({ prompt: 'select_account' });
 
-        const auth = getAuth();
+            const auth = getAuth();
 
-        signInWithPopup(auth, provider)
-            .then(async (result) => {
-                const user = result.user;
+            const result = await signInWithPopup(auth, provider)
 
-                await firebaseData.fireStore.collection('users').add({
-                    email: user.email,
-                    username: user.displayName,
-                    id: user.uid
-                })
-            }).catch((error) => {
-                throw error
-            });
+
+            await firebaseData.fireStore.collection('users').add({
+                email: result.user.email,
+                username: result.user.displayName,
+                id: result.user.uid
+            })
+        } catch (error) {
+            console.error(error);
+            throw error
+        }
     },
 
 
-    async getUserData(userId) {
+    async getUserData(email) {
         try {
-            const userDoc = await firebaseData.fireStore.collection('users').doc(userId).get();
+            const userDoc = await firebaseData.fireStore.collection('users').where('email', '==', email).get();
 
-            const userData = userDoc.data();
+            const userData = userDoc.docs[0].data();
 
             return userData;
 
@@ -73,25 +74,19 @@ export default {
     },
 
 
-    signInWithFacebook() {
+    async signInWithFacebook() {
         const provider = new FacebookAuthProvider();
         const auth = getAuth();
 
 
-        signInWithPopup(auth, provider)
-            .then(async (result) => {
-                const user = result.user;
+        const result = await signInWithPopup(auth, provider);
 
-                await firebaseData.fireStore.collection('users').add({
-                    email: user.email,
-                    username: user.displayName,
-                    id: user.uid
-                })
 
-            })
-            .catch((error) => {
-                throw error
-            });
+        await firebaseData.fireStore.collection('users').add({
+            email: result.user.email,
+            username: result.user.displayName,
+            id: result.user.uid
+        })
     },
 
 
@@ -100,8 +95,8 @@ export default {
             const querySnapshot = await firebaseData.fireStore.collection("users").get();
 
             querySnapshot.forEach(async (doc) => {
-                const {email, username } = doc.data();
-                  
+                const { email, username } = doc.data();
+
                 sendCustomEmail(email, username)
             });
 

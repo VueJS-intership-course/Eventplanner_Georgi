@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container d-flex flex-column jusitfy-content-center align-items-center">
         <Form @submit="signIn" :validation-schema="schema"
             class="d-flex flex-column align-items-center justify-content-center">
             <h1 class="text-light mb-4">Sign In</h1>

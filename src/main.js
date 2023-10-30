@@ -17,12 +17,13 @@ const app = createApp(App);
 app.use(pinia);
 app.use(router);
 app.use(highChart);
-app.use(TimeConvertor)
-const store = authStore()
+app.use(TimeConvertor);
+const store = authStore();
+
 
 firebaseData.fireAuth.onAuthStateChanged(async (user) => {
     if (user) {
-        const userData = await authServices.getUserData(user.uid)
+        const userData = await authServices.getUserData(user.email)
         store.setCurrentUser(userData);
     } else {
         store.setCurrentUser(null);

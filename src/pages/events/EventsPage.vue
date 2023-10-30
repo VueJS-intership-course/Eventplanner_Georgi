@@ -1,15 +1,12 @@
 <template>
     <div class="container">
-        <div v-if="isAddClicked">
-            <add-event @close-modal="closeModal"></add-event>
+        <div v-if="store.isAddClicked">
+            <add-event></add-event>
         </div>
         <div class="wrapper d-flex flex-column flex-wrap mt-4">
             <div>
-                <EventControls @open-add="showAdd" />
+                <EventControls />
             </div>
-            <!-- <div class="introduction">
-                <h1 class="h1 text-center fw-bolder mb-4 text-center">Find your adventure</h1>
-            </div> -->
             <div class="align-self-center p-5">
                 <EventList />
             </div>
@@ -24,37 +21,20 @@
 import EventControls from '@/components/Events/EventControls.vue';
 import EventList from '@/components/Events/EventList.vue';
 import AddEvent from '@/components/Events/AddEvent.vue';
-import { ref } from 'vue';
+import { eventStore } from '@/store/events/eventStore.js';
 
 /*
-   add modal handling
+   event store
 */
 
-const isAddClicked = ref(false)
-
-const showAdd = () => {
-    isAddClicked.value = true
-}
-
-const closeModal = () => {
-    isAddClicked.value = false
-    console.log('clicked');
-}
-
+const store = eventStore()
 </script>
 
 
 <style scoped lang="scss">
 @import '../../styles/variables.scss';
 .wrapper {
-    // border: 1px solid black;
     border-radius: 4%;
     @include page-background
-}
-
-
-.introduction {
-    font-weight: bolder;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 </style>

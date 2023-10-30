@@ -13,14 +13,11 @@ $main-blue: #0076bd !default;
 $main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
 
 @mixin form-auth {
-    background-color: $form-color;
-    position: absolute;
+    @include page-background;
     padding: 2rem;
     border-radius: 10%;
-    width: 30%;
+    width: 40%;
     min-width: 20rem;
-    left: 30%;
-    top: 10%;
 
     h1 {
         font-weight: bolder;

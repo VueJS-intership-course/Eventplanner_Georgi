@@ -4,7 +4,7 @@
             <router-link class="navbar-brand text-xl me-7 fw-bold text-light" :to="{ name: 'Home-Page' }">Eventify</router-link>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <span class="nav-link text-dark me-3 fw-bold" v-if="isAuthenticated">Hello, {{ store.currentUser.username }}</span>
+                    <span class="nav-link text-dark me-3 fw-bold" v-if="store.currentUser">Hello, {{ store.currentUser.username }}</span>
                     <router-link class="nav-link text-light me-3 fw-bold" :to="{ name: 'Event-Catalog' }">Events</router-link>
                     <router-link v-if="!isAuthenticated" class="nav-link text-light me-3 fw-bold" :to="{ name: 'SignUp-Page' }">Sign Up</router-link>
                     <router-link v-if="!isAuthenticated" class="nav-link text-light me-3 fw-bold" :to="{ name: 'SignIn-Page' }">Sign In</router-link>
@@ -67,7 +67,7 @@ const isAuthenticated = computed(() => store.isCurrentUserEmpty)
         font-family: $page-important;
     };
 
-    .active {
+    .active:not(.navbar-brand) {
         text-decoration: underline;
         text-underline-offset: 0.5rem;
         text-decoration-thickness: 20%;

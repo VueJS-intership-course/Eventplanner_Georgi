@@ -39,19 +39,6 @@ const users = authStore();
 
 const isUserAdmin = computed(() => users.isCurrentUserAdmin);
 
-/*
-   emits
-*/
-
-const emits = defineEmits(['open-add']);
-
-/*
-   open Add Event modal
-*/
-
-const openAdd = () => {
-    emits('open-add')
-}
 
 /*
    search
@@ -84,6 +71,14 @@ const openFilter = () => {
 
 const closeFilter = () => {
     isFiltering.value = false;
+}
+
+/*
+   open Add Event modal
+*/
+
+const openAdd = () => {
+    events.isAddClicked = true
 }
 </script>
 

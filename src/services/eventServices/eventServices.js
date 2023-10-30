@@ -21,8 +21,7 @@ export default {
             return data;
 
         } catch (error) {
-
-            throw error;
+           throw new Error('Error while generating all events!')
         }
     },
 
@@ -39,14 +38,15 @@ export default {
                 price: eventData.price,
                 date: eventData.date,
                 location: eventData.location,
-                imgSrc: blobImg
+                imgSrc: blobImg,
+                budget: eventData.budget,
+                country: eventData.country
             });
 
             await authServices.sendAllUsersEmail()
 
         } catch (error) {
-
-            throw error;
+            throw new Error('Error while creating new event!')
         }
     },
 
@@ -65,8 +65,7 @@ export default {
             return null;
 
         } catch (error) {
-            console.error('Error retrieving event data', error);
-            throw error;
+            throw new Error('Error while finding current event!')
         }
     },
 
@@ -82,8 +81,49 @@ export default {
 
         const result = Object.entries(data).map(([country, count]) => ({ name: country, value: count }));
 
-        console.log(result);
         return result;
-    }
+    },
+
+    async editEvent(event) {
+        const querySnapshot = await firebaseData.fireStore
+            .collection("events")
+            .where("id", "==", event.id)
+            .get();
+
+        console.log(event);
+        const doc = querySnapshot.docs[0];
+
+        console.log(doc);
+        try {
+            await doc.ref.update({
+                id: event.id,
+                name: event.name,
+                ticket: event.ticket,
+                price: event.price,
+                date: event.date,
+                time: event.time,
+                imgSrc: event.imgSrc
+            });
+        } catch (error) {
+            throw new Error('Error while editing event, please try again!');
+        }
+    },
+
+
+
+    async deleteEvent(eventId) {
+        const querySnapshot = await firebaseData.fireStore
+            .collection("events")
+            .where("id", "==", eventId)
+            .get();
+        if (querySnapshot.docs.length > 0) {
+            const doc = querySnapshot.docs[0];
+            try {
+                await doc.ref.delete();
+            } catch (error) {
+                throw new Error('Error while deleting event, please try again!');
+            }
+        }
+    },
 
 }

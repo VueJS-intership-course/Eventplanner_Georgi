@@ -20,7 +20,8 @@
                 <li class="tag__item"><i class="fas fa-tag mr-2"></i>Ticlets available: {{ eventData.ticket }}</li>
                 <li class="tag__item"><i class="fas fa-clock mr-2"></i>Price: {{ eventData.price }}$</li>
                 <li class="tag__item">
-                    <router-link :to="{ name: 'Single-Event', params: { id: eventData.id } }" class="btn btn-outline-primary">See details</router-link>
+                    <router-link :to="{ name: 'Single-Event', params: { id: eventData.id } }"
+                        class="btn btn-outline-primary">See details</router-link>
                 </li>
             </ul>
         </div>
@@ -29,18 +30,6 @@
 
 
 <script setup>
-/*
-   imports
-*/
-import { authStore } from '@/store/auth/authStore.js';
-
-
-/*
-   users store
-*/
-
-const store = authStore();
-
 /*
    props
 */
@@ -58,6 +47,7 @@ const props = defineProps({
 
 <style scoped lang="scss">
 @import '../../styles/variables.scss';
+
 .postcard {
     flex-wrap: wrap;
     display: flex;
@@ -68,7 +58,7 @@ const props = defineProps({
     overflow: hidden;
     position: relative;
     color: black;
-   height: 23rem;
+    height: 23rem;
 
     &.light {
         background-color: #e1e5ea;

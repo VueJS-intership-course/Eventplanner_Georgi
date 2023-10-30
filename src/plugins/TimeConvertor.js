@@ -11,7 +11,7 @@ export default {
 
       const store = authStore()
 
-      if (store.currentUser) {
+      if (store.currentUser && store.currentUser.timeZone) {
         const targetTime = originalTime.tz(store.currentUser.timeZone).format('MMMM Do YYYY, h:mm:ss a');
 
         return targetTime

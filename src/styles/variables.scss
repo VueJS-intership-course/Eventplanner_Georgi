@@ -1,7 +1,7 @@
 $form-color: #1e67c0;
 $form-text-color: #ffffff;
-$form-wrong-input:#ce0000;
-$dark-blue:#3c70b1;
+$form-wrong-input: #ce0000;
+$dark-blue: #3c70b1;
 $page-important: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 $main-green: #79dd09 !default;
 $main-green-rgb-015: rgba(121, 221, 9, 0.1) !default;
@@ -26,7 +26,9 @@ $main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
     span {
         color: $form-wrong-input;
     }
-};
+}
+
+;
 
 
 @mixin page-background {
@@ -34,4 +36,22 @@ $main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
     background: linear-gradient(90deg, rgba(29, 194, 217, 1) 0%, rgba(126, 105, 212, 0.8183648459383753) 94%);
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius: 2%;
+}
+
+
+@mixin modal-style {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(77, 77, 77, 0.452);
+    z-index: 3;
+
+    .add-modal {
+        position: absolute;
+        top: 0%;
+        left: 10%;
+        height: fit-content;
+    }
 }

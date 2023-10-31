@@ -16,6 +16,10 @@ const props = defineProps({
     name: {
         type: String,
         required: true
+    },
+    title: {
+        type:String,
+        required:true
     }
 })
 
@@ -25,7 +29,7 @@ const chartOptions = ref({
         map: mapData
     },
     title: {
-        text: "Highmaps basic demo"
+        text: props.title
     },
     mapNavigation: {
         enabled: true,

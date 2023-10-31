@@ -24,6 +24,9 @@
                     </div>
                     <ul class="list-group pmd-list mb-4">
                         <li class="list-group-item d-flex flex-row">
+                            <span class="media-body">Country: {{ store.currentEvent.country }}</span>
+                        </li>
+                        <li class="list-group-item d-flex flex-row">
                             <span class="media-body">Tickets available: {{ store.currentEvent.ticket }}</span>
                         </li>
                         <li class="list-group-item d-flex flex-row">

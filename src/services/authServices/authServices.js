@@ -90,14 +90,14 @@ export default {
     },
 
 
-    async sendAllUsersEmail() {
+    async sendAllUsersEmail(message) {
         try {
             const querySnapshot = await firebaseData.fireStore.collection("users").get();
 
             querySnapshot.forEach(async (doc) => {
                 const { email, username } = doc.data();
 
-                sendCustomEmail(email, username)
+                sendCustomEmail(email, username, message)
             });
 
         } catch (error) {

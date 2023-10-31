@@ -5,12 +5,6 @@ export const eventStore = defineStore('events', {
     state: () => ({
         events: null,
         searchQuery: null,
-        filterQuery: {
-            startDate: null,
-            endDate: null,
-            location: '',
-            ticketStatus: '',
-        },
         editedEvent: {
             name: '',
             ticket: '',
@@ -25,39 +19,41 @@ export const eventStore = defineStore('events', {
         isEditing: false,
         currentEvent: null,
         eventStatistic: null,
-        isAddClicked: false
+        isAddClicked: false,
+        isFiltering: false,
     }),
 
     getters: {
         filteredEvents() {
+            const query = this.router.currentRoute.value.query;
+      
             if (this.searchQuery) {
-                return this.events.filter(event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+              return this.events.filter(event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
             }
-
+      
             return this.events.filter(event => {
-                const { startDate, endDate, location, ticketStatus } = this.filterQuery;
-
-                let meetsCriteria = true;
-
-                if (startDate) {
-                    meetsCriteria = meetsCriteria && event.date >= startDate;
-                }
-
-                if (endDate) {
-                    meetsCriteria = meetsCriteria && event.date <= endDate;
-                }
-
-                // if (location) {
-                //     meetsCriteria = meetsCriteria && event.location.toLowerCase().includes(location.toLowerCase());
-                // }
-
-                if (ticketStatus) {
-                    meetsCriteria = meetsCriteria && event.ticket > 0;
-                }
-
-                return meetsCriteria;
+              const { startDate, endDate, location, ticketStatus } = query;
+              let meetsCriteria = true;
+      
+              if (startDate) {
+                meetsCriteria = meetsCriteria && event.date >= startDate;
+              }
+      
+              if (endDate) {
+                meetsCriteria = meetsCriteria && event.date <= endDate;
+              }
+      
+              if (location) {
+                meetsCriteria = meetsCriteria && event.country.toLowerCase().includes(location.toLowerCase());
+              }
+      
+              if (ticketStatus) {
+                meetsCriteria = meetsCriteria && event.ticket > 0;
+              }
+      
+              return meetsCriteria;
             });
-        }
+          },
     },
 
     actions: {
@@ -79,12 +75,7 @@ export const eventStore = defineStore('events', {
         },
 
         filterReset() {
-            this.filterQuery = {
-                startDate: null,
-                endDate: null,
-                location: '',
-                ticketStatus: '',
-            }
+            this.router.push({ query: {} });;
         },
 
         setEditedEvent() {
@@ -121,6 +112,10 @@ export const eventStore = defineStore('events', {
         closeAdd() {
             this.isAddClicked = false;
         },
+
+        closeFilter() {
+            this.isFiltering = false;
+        }
 
     }
 })

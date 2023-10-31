@@ -6,13 +6,11 @@
 
         <div class="filter-controls d-flex">
             <button @click="openFilter" class="btn btn-primary">Filter by</button>
-            <button @click="resetFilter" class="btn btn-primary">Reset Filter</button>
+            <button @click="resetFilter" v-if="hasQueryParameters" class="btn btn-primary">Reset Filter</button>
         </div>
-        <div v-if="isFiltering">
-            <Teleport to="body">
-                <EventsFilter @close-filter="closeFilter" />
-            </Teleport>
-        </div>
+        <Teleport v-if="events.isFiltering" to="body">
+            <EventsFilter />
+        </Teleport>
         <div>
             <EventSearch v-model="searchValue" />
         </div>
@@ -30,6 +28,13 @@ import { computed, ref, watch } from 'vue';
 import EventSearch from '@/components/Events/EventSearch.vue';
 import { eventStore } from '@/store/events/eventStore.js';
 import EventsFilter from '@/components/Events/EventsFilter.vue';
+import { useRouter } from 'vue-router';
+
+/*
+   router
+*/
+
+const router = useRouter()
 
 /*
    is user admin
@@ -57,7 +62,9 @@ watch(() => searchValue.value, (newVal) => {
   filters
 */
 
-const isFiltering = ref(false);
+const hasQueryParameters = computed(() => Object.keys(router.currentRoute.value.query).length > 0);
+
+
 
 const resetFilter = () => {
     events.filterReset()
@@ -65,13 +72,9 @@ const resetFilter = () => {
 
 
 const openFilter = () => {
-    isFiltering.value = true;
+    events.isFiltering = true;
 }
 
-
-const closeFilter = () => {
-    isFiltering.value = false;
-}
 
 /*
    open Add Event modal

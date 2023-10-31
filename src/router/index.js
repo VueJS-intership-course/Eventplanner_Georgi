@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "./routes";
+import {authStateChangedPromise} from '../main.js'
 
 const router = createRouter({
     history:createWebHistory(),
@@ -12,6 +13,19 @@ const router = createRouter({
         },
     ],
     linkActiveClass: 'active'
+});
+
+
+router.beforeResolve(async (to, _, next) => {
+    const user = await authStateChangedPromise()
+
+    if (to.meta.isAuth && !user) {
+        next({ name: "SignIn-Page" });
+    } else if (to.meta.notAuth && user) {
+        next({ name: "Home-Page" }); 
+    } else {
+        next();
+    }
 });
 
 export default router;

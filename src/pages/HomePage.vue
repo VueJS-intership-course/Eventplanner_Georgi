@@ -6,8 +6,7 @@
         <div class="events-map">
             <h2 class="subHead fw-bold text-center text-light">Events worldwide</h2>
         </div>
-        <MapChart v-if="store.eventStatistic" :data="store.eventStatistic" name="Event information"/>
-
+        <MapChart v-if="store.eventStatistic" :data="store.eventStatistic" name="Event information" title="Events" />
     </div>
 </template>
 

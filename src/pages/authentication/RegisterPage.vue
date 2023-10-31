@@ -43,12 +43,12 @@
    imports
 */
 import { ref } from 'vue';
-import authServices from '@/services/authServices/authServices.js';
 import { useRouter } from 'vue-router';
 import constants from '@/utils/constants.js';
 import AutoComplete from '@/common-templates/AutoComplete.vue';
 import { Field, Form, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup'
+import { authStore } from '@/store/auth/authStore.js';
 
 /*
    router
@@ -57,6 +57,12 @@ import * as yup from 'yup'
 
 const router = useRouter();
 
+
+/*
+    store
+*/
+
+const store = authStore();
 
 /*
    Sign Up
@@ -94,7 +100,7 @@ const signUp = async (values) => {
         };
 
 
-        await authServices.signUp(userInfo);
+        await store.signUp(userInfo)
 
         router.push({ name: 'Event-Catalog' });
     } catch (error) {

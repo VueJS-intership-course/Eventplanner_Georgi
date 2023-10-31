@@ -11,9 +11,9 @@ export default {
 
 
             querySnapshot.forEach((doc) => {
-                const { date, id, imgSrc, location, name, price, ticket, time } = doc.data()
+                const { date, id, imgSrc, location, name, price, ticket, time, country, budget } = doc.data()
 
-                const event = new Event(date, id, imgSrc, location, name, price, ticket, time)
+                const event = new Event(date, id, imgSrc, location, name, price, ticket, time, budget, country)
 
                 data.push(event);
             });
@@ -43,7 +43,8 @@ export default {
                 country: eventData.country
             });
 
-            await authServices.sendAllUsersEmail()
+            const message = `${eventData.name} event is available on Eventify, check it out and don't miss the chance to buy ticket`
+            await authServices.sendAllUsersEmail(message)
 
         } catch (error) {
             throw new Error('Error while creating new event!')
@@ -104,6 +105,10 @@ export default {
                 time: event.time,
                 imgSrc: event.imgSrc
             });
+
+            const message = `${event.name} information is changed, show details`
+            await authServices.sendAllUsersEmail(message)
+
         } catch (error) {
             throw new Error('Error while editing event, please try again!');
         }

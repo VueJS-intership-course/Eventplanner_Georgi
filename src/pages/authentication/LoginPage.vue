@@ -42,12 +42,19 @@ import authServices from '@/services/authServices/authServices.js';
 import { useRouter } from 'vue-router';
 import { Form, ErrorMessage, Field } from 'vee-validate';
 import * as yup from 'yup';
+import { authStore } from '@/store/auth/authStore.js';
 
 /*
    router
 */
 
 const router = useRouter();
+
+/*
+   store
+*/
+
+const store = authStore();
 
 /*
    validation
@@ -71,7 +78,7 @@ const schema = yup.object({
 
 const signIn = async (values) => {
     try {
-        await authServices.signIn(values.email, values.password);
+        await store.signIn(values.email, values.password);
 
         router.push({ name: 'Event-Catalog' });
     } catch (error) {
@@ -85,7 +92,7 @@ const signIn = async (values) => {
 
 const signInGoogle = async () => {
     try {
-        await authServices.signInWIthGoogle();
+        await store.signInWithGoogle();
 
         router.push({ name: 'Event-Catalog' });
     } catch (error) {
@@ -99,7 +106,7 @@ const signInGoogle = async () => {
 
 const signInFacebook = async () => {
     try {
-        await authServices.signInWithFacebook();
+        await store.signInWithFacebook();
 
         router.push({ name: 'Event-Catalog' });
     } catch (error) {

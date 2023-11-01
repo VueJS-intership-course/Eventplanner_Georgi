@@ -47,7 +47,7 @@
                             <input type="text" v-model="location[1]" readonly> <input type="text" v-model="location[0]"
                                 readonly>
                         </div>
-                        <MapComp @map-ready="mapReady" />
+                        <MapComp :is-small="true" @map-ready="mapReady" />
                     </div>
                     <div class="form-group col-lg-12">
                         <label class="form-control-label" for="form-group-input">Country</label>
@@ -77,6 +77,7 @@ import { toLonLat } from "ol/proj";
 import MapComp from '../Map/MapComp.vue'
 import * as yup from 'yup';
 import { ref } from 'vue';
+import mapLayers from '../../utils/mapLayers.js'
 
 
 /*
@@ -120,11 +121,15 @@ const errorMsg = ref('');
    map-handling
 */
 
-const location = ref([])
+const location = ref([]);
+const layer = ref(null);
 
 const mapReady = (map) => {
     map.on('click', (e) => {
         location.value = toLonLat(e.coordinate);
+        map.removeLayer(layer.value)
+        layer.value = mapLayers.createLayerOnClick(location.value);
+        map.addLayer(layer.value)
     })
 }
 

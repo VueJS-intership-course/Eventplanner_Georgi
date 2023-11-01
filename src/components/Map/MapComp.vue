@@ -1,5 +1,5 @@
 <template>
-    <div class="map" id="map"></div>
+    <div :class="{small: isSmall}" class="map" id="map"></div>
 </template>
   
 <script setup>
@@ -8,7 +8,13 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
-import 'ol/ol.css'
+import 'ol/ol.css';
+
+const props = defineProps({
+    isSmall: {
+        type:Boolean,
+    }
+})
 
 const emit = defineEmits(['map-ready']);
 let map = ref({});
@@ -40,6 +46,11 @@ function InitializeMap() {
     width: 800px;
     height: 320px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.small { 
+    width: 500px;
+    height: 300px;
 }
 </style>
   

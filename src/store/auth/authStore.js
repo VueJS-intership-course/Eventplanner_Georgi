@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
-import authServices from "../../services/authServices/authServices.js";
+import authServices from "@/services/authServices/authServices.js";
 
 export const authStore = defineStore('authStore', {
     state: () => ({
-        currentUser: null
+        currentUser: null,
+        isEditing: false
     }),
 
     getters: {
@@ -38,8 +39,11 @@ export const authStore = defineStore('authStore', {
         },
 
         async logout() {
-            localStorage.removeItem('user');
             await authServices.logout();
+        },
+
+        async editProfile(user) {
+            await authServices.updateUsersProfile(user);
         }
     }
 })

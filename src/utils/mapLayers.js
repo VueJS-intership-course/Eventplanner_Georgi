@@ -5,9 +5,24 @@ import VectorSource from "ol/source/Vector";
 import Point from "ol/geom/Point.js";
 
 export default {
-    createSingleLayer: (event) => {        
+    createSingleLayer (event)  {        
         const feature = new Feature({
             geometry: new Point(fromLonLat([event.location[0], event.location[1]])),
+        });
+    
+        const source = new VectorSource({
+            features: [feature], 
+        });
+    
+        return new VectorLayer({
+            source: source, 
+        });
+    },
+
+
+    createLayerOnClick(coordinate) {
+        const feature = new Feature({
+            geometry: new Point(fromLonLat([coordinate[0],coordinate[1]])),
         });
     
         const source = new VectorSource({

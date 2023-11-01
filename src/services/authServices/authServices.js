@@ -112,5 +112,20 @@ export default {
         } catch (error) {
             throw error
         }
+    },
+
+    async updateUsersProfile(user) {
+        try {
+            const querySnapshot = await firebaseData.fireStore.collection('users').where('email', '==', user.email).get();
+            
+            const userDoc = querySnapshot.docs[0];
+
+            userDoc.ref.update({
+               username:user.username,
+               timeZone:user.timeZone
+            })
+        } catch (error) {
+            throw new Error('Error while updating profile, please try again!')
+        }
     }
 }

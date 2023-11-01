@@ -26,39 +26,39 @@ export const eventStore = defineStore('events', {
     getters: {
         filteredEvents() {
             const query = this.router.currentRoute.value.query;
-      
+
             if (this.searchQuery) {
-              return this.events.filter(event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+                return this.events.filter(event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
             }
-      
+
             return this.events.filter(event => {
-              const { startDate, endDate, location, ticketStatus } = query;
-              let meetsCriteria = true;
-      
-              if (startDate) {
-                meetsCriteria = meetsCriteria && event.date >= startDate;
-              }
-      
-              if (endDate) {
-                meetsCriteria = meetsCriteria && event.date <= endDate;
-              }
-      
-              if (location) {
-                meetsCriteria = meetsCriteria && event.country.toLowerCase().includes(location.toLowerCase());
-              }
-      
-              if (ticketStatus) {
-                meetsCriteria = meetsCriteria && event.ticket > 0;
-              }
-      
-              return meetsCriteria;
+                const { startDate, endDate, location, ticketStatus } = query;
+                let meetsCriteria = true;
+
+                if (startDate) {
+                    meetsCriteria = meetsCriteria && event.date >= startDate;
+                }
+
+                if (endDate) {
+                    meetsCriteria = meetsCriteria && event.date <= endDate;
+                }
+
+                if (location) {
+                    meetsCriteria = meetsCriteria && event.country.toLowerCase().includes(location.toLowerCase());
+                }
+
+                if (ticketStatus) {
+                    meetsCriteria = meetsCriteria && event.ticket > 0;
+                }
+
+                return meetsCriteria;
             });
-          },
+        },
     },
 
     actions: {
         async getAllEvents() {
-            this.events = await eventServices.getAll()
+            this.events = await eventServices.getAll();
         },
 
         async addEvent(eventData, file) {
@@ -67,15 +67,15 @@ export const eventStore = defineStore('events', {
         },
 
         async getCurrentEvent(eventId) {
-            this.currentEvent = await eventServices.getSingleEvent(eventId)
+            this.currentEvent = await eventServices.getSingleEvent(eventId);
         },
 
         async deleteEvent(eventId) {
-            await eventServices.deleteEvent(eventId)
+            await eventServices.deleteEvent(eventId);
         },
 
         filterReset() {
-            this.router.push({ query: {} });;
+            this.router.push({ query: {} });
         },
 
         setEditedEvent() {

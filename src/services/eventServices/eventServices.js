@@ -91,10 +91,8 @@ export default {
             .where("id", "==", event.id)
             .get();
 
-        console.log(event);
         const doc = querySnapshot.docs[0];
 
-        console.log(doc);
         try {
             await doc.ref.update({
                 id: event.id,

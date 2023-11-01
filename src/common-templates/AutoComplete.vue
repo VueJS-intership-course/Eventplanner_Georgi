@@ -2,7 +2,7 @@
     <div>
         <input class="form-control" type="text" id="search" autocomplete="off" placeholder="Type here..."
             :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
-        <ul v-show="isDropDownVisible" v-if="searchValues.length">
+        <ul v-show="isDropDownVisible">
             <li v-for="timeZone in searchValues" :key="timeZone">
                 <button class="btn btn-light" @click.prevent="selectTimeZone(timeZone)">{{ timeZone }}</button>
             </li>

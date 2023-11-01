@@ -1,6 +1,6 @@
 <template>
     <div class="back-modal">
-        <div class="add-modal container py-3 d-flex flex-column">
+        <div class="add-modal container py-3 d-flex justify-content-center">
                <slot></slot>
         </div>
     </div>

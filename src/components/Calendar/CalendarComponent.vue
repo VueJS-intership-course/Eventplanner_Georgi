@@ -32,26 +32,12 @@ const props = defineProps({
 })
 
 
-/*
-   handle calendar and date events
-*/
-const handleDateClick = (arg) => {
-    const clickedDate = arg.dateStr;
-    const eventsForDate = props.data.filter(event => event.start === clickedDate);
-    if (eventsForDate.length > 0) {
-        emits('date-click', eventsForDate[0])
-    } else {
-        return
-    }
-};
-
-
 const calendarOptions = ref({
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
     weekends: false,
     events: props.data,
-    dateClick:handleDateClick
+    selectable: true,
 })
 
 </script>

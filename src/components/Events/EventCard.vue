@@ -7,7 +7,7 @@
             <h1 class="postcard__title red">{{ eventData.name }}</h1>
             <div class="postcard__subtitle small">
                 <time :datetime="$formatDateInTimeZone(eventData.location, eventData.date, eventData.time)">
-                    <span>{{ $formatDateInTimeZone(eventData.location, eventData.date, eventData.time) }}</span>
+                    <span>{{ $formatDateInTimeZone(eventData.location, eventData.date) }}</span>
                 </time>
             </div>
             <div class="postcard__bar"></div>

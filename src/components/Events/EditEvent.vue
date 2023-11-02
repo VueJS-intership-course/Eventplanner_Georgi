@@ -1,61 +1,63 @@
 <template>
-    <ErrorModal v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
-    <TheModal @click.self="store.closeModal">
-        <div class="card shadow rounded-3 my-auto">
-            <div class="card-header p-3 h4">
-                Add Event
+    <div>
+        <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
+        <TheModal @click.self="store.closeModal">
+            <div class="card shadow rounded-3 my-auto">
+                <div class="card-header p-3 h4">
+                    Add Event
+                </div>
+                <div class="card-body p-4">
+                    <Form @submit="editEvent" :validation-schema="schema" role="form" class="row">
+                        <div class="form-group col-lg-4 ">
+                            <label class="form-control-label" for="form-group-input">Name</label>
+                            <Field type="text" class="form-control" id="form-group-input" :value="store.editedEvent.name"
+                                name="name" />
+                            <ErrorMessage name="name" />
+                        </div>
+                        <div class="form-group col-lg-4 ">
+                            <label class="form-control-label" for="form-group-input">Tickets</label>
+                            <Field type="number" class="form-control" id="form-group-input"
+                                :value="store.editedEvent.ticket" name="ticket" />
+                            <ErrorMessage name="tickets" />
+                        </div>
+                        <div class="form-group col-lg-4 mb-3">
+                            <label class="form-control-label" for="form-group-input">Price</label>
+                            <Field type="number" class="form-control" id="form-group-input" :value="store.editedEvent.price"
+                                name="price" />
+                            <ErrorMessage name="price" />
+                        </div>
+                        <div class="form-group col-lg-12 mb-3">
+                            <label class="form-control-label" for="form-group-input">Date</label>
+                            <Field type="date" class="form-control" id="form-group-input" :value="store.editedEvent.date"
+                                name="date" />
+                            <ErrorMessage name="date" />
+                        </div>
+                        <div class="form-group col-lg-12 mb-3">
+                            <label class="form-control-label" for="form-group-input">Time</label>
+                            <Field type="time" class="form-control" id="form-group-input" :value="store.editedEvent.time"
+                                name="time" />
+                            <ErrorMessage name="time" />
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label class="form-control-label" for="form-group-input">Longtitude</label>
+                            <Field type="number" placeholder="longtitude" class="form-control"
+                                :value="store.editedEvent.location[0]" id="form-group-input" name="longtitude" />
+                            <ErrorMessage name="longtitude" />
+                        </div>
+                        <div class="form-group col-lg-6 mb-3">
+                            <label class="form-control-label" for="form-group-input">Latitude</label>
+                            <Field type="number" placeholder="latitude" class="form-control"
+                                :value="store.editedEvent.location[1]" id="form-group-input" name="latitude" />
+                            <ErrorMessage name="latitude" />
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <button class="btn btn-primary float-end mt-4" for="form-group-input">Edit Event</button>
+                        </div>
+                    </Form>
+                </div>
             </div>
-            <div class="card-body p-4">
-                <Form @submit="editEvent" :validation-schema="schema" role="form" class="row">
-                    <div class="form-group col-lg-4 ">
-                        <label class="form-control-label" for="form-group-input">Name</label>
-                        <Field type="text" class="form-control" id="form-group-input" :value="store.editedEvent.name"
-                            name="name" />
-                        <ErrorMessage name="name" />
-                    </div>
-                    <div class="form-group col-lg-4 ">
-                        <label class="form-control-label" for="form-group-input">Tickets</label>
-                        <Field type="number" class="form-control" id="form-group-input" :value="store.editedEvent.ticket"
-                            name="ticket" />
-                        <ErrorMessage name="tickets" />
-                    </div>
-                    <div class="form-group col-lg-4 mb-3">
-                        <label class="form-control-label" for="form-group-input">Price</label>
-                        <Field type="number" class="form-control" id="form-group-input" :value="store.editedEvent.price"
-                            name="price" />
-                        <ErrorMessage name="price" />
-                    </div>
-                    <div class="form-group col-lg-12 mb-3">
-                        <label class="form-control-label" for="form-group-input">Date</label>
-                        <Field type="date" class="form-control" id="form-group-input" :value="store.editedEvent.date"
-                            name="date" />
-                        <ErrorMessage name="date" />
-                    </div>
-                    <div class="form-group col-lg-12 mb-3">
-                        <label class="form-control-label" for="form-group-input">Time</label>
-                        <Field type="time" class="form-control" id="form-group-input" :value="store.editedEvent.time"
-                            name="time" />
-                        <ErrorMessage name="time" />
-                    </div>
-                    <div class="form-group col-lg-6">
-                        <label class="form-control-label" for="form-group-input">Longtitude</label>
-                        <Field type="number" placeholder="longtitude" class="form-control"
-                            :value="store.editedEvent.location[0]" id="form-group-input" name="longtitude" />
-                        <ErrorMessage name="longtitude" />
-                    </div>
-                    <div class="form-group col-lg-6 mb-3">
-                        <label class="form-control-label" for="form-group-input">Latitude</label>
-                        <Field type="number" placeholder="latitude" class="form-control"
-                            :value="store.editedEvent.location[1]" id="form-group-input" name="latitude" />
-                        <ErrorMessage name="latitude" />
-                    </div>
-                    <div class="form-group col-lg-6">
-                        <button class="btn btn-primary float-end mt-4" for="form-group-input">Edit Event</button>
-                    </div>
-                </Form>
-            </div>
-        </div>
-    </TheModal>
+        </TheModal>
+    </div>
 </template>
 
 <script setup>
@@ -114,7 +116,7 @@ const errorMsg = ref(null)
 
 const editEvent = (values) => {
     try {
-      
+
         const event = {
             id: store.editedEvent.id,
             name: values.name,
@@ -134,8 +136,16 @@ const editEvent = (values) => {
     }
 }
 
+
+/*
+   close error modal
+*/
+
+const closeError = () => {
+    errorMsg.value = null
+}
+
 </script>
 
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

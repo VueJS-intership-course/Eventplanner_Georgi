@@ -73,7 +73,7 @@ const handleFilters = () => {
 
 <style scoped lang="scss">
     .filterer {
-        position: absolute;
+        position: absolute !important;
         left: 40%;
         width: fit-content !important;
         top: 60%;

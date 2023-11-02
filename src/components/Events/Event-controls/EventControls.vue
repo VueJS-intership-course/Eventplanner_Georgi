@@ -8,9 +8,9 @@
             <button @click="openFilter" class="btn btn-primary">Filter by</button>
             <button @click="resetFilter" v-if="hasQueryParameters" class="btn btn-primary">Reset Filter</button>
         </div>
-        <div v-if="events.isFiltering" to="body">
+        <Teleport v-if="events.isFiltering" to="body">
             <EventsFilter />
-        </div>
+        </Teleport>
         <div>
             <EventSearch v-model="searchValue" />
         </div>

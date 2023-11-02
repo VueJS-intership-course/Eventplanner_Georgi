@@ -4,7 +4,7 @@
             <div class="col-md-7">
                 <ProfileCard />
             </div>
-            <div v-if="usersEvents" class="d-flex flex-column justify-content-center align-items-center">
+            <div v-if="usersEvents && !isUserAdmin" class="d-flex flex-column justify-content-center align-items-center">
                 <h2 class="fw-bold">My events calendar</h2>
                 <CalendarComponent :data="usersEvents" @date-click="handleCalendarClick"/>
             </div>
@@ -17,10 +17,10 @@
 
 <script setup>
 import ProfileCard from '@/components/Users/ProfileCard.vue';
-import { authStore } from '@/store/auth/authStore';
+import { authStore } from '@/store/auth/authStore.js';
 import EditProfile from '@/components/Users/EditProfile.vue';
 import CalendarComponent from '@/components/Calendar/CalendarComponent.vue';
-import { eventStore } from '@/store/events/eventStore';
+import { eventStore } from '@/store/events/eventStore.js';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -45,6 +45,8 @@ events.getAllEvents()
    check if users has events
 */
 const usersEvents = computed(() => events.usersEvent(store.currentUser.email))
+
+const isUserAdmin = computed(() => store.isCurrentUserAdmin)
 
 /*
    calendar events 

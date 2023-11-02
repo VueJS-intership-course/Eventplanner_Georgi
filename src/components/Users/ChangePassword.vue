@@ -1,5 +1,5 @@
 <template>
-    <ErrorModal v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
+    <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
     <TheModal @click.self="closeEdit">
         <div class="card card-body">
             <h3 class="text-center mb-4 fw-bold">Change password</h3>
@@ -76,5 +76,15 @@ const handleChangePassword = async (values) => {
     } catch (error) {
         errorMsg.value = error.message
     }
+};
+
+
+/*
+   close error modal
+*/
+
+const closeError = () => {
+    errorMsg.value = null
 }
+
 </script>

@@ -8,6 +8,9 @@
                 <SingleEventCard />
             </div>
             <div>
+                <AddExpense v-if="store.isAddExpense"/>
+            </div>
+            <div>
                 <MapComp v-if="store.currentEvent" @map-ready="onMapReady" />
             </div>
         </div>
@@ -25,6 +28,7 @@ import { ref } from 'vue';
 import MapComp from '@/components/Map/MapComp.vue';
 import mapLayers from '@/utils/mapLayers.js';
 import SingleEventCard from '../../components/Events/SingleEvent/SingleEventCard.vue';
+import AddExpense from '../../components/Events/SingleEvent/AddExpense.vue';
 
 /*
    props
@@ -70,7 +74,7 @@ const onMapReady = (map) => {
 
 .signle-event {
     width: 100%;
-    gap: 4rem;
+    gap: 2.5rem;
     @include page-background;
 
     .container {

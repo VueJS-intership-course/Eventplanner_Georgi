@@ -11,9 +11,10 @@ export default {
 
 
             querySnapshot.forEach((doc) => {
-                const { date, id, imgSrc, location, name, price, ticket, time, country, budget, boughtTickets } = doc.data()
+                const { date, id, imgSrc, location, name, price, ticket, country, budget, boughtTickets, expenses } = doc.data()
 
-                const event = new Event(date, id, imgSrc, location, name, price, ticket, time, budget, country, boughtTickets)
+                const event = new Event(date, id, imgSrc, location, name, price, ticket, budget, country, boughtTickets, expenses)
+
                 data.push(event);
             });
 
@@ -33,7 +34,6 @@ export default {
                 id: crypto.randomUUID(),
                 name: eventData.name,
                 ticket: eventData.ticket,
-                time: eventData.time,
                 price: eventData.price,
                 date: eventData.date,
                 location: eventData.location,
@@ -139,6 +139,7 @@ export default {
 
         try {
             const updatedBoughtTickets = doc.data().boughtTickets;
+            const ticket = doc.data().ticket - 1;
 
             updatedBoughtTickets.push({
                 email: user.email,
@@ -147,6 +148,7 @@ export default {
 
             await doc.ref.update({
                 boughtTickets: updatedBoughtTickets,
+                ticket
             });
 
 
@@ -154,8 +156,33 @@ export default {
         } catch (error) {
             throw new Error('Error while updating boughtTickets, please try again!');
         }
-    }
+    },
 
 
+    async addExpense(event, expense) {
+        const querySnapshot = await firebaseData.fireStore
+            .collection("events")
+            .where("id", "==", event.id)
+            .get();
+
+        const doc = querySnapshot.docs[0];
+
+        try {
+            const expenses = doc.data().expenses;
+            const budget = doc.data().budget - expense.amount;
+
+            expenses.push({
+                category: expense.category,
+                amount: expense.amount
+            })
+
+            doc.ref.update({
+               expenses: expenses,
+               budget
+            })
+        } catch (error) {
+            throw new Error('Error while adding expense, please try again!');
+        }
+    },
 
 }

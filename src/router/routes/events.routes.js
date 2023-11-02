@@ -2,7 +2,7 @@ export default [
     {
         path: '/catalog',
         name: 'Event-Catalog',
-        component: () => import('../../pages/events/EventsPage.vue'),
+        component: () => import('@/pages/events/EventsPage.vue'),
     },
     {
         path:'/catalog/event/:id',

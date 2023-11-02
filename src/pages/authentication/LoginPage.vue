@@ -1,35 +1,37 @@
 <template>
-    <ErrorModal v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
-    <div class="container d-flex flex-column jusitfy-content-center align-items-center">
-        <Form @submit="signIn" :validation-schema="schema"
-            class="d-flex flex-column align-items-center justify-content-center">
-            <h1 class="text-light mb-4">Sign In</h1>
+    <div>
+        <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
+        <div class="container d-flex flex-column jusitfy-content-center align-items-center">
+            <Form @submit="signIn" :validation-schema="schema"
+                class="d-flex flex-column align-items-center justify-content-center">
+                <h1 class="text-light mb-4">Sign In</h1>
 
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label text-light">Email address</label>
-                <Field type="email" name="email" class="form-control" />
-                <ErrorMessage name="email" />
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label text-light">Password</label>
-                <Field type="password" name="password" class="form-control" />
-                <ErrorMessage name="password" />
-            </div>
-            <div class="controls">
-                <button type="submit" class="btn btn-primary mb-4">Submit</button>
-            </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label text-light">Email address</label>
+                    <Field type="email" name="email" class="form-control" />
+                    <ErrorMessage name="email" />
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label text-light">Password</label>
+                    <Field type="password" name="password" class="form-control" />
+                    <ErrorMessage name="password" />
+                </div>
+                <div class="controls">
+                    <button type="submit" class="btn btn-primary mb-4">Submit</button>
+                </div>
 
-            <div class="text-center text-light">
-                <p>Not a member? <router-link :to="{ name: 'SignUp-Page' }">Sign Up</router-link></p>
-                <p>or sign up with:</p>
-                <button @click="signInGoogle" type="button" class="btn btn-danger btn-floating mx-1">
-                    <i class="bi bi-google"></i>
-                </button>
-                <button @click="signInFacebook" type="button" class="btn btn-primary btn-floating mx-1">
-                    <i class="bi bi-facebook"></i>
-                </button>
-            </div>
-        </Form>
+                <div class="text-center text-light">
+                    <p>Not a member? <router-link :to="{ name: 'SignUp-Page' }">Sign Up</router-link></p>
+                    <p>or sign up with:</p>
+                    <button @click="signInGoogle" type="button" class="btn btn-danger btn-floating mx-1">
+                        <i class="bi bi-google"></i>
+                    </button>
+                    <button @click="signInFacebook" type="button" class="btn btn-primary btn-floating mx-1">
+                        <i class="bi bi-facebook"></i>
+                    </button>
+                </div>
+            </Form>
+        </div>
     </div>
 </template>
 
@@ -114,6 +116,17 @@ const signInFacebook = async () => {
         errorMsg.value = error.message
     }
 }
+
+
+
+/*
+   close error modal
+*/
+
+const closeError = () => {
+    errorMsg.value = null
+}
+
 
 </script>
 

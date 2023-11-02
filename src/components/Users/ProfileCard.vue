@@ -16,7 +16,6 @@
             </ul>
 
             <div class="buttons mt-4 d-flex justify-content-center">
-                <button v-if="isUserAdmin" class="btn btn-outline-primary px-4">See Budget</button>
                 <button v-if="!isUserAdmin" class="btn btn-outline-primary px-4" @click="editOpen">Edit profile</button>
                 <button class="btn btn-outline-primary px-4 ml-3" @click="openEditPass">Change password</button>
             </div>

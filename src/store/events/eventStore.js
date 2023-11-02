@@ -54,6 +54,27 @@ export const eventStore = defineStore('events', {
                 return meetsCriteria;
             });
         },
+
+        hasUserBoughTicket(state) {
+            return (userEmail) => {
+                return state.currentEvent.boughtTickets.some(ticket => ticket.email === userEmail);
+            }
+        },
+
+        usersEvent(state) {
+            return (userEmail) => {
+                if (state.events) {
+                    const userEvents = state.events.filter(event => {
+                        const hasEmail = event.boughtTickets.some(ticket => ticket.email === userEmail);
+                        return hasEmail;
+                    });
+        
+                    return userEvents.map(event => ({ title: event.name, start: event.date, id:event.id }));
+                }
+        
+                return null;
+            }
+        }
     },
 
     actions: {
@@ -115,6 +136,12 @@ export const eventStore = defineStore('events', {
 
         closeFilter() {
             this.isFiltering = false;
+        },
+
+
+        async handleBuyTicket(user, event) {
+            await eventServices.buyTicket(user, event);
+            this.getCurrentEvent(event.id)
         }
 
     }

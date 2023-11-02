@@ -1,4 +1,5 @@
 <template>
+    <ErrorModal v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
     <div class="container d-flex flex-column jusitfy-content-center align-items-center">
         <Form @submit="signIn" :validation-schema="schema"
             class="d-flex flex-column align-items-center justify-content-center">

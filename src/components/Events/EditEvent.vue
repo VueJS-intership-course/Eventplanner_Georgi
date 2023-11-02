@@ -1,4 +1,5 @@
 <template>
+    <ErrorModal v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
     <TheModal @click.self="store.closeModal">
         <div class="card shadow rounded-3 my-auto">
             <div class="card-header p-3 h4">
@@ -64,7 +65,6 @@
 
 import { eventStore } from '@/store/events/eventStore.js';
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import TheModal from '@/common-templates/TheModal.vue';
 import * as yup from 'yup';
 import { ref } from 'vue';
 
@@ -110,12 +110,11 @@ const store = eventStore();
 */
 
 
-const errorMsg = ref('')
+const errorMsg = ref(null)
 
 const editEvent = (values) => {
     try {
-        console.log(values);
-        console.log(store.editedEvent.id);
+      
         const event = {
             id: store.editedEvent.id,
             name: values.name,

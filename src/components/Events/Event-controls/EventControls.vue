@@ -8,9 +8,9 @@
             <button @click="openFilter" class="btn btn-primary">Filter by</button>
             <button @click="resetFilter" v-if="hasQueryParameters" class="btn btn-primary">Reset Filter</button>
         </div>
-        <Teleport v-if="events.isFiltering" to="body">
+        <div v-if="events.isFiltering" to="body">
             <EventsFilter />
-        </Teleport>
+        </div>
         <div>
             <EventSearch v-model="searchValue" />
         </div>
@@ -25,9 +25,9 @@
 
 import { authStore } from '@/store/auth/authStore.js';
 import { computed, ref, watch } from 'vue';
-import EventSearch from '@/components/Events/EventSearch.vue';
+import EventSearch from '@/components/Events/Event-controls/EventSearch.vue';
 import { eventStore } from '@/store/events/eventStore.js';
-import EventsFilter from '@/components/Events/EventsFilter.vue';
+import EventsFilter from '@/components/Events/Event-controls/EventsFilter.vue';
 import { useRouter } from 'vue-router';
 
 /*

@@ -24,7 +24,7 @@ import { eventStore } from '@/store/events/eventStore.js';
 import { ref } from 'vue';
 import MapComp from '@/components/Map/MapComp.vue';
 import mapLayers from '@/utils/mapLayers.js';
-import SingleEventCard from '../../components/Events/SingleEventCard.vue';
+import SingleEventCard from '../../components/Events/SingleEvent/SingleEventCard.vue';
 
 /*
    props
@@ -78,10 +78,6 @@ const onMapReady = (map) => {
         align-items: center;
         gap: 2rem;
 
-
-        .card-footer {
-            gap: 1rem;
-        }
     }
 }
 </style>

@@ -4,7 +4,8 @@ import authServices from "@/services/authServices/authServices.js";
 export const authStore = defineStore('authStore', {
     state: () => ({
         currentUser: null,
-        isEditing: false
+        isEditing: false,
+        isEditPass: false
     }),
 
     getters: {
@@ -44,6 +45,10 @@ export const authStore = defineStore('authStore', {
 
         async editProfile(user) {
             await authServices.updateUsersProfile(user);
+        },
+
+        async changePassword(email, currentPassword, newPassword) {
+            await authServices.changePassword(email, currentPassword, newPassword);
         }
     }
 })

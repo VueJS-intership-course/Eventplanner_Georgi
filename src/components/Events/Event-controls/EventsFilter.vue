@@ -35,7 +35,6 @@
 <script setup>
 import { ref } from 'vue';
 import { eventStore } from '@/store/events/eventStore.js';
-import TheModal from '../../common-templates/TheModal.vue';
 import { useRouter } from 'vue-router';
 
 const startDate = ref(null);

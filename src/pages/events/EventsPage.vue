@@ -18,7 +18,7 @@
 /*
    imports
 */
-import EventControls from '@/components/Events/EventControls.vue';
+import EventControls from '@/components/Events/Event-controls/EventControls.vue';
 import EventList from '@/components/Events/EventList.vue';
 import AddEvent from '@/components/Events/AddEvent.vue';
 import { eventStore } from '@/store/events/eventStore.js';

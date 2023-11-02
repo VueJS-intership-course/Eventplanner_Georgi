@@ -1,4 +1,5 @@
 <template>
+    <ErrorModal v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
     <TheModal @click.self="store.closeAdd">
         <div class="card shadow rounded-2 my-auto">
             <div class="card-header p-1 h4">
@@ -71,7 +72,6 @@
 */
 
 import { eventStore } from '@/store/events/eventStore.js';
-import TheModal from '@/common-templates/TheModal.vue';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { toLonLat } from "ol/proj";
 import MapComp from '../Map/MapComp.vue'
@@ -115,7 +115,7 @@ const store = eventStore();
 */
 
 const img = ref(null);
-const errorMsg = ref('');
+const errorMsg = ref(null);
 
 /*
    map-handling
@@ -151,7 +151,9 @@ const addEvent = (values) => {
         store.closeAdd()
 
     } catch (error) {
-        errorMsg.value = error.message
+        errorMsg.value = error.message;
+
+        store.closeAdd()
     }
 }
 

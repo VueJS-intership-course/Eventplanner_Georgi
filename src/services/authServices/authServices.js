@@ -1,5 +1,5 @@
 import firebaseData from "../../firebase/firebase-config.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, reauthenticateWithCredential, EmailAuthProvider, updatePassword } from "firebase/auth";
 import sendCustomEmail from "../../utils/emailSender.js";
 
 export default {
@@ -50,7 +50,9 @@ export default {
             await firebaseData.fireStore.collection('users').add({
                 email: result.user.email,
                 username: result.user.displayName,
-                id: result.user.uid
+                id: result.user.uid,
+                total:0,
+                tickets:0
             })
         } catch (error) {
             console.error(error);
@@ -85,7 +87,9 @@ export default {
         await firebaseData.fireStore.collection('users').add({
             email: result.user.email,
             username: result.user.displayName,
-            id: result.user.uid
+            id: result.user.uid,
+            total:0,
+            tickets:0
         })
     },
 
@@ -127,5 +131,45 @@ export default {
         } catch (error) {
             throw new Error('Error while updating profile, please try again!')
         }
+    },
+
+    async changePassword(email, currentPassword, newPassword) {
+        try {
+            const user = firebaseData.fireAuth.currentUser;
+
+            if (user) {
+                const credential = EmailAuthProvider.credential(email, currentPassword);
+                await reauthenticateWithCredential(user, credential);
+
+                await updatePassword(user, newPassword);
+
+                await this.logout()
+            } else {
+                throw new Error("User is not authenticated or found.");
+            }
+        } catch (error) {
+            console.error("Error changing password:", error);
+            throw error;
+        }
+    },
+
+
+    async addTicketInformation(user, event) {
+        try {
+            const querySnapshot = await firebaseData.fireStore.collection('users').where('email', '==', user.email).get();
+            
+            const userDoc = querySnapshot.docs[0];
+            
+            const tickets = userDoc.data().tickets + 1;
+            const total = userDoc.data().total + event.price;
+          
+            userDoc.ref.update({
+                tickets,
+                total
+            })
+        } catch (error) {
+            throw new Error('Error while updating profile, please try again!')
+        }
     }
+
 }

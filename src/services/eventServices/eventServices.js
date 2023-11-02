@@ -11,17 +11,16 @@ export default {
 
 
             querySnapshot.forEach((doc) => {
-                const { date, id, imgSrc, location, name, price, ticket, time, country, budget } = doc.data()
+                const { date, id, imgSrc, location, name, price, ticket, time, country, budget, boughtTickets } = doc.data()
 
-                const event = new Event(date, id, imgSrc, location, name, price, ticket, time, budget, country)
-
+                const event = new Event(date, id, imgSrc, location, name, price, ticket, time, budget, country, boughtTickets)
                 data.push(event);
             });
 
             return data;
 
         } catch (error) {
-           throw new Error('Error while generating all events!')
+            throw new Error('Error while generating all events!')
         }
     },
 
@@ -119,7 +118,7 @@ export default {
             .collection("events")
             .where("id", "==", eventId)
             .get();
-        if (querySnapshot.docs.length > 0) {
+        if (querySnapshot.docs.length) {
             const doc = querySnapshot.docs[0];
             try {
                 await doc.ref.delete();
@@ -128,5 +127,35 @@ export default {
             }
         }
     },
+
+
+    async buyTicket(user, event) {
+        const querySnapshot = await firebaseData.fireStore
+            .collection("events")
+            .where("id", "==", event.id)
+            .get();
+
+        const doc = querySnapshot.docs[0];
+
+        try {
+            const updatedBoughtTickets = doc.data().boughtTickets;
+
+            updatedBoughtTickets.push({
+                email: user.email,
+                username: user.username
+            });
+
+            await doc.ref.update({
+                boughtTickets: updatedBoughtTickets,
+            });
+
+
+            await authServices.addTicketInformation(user, event)
+        } catch (error) {
+            throw new Error('Error while updating boughtTickets, please try again!');
+        }
+    }
+
+
 
 }

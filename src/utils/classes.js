@@ -1,5 +1,5 @@
 export class Event {
-    constructor(date, id, imgSrc, location, name, price, ticket, time, budget,country) {
+    constructor(date, id, imgSrc, location, name, price, ticket, time, budget,country, boughtTIckets) {
         this.date = date,
             this.id = id,
             this.imgSrc = imgSrc,
@@ -9,6 +9,7 @@ export class Event {
             this.ticket = ticket,
             this.time = time 
             this.budget = budget,
-            this.country = country
+            this.country = country,
+            this.boughtTickets = boughtTIckets
     }
 }

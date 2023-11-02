@@ -5,8 +5,7 @@
                 width="100" class="rounded-circle">
         </div>
 
-        <div class="text-center mt-3">
-            <span class="bg-secondary p-1 px-4 rounded text-white ">{{ userType }}</span>
+        <div class="text-center mt-3" v-if="store.currentUser">
             <h5 class="mt-2 mb-0">{{ store.currentUser.username }}</h5>
             <span class="mb-4">{{ store.currentUser.email }}</span>
 
@@ -19,8 +18,12 @@
             <div class="buttons mt-4 d-flex justify-content-center">
                 <button v-if="isUserAdmin" class="btn btn-outline-primary px-4">See Budget</button>
                 <button v-if="!isUserAdmin" class="btn btn-outline-primary px-4" @click="editOpen">Edit profile</button>
-                <button class="btn btn-outline-primary px-4 ml-3" @click="editOpen">Change password</button>
+                <button class="btn btn-outline-primary px-4 ml-3" @click="openEditPass">Change password</button>
             </div>
+        </div>
+
+        <div v-if="store.isEditPass">
+            <ChangePassword />
         </div>
     </div>
 </template>
@@ -31,6 +34,7 @@
 */
 import { computed } from 'vue';
 import { authStore } from '@/store/auth/authStore.js';
+import ChangePassword from './ChangePassword.vue';
 
 /*
    store
@@ -38,12 +42,16 @@ import { authStore } from '@/store/auth/authStore.js';
 
 const store = authStore();
 
-const userType = computed(() => store.currentUser.isAdmin ? 'Admin' : 'Client');
 const isUserAdmin = computed(() => store.isCurrentUserAdmin)
 
 
 const editOpen = () => {
     store.isEditing = true
+}
+
+
+const openEditPass = () => {
+    store.isEditPass = true
 }
 </script>
 
@@ -91,7 +99,6 @@ const editOpen = () => {
 
 
 .buttons {
-    gap:1rem
+    gap: 1rem
 }
-
 </style>

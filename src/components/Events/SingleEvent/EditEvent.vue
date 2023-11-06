@@ -38,18 +38,15 @@
                                 name="time" />
                             <ErrorMessage name="time" />
                         </div>
-                        <div class="form-group col-lg-6">
-                            <label class="form-control-label" for="form-group-input">Longtitude</label>
-                            <Field type="number" placeholder="longtitude" class="form-control"
-                                :value="store.editedEvent.location[0]" id="form-group-input" name="longtitude" />
-                            <ErrorMessage name="longtitude" />
+                        <div class="col-lg-12 mb-4">
+                            <label class="form-control-label">Choose location</label>
+                            <div class="mb-4">
+                                <input type="text" v-model="location[1]" readonly> <input type="text" v-model="location[0]"
+                                    readonly>
+                            </div>
+                            <MapComp :is-small="true" @map-ready="mapReady" />
                         </div>
-                        <div class="form-group col-lg-6 mb-3">
-                            <label class="form-control-label" for="form-group-input">Latitude</label>
-                            <Field type="number" placeholder="latitude" class="form-control"
-                                :value="store.editedEvent.location[1]" id="form-group-input" name="latitude" />
-                            <ErrorMessage name="latitude" />
-                        </div>
+
                         <div class="form-group col-lg-6">
                             <button class="btn btn-primary float-end mt-4" for="form-group-input">Edit Event</button>
                         </div>
@@ -67,6 +64,9 @@
 
 import { eventStore } from '@/store/events/eventStore.js';
 import { Form, Field, ErrorMessage } from 'vee-validate';
+import { toLonLat } from 'ol/proj';
+import mapLayers from '@/utils/mapLayers.js';
+import MapComp from '@/components/Map/MapComp.vue';
 import * as yup from 'yup';
 import { ref } from 'vue';
 
@@ -101,18 +101,22 @@ const schema = yup.object({
 })
 
 
+
 /*
    event store
 */
 
 const store = eventStore();
 
+
 /*
     adding event
 */
 
 
-const errorMsg = ref(null)
+const errorMsg = ref(null);
+const location = ref([store.editedEvent.location[0], store.editedEvent.location[1]]);
+const layer = ref(null)
 
 const editEvent = (values) => {
     try {
@@ -126,6 +130,7 @@ const editEvent = (values) => {
             time: values.time,
             location: [values.longtitude, values.latitude],
             imgSrc: store.editedEvent.imgSrc,
+            dateTime: new Date(values.date + 'T' + values.time + 'Z').toISOString(),
         }
 
         store.editEvent(event);
@@ -134,6 +139,19 @@ const editEvent = (values) => {
     } catch (error) {
         errorMsg.value = error;
     }
+}
+
+/*
+   map handling
+*/
+
+const mapReady = (map) => {
+    map.on('click', (e) => {
+        location.value = toLonLat(e.coordinate);
+        map.removeLayer(layer.value)
+        layer.value = mapLayers.createLayerOnClick(location.value);
+        map.addLayer(layer.value)
+    })
 }
 
 

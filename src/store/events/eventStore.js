@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import eventServices from "@/services/eventServices/eventServices.js";
-import moment from "moment";
 
 export const eventStore = defineStore('events', {
     state: () => ({
@@ -17,6 +16,7 @@ export const eventStore = defineStore('events', {
             budget: '',
             country: '',
         },
+        
         isEditing: false,
         currentEvent: null,
         eventStatistic: null,
@@ -70,8 +70,8 @@ export const eventStore = defineStore('events', {
                         const hasEmail = event.boughtTickets.some(ticket => ticket.email === userEmail);
                         return hasEmail;
                     });
-        
-                    return userEvents.map(event => ({ title: event.name, start: moment.utc(event.date).format('YYYY-MM-DD'), url:`/catalog/event/${event.id}` }));
+
+                    return userEvents.map(event => ({ title: event.name, start: event.date, url:`/catalog/event/${event.id}` }));
                 }
         
                 return null;

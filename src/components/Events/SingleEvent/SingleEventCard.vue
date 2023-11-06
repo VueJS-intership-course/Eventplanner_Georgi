@@ -6,7 +6,7 @@
         <div class="">
             <div class="card-header mb-4">
                 <h2 class="card-title">{{ store.currentEvent.name }}</h2>
-                <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.location, store.currentEvent.date) }}
+                <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.location, store.currentEvent.dateTime) }}
                 </p>
 
             </div>

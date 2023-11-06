@@ -1,29 +1,31 @@
 <template>
-    <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
-    <TheModal @click.self="closeEdit">
-        <div class="card card-body">
-            <h3 class="text-center mb-4 fw-bold">Profile information</h3>
-            <form @submit.prevent="handleEdit">
-                <div class="form-group has-error">
-                    <label for="email">Email</label>
-                    <input class="form-control input-lg" readonly id="email" :value="store.currentUser.email" name="email"
-                        type="text" />
-                </div>
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input class="form-control input-lg" placeholder="Sequrity Answer" name="username" v-model="username"
-                        type="text" />
-                </div>
-                <div class="form-group">
-                    <label>TimeZone: </label>
-                    <auto-complete v-model="selectedTimeZone" :data="constants.allTimeZones"></auto-complete>
-                </div>
-                <div class="form-group mt-4 text-center">
-                    <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">Save</button>
-                </div>
-            </form>
-        </div>
-    </TheModal>
+    <div>
+        <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
+        <TheModal @click.self="closeEdit">
+            <div class="card card-body">
+                <h3 class="text-center mb-4 fw-bold">Profile information</h3>
+                <form @submit.prevent="handleEdit">
+                    <div class="form-group has-error">
+                        <label for="email">Email</label>
+                        <input class="form-control input-lg" readonly id="email" :value="store.currentUser.email"
+                            name="email" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input class="form-control input-lg" placeholder="Sequrity Answer" name="username"
+                            v-model="username" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label>TimeZone: </label>
+                        <auto-complete v-model="selectedTimeZone" :data="constants.allTimeZones"></auto-complete>
+                    </div>
+                    <div class="form-group mt-4 text-center">
+                        <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </TheModal>
+    </div>
 </template>
 
 <script setup>

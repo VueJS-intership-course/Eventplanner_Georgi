@@ -16,7 +16,7 @@
 */
 import { eventStore } from '@/store/events/eventStore.js';
 import WelcomeCard from '@/common-templates/WelcomeCard.vue';
-import MapChart from '../components/Charts/MapChart.vue';
+import MapChart from '@/components/Charts/MapChart.vue';
 
 
 

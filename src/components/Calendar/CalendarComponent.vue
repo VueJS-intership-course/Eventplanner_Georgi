@@ -35,7 +35,7 @@ const props = defineProps({
 const calendarOptions = ref({
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
-    weekends: false,
+    weekends: true,
     events: props.data,
     selectable: true,
 })
@@ -46,11 +46,6 @@ const calendarOptions = ref({
 .calendar {
     width: 60%;
     height: 400px;
+    overflow: auto;
 
-
-    .fc-media-screen {
-        height: 100%;
-        padding: 0.2rem;
-    }
-}
-</style>
+}</style>

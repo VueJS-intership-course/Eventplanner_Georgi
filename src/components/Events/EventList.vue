@@ -35,28 +35,12 @@ store.getAllEvents();
 @import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
 @import '../../styles/variables.scss';
 
-// body {
-//     font-family: "Baloo 2", cursive;
-//     font-size: 16px;
-//     color: #ffffff;
-//     text-rendering: optimizeLegibility;
-//     font-weight: initial;
-// }
-
-.dark {
-    background: #110f16;
-}
 
 
 .light {
     background: #f3f5f7;
-}
+};
 
-// a,
-// a:hover {
-//     text-decoration: none;
-//     transition: color 0.6s ease-in-out;
-// }
 
 #pageHeaderTitle {
     margin: 2rem 0;

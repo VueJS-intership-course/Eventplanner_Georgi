@@ -7,31 +7,21 @@
                     Add Event
                 </div>
                 <div class="card-body p-">
-                    <Form @submit="addEvent" :validation-schema="schema" role="form" class="row">
+                    <form @submit="addEvent" role="form" class="row">
                         <div class="form-group col-lg-4 ">
-                            <label class="form-control-label" for="form-group-input">Name</label>
-                            <Field type="text" class="form-control" id="form-group-input" name="name" />
-                            <ErrorMessage name="name" />
+                            <BasicInput type="text" name="name" label="Name" />
                         </div>
                         <div class="form-group col-lg-4 ">
-                            <label class="form-control-label" for="form-group-input">Tickets</label>
-                            <Field type="number" class="form-control" id="form-group-input" name="tickets" />
-                            <ErrorMessage name="tickets" />
+                            <BasicInput type="number" name="tickets" label="Tickets" />
                         </div>
                         <div class="form-group col-lg-4">
-                            <label class="form-control-label" for="form-group-input">Price</label>
-                            <Field type="number" class="form-control" id="form-group-input" name="price" />
-                            <ErrorMessage name="price" />
+                            <BasicInput type="number" name="price" label="Price" />
                         </div>
                         <div class="form-group col-lg-12 ">
-                            <label class="form-control-label" for="form-group-input">Date</label>
-                            <Field type="date" class="form-control" id="form-group-input" name="date" />
-                            <ErrorMessage name="date" />
+                            <BasicInput type="date" name="date" label="Date" />
                         </div>
                         <div class="form-group col-lg-12 ">
-                            <label class="form-control-label" for="form-group-input">Time</label>
-                            <Field type="time" class="form-control" id="form-group-input" name="time" />
-                            <ErrorMessage name="time" />
+                            <BasicInput type="time" name="time" label="Time" />
                         </div>
                         <div class="form-group col-lg-12">
                             <label class="form-control-label" for="form-group-input">Image</label>
@@ -39,9 +29,7 @@
                                 name="imgSrc" />
                         </div>
                         <div class="form-group col-lg-12">
-                            <label class="form-control-label" for="form-group-input">Budget</label>
-                            <Field type="number" class="form-control" id="form-group-input" name="budget" />
-                            <ErrorMessage name="budget" />
+                            <BasicInput type="number" name="budget" label="Budget" />
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-control-label">Choose location</label>
@@ -52,15 +40,13 @@
                             <MapComp :is-small="true" @map-ready="mapReady" />
                         </div>
                         <div class="form-group col-lg-12">
-                            <label class="form-control-label" for="form-group-input">Country</label>
-                            <Field type="text" class="form-control" id="form-group-input" name="country" />
-                            <ErrorMessage name="country" />
+                            <BasicInput type="text" name="country" label="Country" />
                         </div>
 
                         <div class="form-group col-lg-6">
                             <button class="btn btn-primary float-end mt-4" for="form-group-input">Add Event</button>
                         </div>
-                    </Form>
+                    </form>
                 </div>
             </div>
         </TheModal>
@@ -74,12 +60,12 @@
 */
 
 import { eventStore } from '@/store/events/eventStore.js';
-import { Form, Field, ErrorMessage } from 'vee-validate';
 import { toLonLat } from "ol/proj";
-import MapComp from '../Map/MapComp.vue'
+import { useForm } from 'vee-validate';
+import MapComp from '@/components/Map/MapComp.vue'
 import * as yup from 'yup';
 import { ref } from 'vue';
-import mapLayers from '../../utils/mapLayers.js'
+import mapLayers from '@/utils/mapLayers.js'
 
 
 /*
@@ -87,22 +73,24 @@ import mapLayers from '../../utils/mapLayers.js'
 */
 
 
-const schema = yup.object({
-    name: yup.string().required("This field is required!"),
-    tickets: yup
-        .number()
-        .required("This field is required!")
-        .min(20, 'Minimum 20 tickets should be available'),
-    price: yup
-        .number()
-        .required("This field is required!"),
-    date: yup
-        .string()
-        .required("This field is required!"),
-    time: yup
-        .string()
-        .required('This field is required'),
+const { handleSubmit } = useForm({
+    validationSchema: yup.object({
+        name: yup.string().required("This field is required!"),
+        tickets: yup
+            .number()
+            .required("This field is required!")
+            .min(20, 'Minimum 20 tickets should be available'),
+        price: yup
+            .number()
+            .required("This field is required!"),
+        date: yup
+            .string()
+            .required("This field is required!"),
+        time: yup
+            .string()
+            .required('This field is required'),
 
+    })
 })
 
 
@@ -135,8 +123,17 @@ const mapReady = (map) => {
     })
 }
 
-const addEvent = (values) => {
+/*
+   handle add new Event
+*/
+
+const addEvent = handleSubmit((values) => {
     try {
+
+        if (selectedDate < new Date()) {
+            throw new Error('Selected date is in the past');
+        }
+
         const newEvent = {
             name: values.name,
             ticket: values.tickets,
@@ -156,7 +153,7 @@ const addEvent = (values) => {
 
         store.closeAdd()
     }
-}
+})
 
 const handleEventImage = (event) => {
     const file = event.target.files[0];

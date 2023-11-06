@@ -22,13 +22,13 @@
 /*
    imports
 */
-import EditEvent from '../../components/Events/EditEvent.vue';
+import EditEvent from '@/components/Events/SingleEvent/EditEvent.vue';
 import { eventStore } from '@/store/events/eventStore.js';
 import { ref } from 'vue';
 import MapComp from '@/components/Map/MapComp.vue';
 import mapLayers from '@/utils/mapLayers.js';
-import SingleEventCard from '../../components/Events/SingleEvent/SingleEventCard.vue';
-import AddExpense from '../../components/Events/SingleEvent/AddExpense.vue';
+import SingleEventCard from '@/components/Events/SingleEvent/SingleEventCard.vue';
+import AddExpense from '@/components/Events/SingleEvent/AddExpense.vue';
 
 /*
    props

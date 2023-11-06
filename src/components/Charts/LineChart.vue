@@ -7,11 +7,15 @@
 <script setup>
 import { ref } from 'vue';
 
+const chartIsLoaded = () => {
+  console.log('Loaded');
+}
+
 const chartOptions = ref({
-  loading: {
-    hideDuration: 1000,
-    showDuration: 1000
-  },
+  // loading: {
+  //   hideDuration: 1000,
+  //   showDuration: 1000
+  // },
   credits: {
     enabled: false
   },
@@ -31,9 +35,9 @@ const chartOptions = ref({
   }, {
     data: [0, 4, 3, 2, 1]
   }],
-  xAxis: {
-    categories: ['Hi', 'Hello', 'How', 'Are']
-  },
+  // xAxis: {
+  //   categories: ['Hi', 'Hello', 'How', 'Are']
+  // },
   yAxis: {
     alternateGridColor: '#FDFFD5'
   },

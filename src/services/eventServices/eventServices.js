@@ -11,9 +11,9 @@ export default {
 
 
             querySnapshot.forEach((doc) => {
-                const { date, id, imgSrc, location, name, price, ticket, country, budget, boughtTickets, expenses } = doc.data()
+                const { date, id, imgSrc, location, name, price, ticket, country, budget, boughtTickets, expenses,time, dateTime } = doc.data()
 
-                const event = new Event(date, id, imgSrc, location, name, price, ticket, budget, country, boughtTickets, expenses)
+                const event = new Event(date, id, imgSrc, location, name, price, ticket, budget, country, boughtTickets, expenses,time, dateTime)
 
                 data.push(event);
             });
@@ -100,7 +100,8 @@ export default {
                 price: event.price,
                 date: event.date,
                 time: event.time,
-                imgSrc: event.imgSrc
+                imgSrc: event.imgSrc,
+                dateTime: event.dateTime
             });
 
             const message = `${event.name} information is changed, show details`

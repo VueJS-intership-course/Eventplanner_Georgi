@@ -17,6 +17,7 @@
 
             <div class="buttons mt-4 d-flex justify-content-center">
                 <button v-if="!isUserAdmin" class="btn btn-outline-primary px-4" @click="editOpen">Edit profile</button>
+                <router-link v-if="isUserAdmin" class="btn btn-outline-primary px-4" :to="{name:'Budget-Page'}">Budget</router-link>
                 <button class="btn btn-outline-primary px-4 ml-3" @click="openEditPass">Change password</button>
             </div>
         </div>
@@ -33,7 +34,7 @@
 */
 import { computed } from 'vue';
 import { authStore } from '@/store/auth/authStore.js';
-import ChangePassword from './ChangePassword.vue';
+import ChangePassword from '@/components/Users/ChangePassword.vue';
 
 /*
    store

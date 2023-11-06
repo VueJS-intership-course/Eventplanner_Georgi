@@ -12,6 +12,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap';
 import authServices from '@/services/authServices/authServices.js';
 import TheModal from '@/common-templates/TheModal.vue';
+import BasicInput from '@/common-templates/BasicInput.vue'
 import ErrorModal from '@/common-templates/ErrorModal.vue';
 
 const pinia = createPinia();
@@ -28,7 +29,8 @@ app.use(router);
 
 
 app.component('TheModal', TheModal);
-app.component('ErrorModal',ErrorModal)
+app.component('ErrorModal',ErrorModal);
+app.component('BasicInput', BasicInput)
 
 const store = authStore();
 

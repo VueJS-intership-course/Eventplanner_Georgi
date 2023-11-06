@@ -52,7 +52,8 @@ export default {
                 username: result.user.displayName,
                 id: result.user.uid,
                 total:0,
-                tickets:0
+                tickets:0,
+                timeZone: '',
             })
         } catch (error) {
             console.error(error);
@@ -89,7 +90,8 @@ export default {
             username: result.user.displayName,
             id: result.user.uid,
             total:0,
-            tickets:0
+            tickets:0,
+            timeZone: ''
         })
     },
 

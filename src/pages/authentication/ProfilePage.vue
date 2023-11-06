@@ -5,8 +5,8 @@
                 <ProfileCard />
             </div>
             <div v-if="usersEvents && !isUserAdmin" class="d-flex flex-column justify-content-center align-items-center">
-                <h2 class="fw-bold">My events calendar</h2>
-                <CalendarComponent :data="usersEvents" @date-click="handleCalendarClick"/>
+                <h2 class="fw-bold text-light">My events calendar</h2>
+                <CalendarComponent :data="usersEvents" @date-click="handleCalendarClick" />
             </div>
             <div v-if="store.isEditing">
                 <EditProfile />
@@ -44,7 +44,7 @@ events.getAllEvents()
 /*
    check if users has events
 */
-const usersEvents = computed(() => events.usersEvent(store.currentUser.email))
+const usersEvents = computed(() => store.currentUser ? events.usersEvent(store.currentUser.email) : null)
 
 const isUserAdmin = computed(() => store.isCurrentUserAdmin)
 
@@ -53,8 +53,8 @@ const isUserAdmin = computed(() => store.isCurrentUserAdmin)
 */
 
 const handleCalendarClick = (event) => {
-    router.push({name:'Single-Event', params:{id:event.id}})
-} 
+    router.push({ name: 'Single-Event', params: { id: event.id } })
+}
 
 </script>
 
@@ -65,7 +65,7 @@ const handleCalendarClick = (event) => {
     @include page-background;
 
     .row {
-        gap:2rem;
+        gap: 2rem;
     }
 }
 </style>

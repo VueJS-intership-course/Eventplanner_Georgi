@@ -1,5 +1,6 @@
 <template>
-    <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
+    <div>
+          <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
     <TheModal @click.self="closeEdit">
         <div class="card card-body">
             <h3 class="text-center mb-4 fw-bold">Change password</h3>
@@ -28,10 +29,11 @@
             </Form>
         </div>
     </TheModal>
+    </div>
 </template>
 
 <script setup>
-import { authStore } from '../../store/auth/authStore';
+import { authStore } from '@/store/auth/authStore.js';
 import { ErrorMessage, Field, Form } from 'vee-validate';
 import * as yup from 'yup'
 import { useRouter } from 'vue-router';

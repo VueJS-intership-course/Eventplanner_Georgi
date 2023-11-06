@@ -1,6 +1,6 @@
 import moment from 'moment-timezone';
 import tzlookup from 'tz-lookup';
-import { authStore } from '../store/auth/authStore.js'
+import { authStore } from '@/store/auth/authStore.js'
 
 export default {
   install: (app) => {
@@ -11,7 +11,7 @@ export default {
       const store = authStore()
 
       if (store.currentUser && store.currentUser.timeZone) {
-        const targetTime = originalTime.tz(store.currentUser.timeZone).format();
+        const targetTime = originalTime.tz(store.currentUser.timeZone).format('dddd, MMMM Do YYYY, h:mm:ss a');
 
         return targetTime
       }

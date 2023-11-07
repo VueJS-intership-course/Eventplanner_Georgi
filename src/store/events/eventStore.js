@@ -80,61 +80,32 @@ export const eventStore = defineStore('events', {
         },
 
         getAllTicketsInfo(state) {
-            const data = {};
-
-            for (let i = 0; i <= 11; i++) {
-                data[i] = 0;
-            }
-
-            state.events.forEach(event => {
+            const data = state.events.reduce((result, event) => {
                 const monthKey = moment.utc(event.boughtTickets.date).month();
-                data[monthKey] += 1;
-            });
-
-            const chartData = Object.entries(data).map(([key, value]) => [parseInt(key), value]);
+                result[monthKey] = (result[monthKey] || 0) + 1;
+                return result;
+            }, {});
 
             return {
                 name: 'Tickets',
-                cursor: 'pointer',
-                point: {
-                    events: {
-                        click: function () {
-                            console.dir(this);
-                        },
-                    }
-                },
-                data: chartData
-            }
+                type: 'column',
+                data: Object.entries(data).map(([key, value]) => [parseInt(key), value]),
+            };
         },
 
         getAllEventsDates(state) {
-            const data = {};
-
-            for (let i = 0; i <= 11; i++) {
-                data[i] = 0;
-            }
-
-            state.events.forEach(event => {
+            const data = state.events.reduce((result, event) => {
                 const monthKey = moment.utc(event.date).month();
-                data[monthKey] += 1;
-            });
-
-            const chartData = Object.entries(data).map(([key, value]) => [parseInt(key), value]);
+                result[monthKey] = (result[monthKey] || 0) + 1;
+                return result;
+            }, {});
 
             return {
                 name: 'Events',
-                cursor: 'pointer',
-                point: {
-                    events: {
-                        click: function () {
-                            console.dir(this);
-                        },
-                    }
-                },
-                data: chartData
-            }
+                type: 'column',
+                data: Object.entries(data).map(([key, value]) => [parseInt(key), value]),
+            };
         },
-
 
         getFullAnalytics() {
             return [this.getAllTicketsInfo, this.getAllEventsDates];

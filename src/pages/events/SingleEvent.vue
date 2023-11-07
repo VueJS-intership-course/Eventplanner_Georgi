@@ -14,7 +14,6 @@
                 <MapComp v-if="store.currentEvent" @map-ready="onMapReady" />
             </div>
         </div>
-
     </div>
 </template>
 

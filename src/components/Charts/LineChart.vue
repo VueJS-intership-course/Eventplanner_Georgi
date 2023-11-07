@@ -37,6 +37,7 @@ const chartOptions = ref({
     alternateGridColor: '#FDFFD5'
   },
   chart: {
+    type:'column',
     zoomType: 'x',
     resetZoomButton: {
       position: {
@@ -45,6 +46,8 @@ const chartOptions = ref({
       }
     }
   },
+  //plot options
+  //series
 })
 </script>
   

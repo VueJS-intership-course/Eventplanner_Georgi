@@ -25,9 +25,9 @@
 
 import { authStore } from '@/store/auth/authStore.js';
 import { computed, ref, watch } from 'vue';
-import EventSearch from '@/components/Events/Event-controls/EventSearch.vue';
+import EventSearch from '@/components/Events/Catalog-controls/EventSearch.vue';
 import { eventStore } from '@/store/events/eventStore.js';
-import EventsFilter from '@/components/Events/Event-controls/EventsFilter.vue';
+import EventsFilter from '@/components/Events/Catalog-controls/EventsFilter.vue';
 import { useRouter } from 'vue-router';
 
 /*

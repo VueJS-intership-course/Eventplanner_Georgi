@@ -18,16 +18,16 @@ import { eventStore } from '@/store/events/eventStore.js';
 import WelcomeCard from '@/common-templates/WelcomeCard.vue';
 import MapChart from '@/components/Charts/MapChart.vue';
 
-
-
 /*
-   map handling
+   store
 */
-
 const store = eventStore();
 
+/*
+   generate linechart map data
+*/
 store.getAllEvents();
-store.getStatistics()
+store.getStatistics();
 </script>
 
 <style scoped lang="scss">

@@ -11,53 +11,31 @@ const chartIsLoaded = () => {
   console.log('Loaded');
 }
 
+const props = defineProps({
+  data: {
+    type: Array,
+    required: true
+  },
+  title: {
+    type: String,
+    default:"Chart"
+  }
+})
+
 const chartOptions = ref({
-  // loading: {
-  //   hideDuration: 1000,
-  //   showDuration: 1000
-  // },
   credits: {
     enabled: false
   },
   title: {
-    text: 'Hello'
+    text: props.title
   },
-  series: [{
-    cursor: 'pointer',
-    point: {
-      events: {
-        click: function () {
-          console.dir(this);
-        },
-      }
-    },
-    data: [0, 1, 2, 3]
-  }, {
-    data: [0, 4, 3, 2, 1]
-  }],
-  // xAxis: {
-  //   categories: ['Hi', 'Hello', 'How', 'Are']
-  // },
+  series: props.data,
+  xAxis: {
+    categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  },
   yAxis: {
     alternateGridColor: '#FDFFD5'
   },
-  annotations: [{
-    labelOptions: {
-      dragable: false,
-      verticalAlign: 'top',
-    },
-    labels: [
-      {
-        point: {
-          xAxis: 0,
-          yAxis: 0,
-          y: 1,
-          x: 1,
-
-        },
-        text: 'Hello there'
-      }]
-  }],
   chart: {
     zoomType: 'x',
     resetZoomButton: {
@@ -66,8 +44,7 @@ const chartOptions = ref({
         y: -30
       }
     }
-  }
-
+  },
 })
 </script>
   

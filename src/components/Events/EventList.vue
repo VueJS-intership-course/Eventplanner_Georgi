@@ -20,7 +20,7 @@ import EventCard from '@/components/Events/EventCard.vue';
 import EmptyEvents from '@/components/Events/EmptyEvents.vue';
 
 /*
-   get events
+   get all events
 */
 
 const store = eventStore();

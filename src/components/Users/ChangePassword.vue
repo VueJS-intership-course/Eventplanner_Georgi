@@ -1,74 +1,87 @@
 <template>
     <div>
-          <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
-    <TheModal @click.self="closeEdit">
-        <div class="card card-body">
-            <h3 class="text-center mb-4 fw-bold">Change password</h3>
-            <Form @submit="handleChangePassword" :validation-schema="schema">
-                <div class="form-group has-error">
-                    <label for="currPass">Current password</label>
-                    <Field class="form-control input-lg" placeholder="Write down your current password" id="currPass"
-                        name="currPass" type="password" />
-                    <ErrorMessage name="currPass" />
-                </div>
-                <div class="form-group">
-                    <label for="newPaas">New Password:</label>
-                    <Field class="form-control input-lg" id="newPass" placeholder="Write down your new password"
-                        name="newPass" type="password" />
-                    <ErrorMessage name="newPass" />
-                </div>
-                <div class="form-group">
-                    <label for="rePass">Repeat New Password:</label>
-                    <Field class="form-control input-lg" id="rePass" placeholder="Repeat your new password" name="rePass"
-                        type="password" />
-                    <ErrorMessage name="rePass" />
-                </div>
-                <div class="form-group mt-4 text-center">
-                    <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">Save</button>
-                </div>
-            </Form>
-        </div>
-    </TheModal>
+        <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
+        <TheModal @click.self="closeEdit">
+            <div class="card card-body">
+                <h3 class="text-center mb-4 fw-bold">Change password</h3>
+                <form @submit="handleChangePassword">
+                    <div class="form-group has-error">
+                        <BasicInput type="password" name="currPass" label="Current password"
+                            placeholder="Write down your current password" />
+                    </div>
+                    <div class="form-group">
+                        <BasicInput type="password" name="newPass" label="New Password"
+                            placeholder="Write down your new password" />
+                    </div>
+                    <div class="form-group">
+                        <BasicInput type="password" name="rePass" label="Repeat New Password"
+                            placeholder="Repeat your new password" />
+                    </div>
+                    <div class="form-group mt-4 text-center">
+                        <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </TheModal>
     </div>
 </template>
 
 <script setup>
+/*
+   imports
+*/
 import { authStore } from '@/store/auth/authStore.js';
-import { ErrorMessage, Field, Form } from 'vee-validate';
 import * as yup from 'yup'
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { useForm } from 'vee-validate';
 
+/*
+   router
+*/
 const router = useRouter()
 
-
+/*
+   store
+*/
 const store = authStore();
 
-
+/*
+   close edit password modal
+*/
 const closeEdit = () => {
     store.isEditPass = false;
 }
 
 
-const schema = yup.object({
-    currPass: yup
-        .string()
-        .required("This field is required!"),
-    newPass: yup
-        .string()
-        .min(8, "Password must be at least 8 symbols!")
-        .required("This field is required!"),
-    rePass: yup
-        .string()
-        .required("This field is required!")
-        .oneOf([yup.ref("newPass")], "Passwords does not match!"),
+/*
+   validation schema
+*/
+const { handleSubmit } = useForm({
+    validationSchema: yup.object({
+        currPass: yup
+            .string()
+            .required("This field is required!"),
+        newPass: yup
+            .string()
+            .min(8, "Password must be at least 8 symbols!")
+            .required("This field is required!"),
+        rePass: yup
+            .string()
+            .required("This field is required!")
+            .oneOf([yup.ref("newPass")], "Passwords does not match!"),
 
-});
+    })
+})
 
+
+/*
+   handle change password form
+*/
 
 const errorMsg = ref(null)
 
-const handleChangePassword = async (values) => {
+const handleChangePassword = handleSubmit(async (values) => {
     try {
         await store.changePassword(store.currentUser.email, values.currPass, values.newPass);
 
@@ -78,7 +91,7 @@ const handleChangePassword = async (values) => {
     } catch (error) {
         errorMsg.value = error.message
     }
-};
+})
 
 
 /*
@@ -90,3 +103,12 @@ const closeError = () => {
 }
 
 </script>
+
+
+<style scoped lang="scss">
+@import '../../styles/variables.scss';
+
+span {
+    color: $form-wrong-input;
+}
+</style>

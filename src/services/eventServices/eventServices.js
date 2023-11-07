@@ -35,11 +35,14 @@ export default {
                 name: eventData.name,
                 ticket: eventData.ticket,
                 price: eventData.price,
-                date: eventData.date,
+                dateTime: eventData.dateTime,
                 location: eventData.location,
                 imgSrc: blobImg,
                 budget: eventData.budget,
-                country: eventData.country
+                country: eventData.country,
+                date: eventData.date,
+                time:eventData.time, 
+                boughtTickets: []
             });
 
             const message = `${eventData.name} event is available on Eventify, check it out and don't miss the chance to buy ticket`
@@ -141,15 +144,18 @@ export default {
         try {
             const updatedBoughtTickets = doc.data().boughtTickets;
             const ticket = doc.data().ticket - 1;
+            const budget = parseInt(doc.data().budget) + parseInt(event.price);
 
             updatedBoughtTickets.push({
                 email: user.email,
-                username: user.username
+                username: user.username,
+                date: Date.now()
             });
 
             await doc.ref.update({
                 boughtTickets: updatedBoughtTickets,
-                ticket
+                ticket,
+                budget
             });
 
 

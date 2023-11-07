@@ -9,12 +9,10 @@
             </transition>
         </router-view>
     </div>
-    
 </template>
 
 <script setup>
-import TheHeader from './common-templates/TheHeader.vue';
-
+import TheHeader from '@/common-templates/TheHeader.vue';
 </script>
 
 <style scoped lang="scss">

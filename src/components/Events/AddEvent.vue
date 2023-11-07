@@ -64,8 +64,9 @@ import { toLonLat } from "ol/proj";
 import { useForm } from 'vee-validate';
 import MapComp from '@/components/Map/MapComp.vue'
 import * as yup from 'yup';
-import { ref } from 'vue';
-import mapLayers from '@/utils/mapLayers.js'
+import {  ref } from 'vue';
+import mapLayers from '@/utils/mapLayers.js';
+import showNotifications from '@/utils/notifications.js'
 
 
 /*
@@ -89,7 +90,12 @@ const { handleSubmit } = useForm({
         time: yup
             .string()
             .required('This field is required'),
-
+        budget: yup
+            .string()
+            .required('This field is required'),
+        country: yup
+            .string()
+            .required('This field is required'),
     })
 })
 
@@ -130,24 +136,24 @@ const mapReady = (map) => {
 const addEvent = handleSubmit((values) => {
     try {
 
-        if (selectedDate < new Date()) {
-            throw new Error('Selected date is in the past');
-        }
-
         const newEvent = {
             name: values.name,
             ticket: values.tickets,
             price: values.price,
-            date: new Date(values.date + 'T' + values.time + 'Z').toISOString(),
+            dateTime: new Date(values.date + 'T' + values.time + 'Z').toISOString(),
             location: location.value,
             budget: values.budget,
-            country: values.country
+            country: values.country,
+            date:values.date,
+            time: values.time
         }
+
 
         store.addEvent(newEvent, img.value);
 
-        store.closeAdd()
-
+        store.closeAdd();
+    
+       showNotifications(`${newEvent.name} is added to the catalog!`);
     } catch (error) {
         errorMsg.value = error.message;
 

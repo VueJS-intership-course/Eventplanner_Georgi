@@ -1,6 +1,6 @@
-import firebaseData from "../../firebase/firebase-config.js";
+import firebaseData from "@/firebase/firebase-config.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, reauthenticateWithCredential, EmailAuthProvider, updatePassword } from "firebase/auth";
-import sendCustomEmail from "../../utils/emailSender.js";
+import sendCustomEmail from "@/utils/emailSender.js";
 
 export default {
     async signUp(user) {

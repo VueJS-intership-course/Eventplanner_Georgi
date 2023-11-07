@@ -64,6 +64,7 @@
 
 import { eventStore } from '@/store/events/eventStore.js';
 import { Form, Field, ErrorMessage } from 'vee-validate';
+import showNotifications from '@/utils/notifications.js'
 import { toLonLat } from 'ol/proj';
 import mapLayers from '@/utils/mapLayers.js';
 import MapComp from '@/components/Map/MapComp.vue';
@@ -136,6 +137,7 @@ const editEvent = (values) => {
         store.editEvent(event);
         store.closeModal();
 
+        showNotifications(`${event.name} is edited successfully!`)
     } catch (error) {
         errorMsg.value = error;
     }
@@ -166,4 +168,10 @@ const closeError = () => {
 </script>
 
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import '../../../styles/variables.scss';
+
+span {
+    color: $form-wrong-input;
+}
+</style>

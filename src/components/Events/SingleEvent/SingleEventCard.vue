@@ -111,7 +111,7 @@ const handleBuyTicket = () => {
     has user bought ticket
 */
 
-const hasUserBoughtTIcket = computed(() => store.hasUserBoughTicket(users.currentUser.email))
+const hasUserBoughtTIcket = computed(() => users.currentUser ? store.hasUserBoughTicket(users.currentUser.email) : null)
 
 /*
    handle add expense

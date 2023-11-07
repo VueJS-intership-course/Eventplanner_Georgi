@@ -40,6 +40,7 @@ import { useRouter } from 'vue-router';
 import { useForm } from 'vee-validate';
 import * as yup from 'yup';
 import { authStore } from '@/store/auth/authStore.js';
+import showNotification from '@/utils/notifications.js';
 
 /*
    router
@@ -81,6 +82,8 @@ const signIn = handleSubmit(async (values) => {
         await store.signIn(values.email, values.password);
 
         router.push({ name: 'Event-Catalog' });
+
+        showNotification(`Welcome, ${values.name}`);
     } catch (error) {
         errorMsg.value = error.message
     }
@@ -94,7 +97,8 @@ const signInGoogle = async () => {
     try {
         await store.signInWithGoogle();
 
-        router.push({ name: 'Event-Catalog' });
+        store.isEditing = true;
+        router.push({ name: 'Profile-Page' });
 
     } catch (error) {
         errorMsg.value = error.message
@@ -109,7 +113,8 @@ const signInFacebook = async () => {
     try {
         await store.signInWithFacebook();
 
-        router.push({ name: 'Event-Catalog' });
+        store.isEditing = true;
+        router.push({ name: 'Profile-Page' });
     } catch (error) {
         errorMsg.value = error.message
     }

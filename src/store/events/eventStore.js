@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import eventServices from "@/services/eventServices/eventServices.js";
+import moment from "moment";
 
 export const eventStore = defineStore('events', {
     state: () => ({
@@ -16,13 +17,13 @@ export const eventStore = defineStore('events', {
             budget: '',
             country: '',
         },
-        
+
         isEditing: false,
         currentEvent: null,
         eventStatistic: null,
         isAddClicked: false,
         isFiltering: false,
-        isAddExpense:false
+        isAddExpense: false
     }),
 
     getters: {
@@ -71,11 +72,72 @@ export const eventStore = defineStore('events', {
                         return hasEmail;
                     });
 
-                    return userEvents.map(event => ({ title: event.name, start: event.date, url:`/catalog/event/${event.id}` }));
+                    return userEvents.map(event => ({ title: event.name, start: event.date, url: `/catalog/event/${event.id}` }));
                 }
-        
+
                 return null;
             }
+        },
+
+        getAllTicketsInfo(state) {
+            const data = {};
+
+            for (let i = 0; i <= 11; i++) {
+                data[i] = 0;
+            }
+
+            state.events.forEach(event => {
+                const monthKey = moment.utc(event.boughtTickets.date).month();
+                data[monthKey] += 1;
+            });
+
+            const chartData = Object.entries(data).map(([key, value]) => [parseInt(key), value]);
+
+            return {
+                name: 'Tickets',
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function () {
+                            console.dir(this);
+                        },
+                    }
+                },
+                data: chartData
+            }
+        },
+
+        getAllEventsDates(state) {
+            const data = {};
+
+            for (let i = 0; i <= 11; i++) {
+                data[i] = 0;
+            }
+
+            state.events.forEach(event => {
+                const monthKey = moment.utc(event.date).month();
+                data[monthKey] += 1;
+            });
+
+            const chartData = Object.entries(data).map(([key, value]) => [parseInt(key), value]);
+
+            return {
+                name: 'Events',
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function () {
+                            console.dir(this);
+                        },
+                    }
+                },
+                data: chartData
+            }
+        },
+
+
+        getFullAnalytics() {
+            return [this.getAllTicketsInfo, this.getAllEventsDates];
         }
     },
 

@@ -33,17 +33,31 @@
 </template>
 
 <script setup>
+/*
+   imports
+*/
 import { ref } from 'vue';
 import { eventStore } from '@/store/events/eventStore.js';
 import { useRouter } from 'vue-router';
 
+/*
+   event store
+*/
+const store = eventStore();
+
+/*
+   router
+*/
+const router = useRouter();
+
+
+/*
+   handle filter form
+*/
 const startDate = ref(null);
 const endDate = ref('');
 const location = ref('');
 const ticketStatus = ref('');
-
-const store = eventStore();
-const router = useRouter()
 
 const handleFilters = () => {
     const queryParameters = {};

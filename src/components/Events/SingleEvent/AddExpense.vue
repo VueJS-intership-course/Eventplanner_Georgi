@@ -2,50 +2,82 @@
     <TheModal @click.self="closeAddExpense">
         <div class="card card-body">
             <h3 class="text-center mb-4 fw-bold">Add expense</h3>
-            <Form @submit="handleAddExpense" >
+            <form @submit="handleAddExpense">
                 <div class="form-group">
-                    <label for="category">Expense Category:</label>
-                    <Field name="category" class="form-select" id="category" as="select" value="rent">
-                        <option value="rent">Rent place</option>
-                        <option value="food">Food</option>
-                        <option value="logistics">Logistics</option>
-                    </Field>
-                    <ErrorMessage name="category" />
+                    <BasicInput type="select" :selectOptions="options" name="category" label="Expense Category" />
                 </div>
                 <div class="form-group">
-                    <label for="expenseAmount">Amount:</label>
-                    <Field class="form-control input-lg" id="expenseAmount" name="expenseAmount" type="number" />
-                    <ErrorMessage name="expenseAmount" />
+                    <BasicInput type="number" label="Amount" name="expenseAmount" />
                 </div>
                 <div class="form-group mt-4 text-center">
                     <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">Save</button>
                 </div>
-            </Form>
+            </form>
         </div>
     </TheModal>
 </template>
 
 
 <script setup>
-import { Form, Field, ErrorMessage } from 'vee-validate';
+/*
+   imports
+*/
+import { useForm } from 'vee-validate';
 import { eventStore } from '../../../store/events/eventStore';
+import * as yup from 'yup';
+import { ref } from 'vue';
 
+/*
+   store
+*/
 const store = eventStore();
 
 
+/*
+   open modal
+*/
 const closeAddExpense = () => {
     store.isAddExpense = false;
 };
 
+/*
+   handle add expense form
+*/
+const { handleSubmit } = useForm({
+    validationSchema: yup.object({
+        category: yup
+            .string()
+            .required('This field is required'),
+        expenseAmount: yup
+            .number()
+            .required('This field is required')
+    })
+})
 
-const handleAddExpense =async  (values) => {
+const options = ref([
+    {
+        value: 'rent',
+        label: 'Rent place'
+    },
+    {
+        value: 'food',
+        label: 'Food'
+    },
+    {
+        value: 'logistics',
+        label: 'Logistics'
+    }
+])
+
+
+const handleAddExpense = handleSubmit(async (values) => {
     const expense = {
         category: values.category,
         amount: values.expenseAmount
     };
 
     await store.addExpense(store.currentEvent, expense);
-
+    
     closeAddExpense()
-}
+});
 </script>

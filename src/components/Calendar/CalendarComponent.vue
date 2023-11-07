@@ -32,6 +32,9 @@ const props = defineProps({
 })
 
 
+/*
+   options
+*/
 const calendarOptions = ref({
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',

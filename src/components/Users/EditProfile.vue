@@ -37,6 +37,8 @@ import AutoComplete from '@/common-templates/AutoComplete.vue';
 import constants from '@/utils/constants.js';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import showNotifications from '@/utils/notifications.js'
+
 
 /*
    router
@@ -50,7 +52,7 @@ const router = useRouter()
 const store = authStore();
 
 /*
-   handle edit
+   handle edit form
 */
 
 const selectedTimeZone = ref(store.currentUser.timeZone);
@@ -78,7 +80,9 @@ const handleEdit = () => {
 
         closeEdit()
 
-        router.push({ name: 'Home-Page' })
+        router.push({ name: 'Home-Page' });
+
+       showNotifications(`Profile has been edited!`);
     } catch (error) {
         errorMsg.value = error.message
     }
@@ -96,4 +100,10 @@ const closeError = () => {
 </script>
 
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import '../../styles/variables.scss';
+
+span {
+    color: $form-wrong-input;
+}
+</style>

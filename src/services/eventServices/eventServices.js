@@ -103,7 +103,6 @@ export default {
                 price: event.price,
                 date: event.date,
                 time: event.time,
-                imgSrc: event.imgSrc,
                 dateTime: event.dateTime
             });
 

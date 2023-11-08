@@ -18,7 +18,7 @@
                             <label class="form-control-label" for="form-group-input">Tickets</label>
                             <Field type="number" class="form-control" id="form-group-input"
                                 :value="store.editedEvent.ticket" name="ticket" />
-                            <ErrorMessage name="tickets" />
+                            <ErrorMessage name="ticket" />
                         </div>
                         <div class="form-group col-lg-4 mb-3">
                             <label class="form-control-label" for="form-group-input">Price</label>
@@ -92,13 +92,6 @@ const schema = yup.object({
     time: yup
         .string()
         .required('This field is required'),
-    longtitude: yup
-        .number()
-        .required('This field is required'),
-    latitude: yup
-        .number()
-        .required('This field is required'),
-
 })
 
 
@@ -129,8 +122,7 @@ const editEvent = (values) => {
             price: values.price,
             date: values.date,
             time: values.time,
-            location: [values.longtitude, values.latitude],
-            imgSrc: store.editedEvent.imgSrc,
+            location: location.value,
             dateTime: new Date(values.date + 'T' + values.time + 'Z').toISOString(),
         }
 

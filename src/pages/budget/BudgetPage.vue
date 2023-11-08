@@ -4,7 +4,7 @@
             <h2 class="h1 fw-bold text-light">Analytics</h2>
         </div>
         <div class="row">
-            <LineChart v-if="store.events" title="Events analytics" :data="data"/>
+            <LineChart v-if="store.events" title="Events analytics" @page-filter="handleChartEvent" :data="data" />
         </div>
     </div>
 </template>
@@ -16,6 +16,13 @@
 import LineChart from '@/components/Charts/LineChart.vue';
 import { eventStore } from '../../store/events/eventStore';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import moment from 'moment';
+
+/*
+  router
+*/
+const router = useRouter();
 
 /*
    store
@@ -32,6 +39,20 @@ store.getAllEvents()
 */
 const data = computed(() => store.getFullAnalytics);
 
+/*
+   handle chart event
+*/
+
+const handleChartEvent = (monthIndex) => {
+    const startDate = new Date(2023, monthIndex, 1);
+    const endDate = new Date(2023, monthIndex + 1, 0);
+
+    const formattedStartDate = moment(startDate).format('YYYY-MM-DD');
+    const formattedEndDate = moment(endDate).format('YYYY-MM-DD');
+
+    router.push({ name: 'Event-Catalog', query: { startDate: formattedStartDate, endDate: formattedEndDate } });
+};
+
 </script>
 
 <style lang="scss" scoped>
@@ -39,6 +60,6 @@ const data = computed(() => store.getFullAnalytics);
 
 .container {
     @include page-background;
-    gap:2rem
+    gap: 2rem
 }
 </style>

@@ -23,8 +23,7 @@ export default {
                     });
             }
         } catch (error) {
-            console.error('Error while signin up:', error)
-            throw error
+          throw new Error('Error while signing up, please try again!')
         }
     },
 
@@ -56,8 +55,7 @@ export default {
                 timeZone: '',
             })
         } catch (error) {
-            console.error(error);
-            throw error
+           throw new Error('Error while signing up with google, please try again!')
         }
     },
 
@@ -78,7 +76,8 @@ export default {
 
 
     async signInWithFacebook() {
-        const provider = new FacebookAuthProvider();
+        try {
+             const provider = new FacebookAuthProvider();
         const auth = getAuth();
 
 
@@ -93,6 +92,9 @@ export default {
             tickets:0,
             timeZone: ''
         })
+        } catch (error) {
+           throw new Error('Error while signing up with Facebook, please try again!')
+        }
     },
 
 
@@ -107,8 +109,7 @@ export default {
             });
 
         } catch (error) {
-            console.error("Error fetching user profiles:", error);
-            throw error;
+            throw new Error('Error while sending emails!')
         }
     },
 
@@ -116,7 +117,7 @@ export default {
         try {
             await firebaseData.fireAuth.signOut()
         } catch (error) {
-            throw error
+            throw new Error('Error while loging out, please try again!')
         }
     },
 
@@ -150,8 +151,7 @@ export default {
                 throw new Error("User is not authenticated or found.");
             }
         } catch (error) {
-            console.error("Error changing password:", error);
-            throw error;
+           throw new Error('Error while changing password, please try again!')
         }
     },
 

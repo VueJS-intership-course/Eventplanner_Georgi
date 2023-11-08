@@ -1,15 +1,13 @@
 <template>
   <div>
-    <Chart :options="chartOptions" ref="chart" :callback="chartIsLoaded"></Chart>
+    <Chart :options="chartOptions" ref="chart"></Chart>
   </div>
 </template>
   
 <script setup>
 import { ref } from 'vue';
 
-const chartIsLoaded = () => {
-  console.log('Loaded');
-}
+const emits = defineEmits(['page-filter'])
 
 const props = defineProps({
   data: {
@@ -18,7 +16,7 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default:"Chart"
+    default: "Chart"
   }
 })
 
@@ -37,7 +35,7 @@ const chartOptions = ref({
     alternateGridColor: '#FDFFD5'
   },
   chart: {
-    type:'column',
+    type: 'column',
     zoomType: 'x',
     resetZoomButton: {
       position: {
@@ -46,6 +44,17 @@ const chartOptions = ref({
       }
     }
   },
+  plotOptions: {
+    series: {
+      cursor: 'pointer',
+      events: {
+        click: function (event) {
+          var monthIndex = event.point.options.x;
+          emits('page-filter', monthIndex);
+        }
+      }
+    }
+  }
   //plot options
   //series
 })

@@ -7,7 +7,7 @@
             <div>
                 <EventControls />
             </div>
-            <div class="align-self-center p-5">
+            <div class="align-self-center p-3">
                 <EventList />
             </div>
         </div>

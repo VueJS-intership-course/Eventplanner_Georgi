@@ -6,7 +6,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <div>
-                        <span class="nav-link text-dark me-3 fw-bold" v-if="store.currentUser">Hello, {{
+                        <span class="navbar-welcome-message nav-link me-3 fw-bold " v-if="store.currentUser">Hello, {{
                             store.currentUser.username
                         }}</span>
                     </div>
@@ -27,7 +27,8 @@
                             :to="{ name: 'Profile-Page' }">Profile</router-link>
                     </div>
                     <div>
-                        <button v-if="isAuthenticated" class="nav-link text-light me-3 fw-bold" @click="signOut">Logout</button>
+                        <button v-if="isAuthenticated" class="nav-link text-light me-3 fw-bold"
+                            @click="signOut">Logout</button>
                     </div>
                 </div>
             </div>
@@ -85,17 +86,17 @@ const signOut = async () => {
     .navbar-brand {
         font-size: 3.2rem;
         font-family: $page-important;
-    }
-
-    ;
+    };
 
     .active:not(.navbar-brand) {
         text-decoration: underline;
         text-underline-offset: 0.5rem;
         text-decoration-thickness: 20%;
-    }
+    };
 
-    ;
+    .navbar-welcome-message {
+        color: $welcome-message-color;
+    }
 
 }
 </style>

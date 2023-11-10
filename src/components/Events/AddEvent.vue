@@ -60,7 +60,7 @@ import { toLonLat } from "ol/proj";
 import { useForm } from 'vee-validate';
 import MapComp from '@/components/Map/MapComp.vue'
 import * as yup from 'yup';
-import {  ref } from 'vue';
+import { ref } from 'vue';
 import mapLayers from '@/utils/mapLayers.js';
 import showNotifications from '@/utils/notifications.js'
 
@@ -75,14 +75,19 @@ const { handleSubmit } = useForm({
         name: yup.string().required("This field is required!"),
         tickets: yup
             .number()
+            .typeError('Tickets must be a number')
             .required("This field is required!")
             .min(20, 'Minimum 20 tickets should be available'),
         price: yup
             .number()
+            .typeError('Price must be a number')
             .required("This field is required!"),
         date: yup
-            .string()
-            .required("This field is required!"),
+            .date()
+            .test('date', 'Selected date must be later than today', function (value) {
+                const today = new Date();
+                return value && value >= today;
+            }),
         time: yup
             .string()
             .required('This field is required'),
@@ -136,20 +141,20 @@ const addEvent = handleSubmit((values) => {
             dateTime: new Date(values.date + 'T' + values.time + 'Z').toISOString(),
             location: location.value,
             budget: values.budget,
-            date:values.date,
+            date: values.date,
             time: values.time
         }
 
         const isConfirmed = confirm(`Are you sure you want to add ${values.name}?`)
 
-        if(isConfirmed) {
+        if (isConfirmed) {
             store.addEvent(newEvent, img.value);
-            
+
             showNotifications(`${newEvent.name} is added to the catalog!`);
         }
 
         store.closeAdd();
-    
+
     } catch (error) {
         errorMsg.value = error.message;
 

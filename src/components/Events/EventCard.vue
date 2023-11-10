@@ -18,8 +18,9 @@
                 illum quos!</div>
             <ul class="postcard__tagbox">
                 <li class="tag__item"><i class="fas fa-tag mr-2"></i>Country: {{ eventData.country }}</li>
-                <li class="tag__item"><i class="fas fa-tag mr-2"></i>Ticlets available: {{ eventData.ticket }}</li>
-                <li class="tag__item"><i class="fas fa-clock mr-2"></i>Price: {{ eventData.price }}$</li>
+                <li v-if="eventData.ticket" class="tag__item"><i class="fas fa-tag mr-2"></i>Ticlets available: {{ eventData.ticket }}</li>
+                <li v-if="eventData.ticket" class="tag__item"><i class="fas fa-clock mr-2"></i>Price: {{ eventData.price }}$</li>
+                <li v-if="!eventData.ticket" class="tag__item fw-bold text-danger">SOLD OUT!</li>
                 <li class="tag__item">
                     <router-link :to="{ name: 'Single-Event', params: { id: eventData.id } }"
                         class="btn btn-outline-primary">See details</router-link>

@@ -79,16 +79,21 @@ import { ref } from 'vue';
 
 const schema = yup.object({
     name: yup.string().required("This field is required!"),
-    ticket: yup
+    tickets: yup
         .number()
+        .typeError('Tickets must be a number')
         .required("This field is required!")
         .min(20, 'Minimum 20 tickets should be available'),
     price: yup
         .number()
+        .typeError('Price must be a number')
         .required("This field is required!"),
     date: yup
-        .string()
-        .required("This field is required!"),
+        .date()
+        .test('date', 'Selected date must be later than today', function (value) {
+            const today = new Date();
+            return value && value >= today;
+        }),
     time: yup
         .string()
         .required('This field is required'),
@@ -128,7 +133,7 @@ const editEvent = (values) => {
 
         const isConfirmed = confirm('Are you sure you want to change this event?');
 
-        if(isConfirmed) {
+        if (isConfirmed) {
             store.editEvent(event);
             showNotifications(`${event.name} is edited successfully!`);
         }

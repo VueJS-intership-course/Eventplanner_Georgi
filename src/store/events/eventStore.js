@@ -56,13 +56,18 @@ export const eventStore = defineStore('events', {
                     meetsCriteria = meetsCriteria && event.country.toLowerCase().includes(location.toLowerCase());
                 }
 
-                if (ticketStatus) {
-                    meetsCriteria = meetsCriteria && event.ticket > 0;
+                if (ticketStatus !== undefined) {
+                    if (ticketStatus === 'sold') {
+                        meetsCriteria = meetsCriteria && !event.ticket;
+                    } else if (ticketStatus === 'available') {
+                        meetsCriteria = meetsCriteria && event.ticket;
+                    }
                 }
 
                 return meetsCriteria;
             });
         },
+
 
 
         hasUserBoughTicket(state) {

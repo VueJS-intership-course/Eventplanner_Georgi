@@ -105,10 +105,4 @@ const closeError = () => {
 </script>
 
 
-<style scoped lang="scss">
-@import '../../styles/variables.scss';
-
-span {
-    color: $form-wrong-input;
-}
-</style>
+<style scoped lang="scss"></style>

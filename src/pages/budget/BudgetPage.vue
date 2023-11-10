@@ -14,7 +14,7 @@
    imports
 */
 import LineChart from '@/components/Charts/LineChart.vue';
-import { eventStore } from '../../store/events/eventStore';
+import { eventStore } from '@/store/events/eventStore.js';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import moment from 'moment';

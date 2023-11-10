@@ -9,7 +9,6 @@ import firebaseData from '@/firebase/firebase-config.js';
 import { authStore } from '@/store/auth/authStore.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import 'bootstrap/dist/js/bootstrap';
 import authServices from '@/services/authServices/authServices.js';
 import TheModal from '@/common-templates/TheModal.vue';
 import BasicInput from '@/common-templates/BasicInput.vue'
@@ -31,6 +30,7 @@ app.use(router);
 app.component('TheModal', TheModal);
 app.component('ErrorModal',ErrorModal);
 app.component('BasicInput', BasicInput)
+
 
 const store = authStore();
 

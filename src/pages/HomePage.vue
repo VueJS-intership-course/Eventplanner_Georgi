@@ -6,7 +6,7 @@
         <div class="events-map">
             <h2 class="subHead fw-bold text-center text-light">Events worldwide</h2>
         </div>
-        <MapChart v-if="store.eventStatistic" :data="store.eventStatistic" name="Event information" title="Events" />
+        <MapChart v-if="store.eventStatistic" :data="store.eventStatistic" name="Event information" @page-filter="handleMapChartClick" title="Events" />
     </div>
 </template>
 
@@ -17,17 +17,33 @@
 import { eventStore } from '@/store/events/eventStore.js';
 import WelcomeCard from '@/common-templates/WelcomeCard.vue';
 import MapChart from '@/components/Charts/MapChart.vue';
+import { useRouter } from 'vue-router';
+
+/*
+   router 
+*/
+const router = useRouter();
+
 
 /*
    store
 */
 const store = eventStore();
 
+
 /*
    generate linechart map data
 */
 store.getAllEvents();
 store.getStatistics();
+
+
+/*
+   handle map click
+*/
+const handleMapChartClick = (countryName) => {
+    router.push({name: 'Event-Catalog', query: {location: countryName}});
+}
 </script>
 
 <style scoped lang="scss">

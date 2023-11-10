@@ -18,11 +18,12 @@ const props = defineProps({
         required: true
     },
     title: {
-        type:String,
-        required:true
+        type: String,
+        required: true
     }
 })
 
+const emits = defineEmits(['page-filter'])
 
 const chartOptions = ref({
     chart: {
@@ -64,7 +65,18 @@ const chartOptions = ref({
     ],
     tooltip: {
         formatter: function () {
-            return  `${this.point.name} has ${this.point.value} events available`
+            return `${this.point.name} has ${this.point.value} events available`
+        }
+    },
+
+    plotOptions: {
+        series: {
+            cursor: 'pointer',
+            events: {
+                click: function (e) {
+                    emits('page-filter', e.point.name)
+                }
+            }
         }
     }
 });

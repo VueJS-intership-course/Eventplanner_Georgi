@@ -126,10 +126,15 @@ const editEvent = (values) => {
             dateTime: new Date(values.date + 'T' + values.time + 'Z').toISOString(),
         }
 
-        store.editEvent(event);
+        const isConfirmed = confirm('Are you sure you want to change this event?');
+
+        if(isConfirmed) {
+            store.editEvent(event);
+            showNotifications(`${event.name} is edited successfully!`);
+        }
+
         store.closeModal();
 
-        showNotifications(`${event.name} is edited successfully!`)
     } catch (error) {
         errorMsg.value = error;
     }

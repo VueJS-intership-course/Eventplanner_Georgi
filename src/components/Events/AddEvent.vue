@@ -39,10 +39,6 @@
                             </div>
                             <MapComp :is-small="true" @map-ready="mapReady" />
                         </div>
-                        <div class="form-group col-lg-12">
-                            <BasicInput type="text" name="country" label="Country" />
-                        </div>
-
                         <div class="form-group col-lg-6">
                             <button class="btn btn-primary float-end mt-4" for="form-group-input">Add Event</button>
                         </div>
@@ -93,9 +89,6 @@ const { handleSubmit } = useForm({
         budget: yup
             .string()
             .required('This field is required'),
-        country: yup
-            .string()
-            .required('This field is required'),
     })
 })
 
@@ -143,17 +136,20 @@ const addEvent = handleSubmit((values) => {
             dateTime: new Date(values.date + 'T' + values.time + 'Z').toISOString(),
             location: location.value,
             budget: values.budget,
-            country: values.country,
             date:values.date,
             time: values.time
         }
 
+        const isConfirmed = confirm(`Are you sure you want to add ${values.name}?`)
 
-        store.addEvent(newEvent, img.value);
+        if(isConfirmed) {
+            store.addEvent(newEvent, img.value);
+            
+            showNotifications(`${newEvent.name} is added to the catalog!`);
+        }
 
         store.closeAdd();
     
-       showNotifications(`${newEvent.name} is added to the catalog!`);
     } catch (error) {
         errorMsg.value = error.message;
 

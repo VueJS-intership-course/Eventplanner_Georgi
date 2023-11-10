@@ -36,6 +36,7 @@ import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { useForm } from 'vee-validate';
 
+
 /*
    router
 */
@@ -83,11 +84,16 @@ const errorMsg = ref(null)
 
 const handleChangePassword = handleSubmit(async (values) => {
     try {
-        await store.changePassword(store.currentUser.email, values.currPass, values.newPass);
+
+        const isConfirmed = confirm('Are you sure you want to change your password?');
+
+        if(isConfirmed) {
+            await store.changePassword(store.currentUser.email, values.currPass, values.newPass);
+            router.push({ name: 'SignIn-Page' })
+        }
 
         closeEdit();
 
-        router.push({ name: 'SignIn-Page' })
     } catch (error) {
         errorMsg.value = error.message
     }

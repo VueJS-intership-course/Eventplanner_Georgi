@@ -2,28 +2,32 @@ import firebaseData from '@/firebase/firebase-config.js';
 import { Event } from '@/utils/classes.js';
 import uploadImage from '@/utils/imageConvertor.js';
 import authServices from '@/services/authServices/authServices.js';
+import { getCountryFromCoords } from '../../utils/countryFromCoordinates';
 
 export default {
     async getAll() {
         try {
             const data = [];
-            const querySnapshot = await firebaseData.fireStore.collection("events").get();
-
+            const querySnapshot = await firebaseData.fireStore
+                .collection("events")
+                .orderBy("dateTime", "asc")
+                .get();
 
             querySnapshot.forEach((doc) => {
-                const { date, id, imgSrc, location, name, price, ticket, country, budget, boughtTickets, expenses,time, dateTime } = doc.data()
+                const { date, id, imgSrc, location, name, price, ticket, country, budget, boughtTickets, expenses, time, dateTime } = doc.data();
 
-                const event = new Event(date, id, imgSrc, location, name, price, ticket, budget, country, boughtTickets, expenses,time, dateTime)
+                const event = new Event(date, id, imgSrc, location, name, price, ticket, budget, country, boughtTickets, expenses, time, dateTime);
 
                 data.push(event);
             });
 
             return data;
-
+            
         } catch (error) {
-            throw new Error('Error while generating all events!')
+            throw new Error('Error while generating all events!');
         }
     },
+
 
 
     async addEvent(eventData, file) {
@@ -39,10 +43,11 @@ export default {
                 location: eventData.location,
                 imgSrc: blobImg,
                 budget: eventData.budget,
-                country: eventData.country,
+                country: await getCountryFromCoords(eventData.location),
                 date: eventData.date,
-                time:eventData.time, 
-                boughtTickets: []
+                time: eventData.time,
+                boughtTickets: [],
+                expenses: []
             });
 
             const message = `${eventData.name} event is available on Eventify, check it out and don't miss the chance to buy ticket`
@@ -170,15 +175,15 @@ export default {
             .collection("events")
             .where("id", "==", event.id)
             .get();
-    
+
         const doc = querySnapshot.docs[0];
-    
+
         try {
             const expenses = doc.data().expenses;
             const budget = doc.data().budget - expense.amount;
-    
+
             const existingExpense = expenses.find(e => e.category === expense.category);
-    
+
             if (existingExpense) {
                 existingExpense.amount += expense.amount;
             } else {
@@ -187,7 +192,7 @@ export default {
                     amount: expense.amount
                 });
             }
-    
+
             doc.ref.update({
                 expenses: expenses,
                 budget
@@ -196,6 +201,6 @@ export default {
             throw new Error('Error while adding expense, please try again!');
         }
     }
-    
+
 
 }

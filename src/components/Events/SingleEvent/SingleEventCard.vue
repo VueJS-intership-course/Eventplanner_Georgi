@@ -22,34 +22,48 @@
                 <li class="list-group-item d-flex flex-row">
                     <span class="media-body">Country: {{ store.currentEvent.country }}</span>
                 </li>
-                <li class="list-group-item d-flex flex-row">
+                <li class="list-group-item d-flex flex-row" v-if="hasTicketsAvailable">
                     <span class="media-body">Tickets available: {{ store.currentEvent.ticket }}</span>
                 </li>
-                <li class="list-group-item d-flex flex-row">
+                <li class="list-group-item d-flex flex-row" v-if="hasTicketsAvailable">
                     <div class="media-body">Ticket price: {{ store.currentEvent.price }}$</div>
+                </li>
+                <li class="list-group-item d-flex flex-row" v-if="!hasTicketsAvailable">
+                    <div class="media-body fw-bold text-danger">SOLD OUT!</div>
                 </li>
                 <li v-if="isAdmin" class="list-group-item d-flex flex-row">
                     <div class="media-body">Budget: {{ store.currentEvent.budget }}</div>
                 </li>
             </ul>
             <div class="card-footer d-flex">
-                <button v-if="!isAdmin && users.currentUser && !hasUserBoughtTIcket" type="button"
-                    class="btn pmd-btn-flat pmd-ripple-effect btn-primary" @click="handleBuyTicket">Buy
-                    Ticket</button>
-                <router-link v-if="isAdmin" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"
-                    :to="{ name: 'Event-Budget', params: { id: store.currentEvent.id } }"
-                    type="button">Analytics</router-link>
-                <button v-if="isAdmin" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button"
-                    @click="openAddExpense">Add
-                    Expense</button>
-                <button v-if="isAdmin" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" @click="editEvent"
-                    type="button">Edit</button>
-                <button v-if="isAdmin" class="btn pmd-btn-flat pmd-ripple-effect btn-danger" @click="deleteEvent"
-                    type="button">Delete</button>
-                <p v-if="hasUserBoughtTIcket" class="fw-bold">You have already bought ticket for this event!</p>
-            </div>
-            <div>
-
+                <div v-if="!isAdmin && users.currentUser && !hasUserBoughtTIcket && hasTicketsAvailable">
+                    <button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"
+                        @click="handleBuyTicket">Buy
+                        Ticket</button>
+                </div>
+                <div v-if="isAdmin" class="admin-controls">
+                    <div>
+                        <router-link class="btn pmd-btn-flat pmd-ripple-effect btn-primary"
+                            :to="{ name: 'Event-Budget', params: { id: store.currentEvent.id } }"
+                            type="button">Analytics</router-link>
+                    </div>
+                    <div>
+                        <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button"
+                            @click="openAddExpense">Add
+                            Expense</button>
+                    </div>
+                    <div>
+                        <button class="btn pmd-btn-flat pmd-ripple-effect btn-primary" @click="editEvent"
+                            type="button">Edit</button>
+                    </div>
+                    <div>
+                        <button class="btn pmd-btn-flat pmd-ripple-effect btn-danger" @click="deleteEvent"
+                            type="button">Delete</button>
+                    </div>
+                </div>
+                <div>
+                    <p v-if="hasUserBoughtTIcket" class="fw-bold">You have already bought ticket for this event!</p>
+                </div>
             </div>
         </div>
     </div>
@@ -91,9 +105,9 @@ const isAdmin = computed(() => users.isCurrentUserAdmin);
 const deleteEvent = async () => {
     const isConfirmed = confirm(`Are you sure you want to delete ${store.currentEvent.name}`)
 
-    if(isConfirmed) {
+    if (isConfirmed) {
         await store.deleteEvent(store.currentEvent.id);
-    }else {
+    } else {
         return
     }
 
@@ -126,6 +140,12 @@ const handleBuyTicket = () => {
 */
 
 const hasUserBoughtTIcket = computed(() => users.currentUser ? store.hasUserBoughTicket(users.currentUser.email) : null)
+
+/*
+   has available tickets
+*/
+
+const hasTicketsAvailable = computed(() => store.currentEvent.ticket > 0);
 
 /*
    handle add expense

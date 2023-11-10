@@ -13,10 +13,19 @@
 </template>
 
 <script setup>
+/*
+   imports
+*/
 import { ref, computed, onUnmounted } from 'vue';
 
+/*
+  emits
+*/
 const emits = defineEmits(['update:modelValue']);
 
+/*
+  props
+*/
 const props = defineProps({
   modelValue: {
     type: String,
@@ -28,19 +37,23 @@ const props = defineProps({
   },
 });
 
+
+/*
+   handling custom autocomplete dropdown
+*/
 const isDropDownVisible = ref(false);
 const checkValidity = ref(false);
-let blurTimeout;
+const blurTimeout = ref(null);
 
 const handleBlur = () => {
-  blurTimeout = setTimeout(() => {
+  blurTimeout.value = setTimeout(() => {
     checkValidity.value = true;
     isDropDownVisible.value = false;
   }, 100);
 };
 
 const handleButtonMouseDown = () => {
-  clearTimeout(blurTimeout);
+  clearTimeout(blurTimeout.value);
 };
 
 const searchValues = computed(() => props.data.filter(timeZone => timeZone.toLowerCase()
@@ -63,7 +76,7 @@ const isValidTImeZone = computed(() => {
 });
 
 onUnmounted(() => {
-  clearTimeout(blurTimeout);
+  clearTimeout(blurTimeout.value);
 });
 </script>
 

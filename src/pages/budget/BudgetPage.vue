@@ -4,7 +4,7 @@
             <h2 class="h1 fw-bold text-light">Analytics</h2>
         </div>
         <div class="row">
-            <LineChart v-if="store.events" title="Events analytics" @page-filter="handleChartEvent" :data="data" />
+            <LineChart v-if="store.events" title="Events analytics" @page-filter="handleChartEvent" :data="data" type="column"/>
         </div>
     </div>
 </template>

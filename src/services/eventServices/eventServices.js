@@ -170,25 +170,32 @@ export default {
             .collection("events")
             .where("id", "==", event.id)
             .get();
-
+    
         const doc = querySnapshot.docs[0];
-
+    
         try {
             const expenses = doc.data().expenses;
             const budget = doc.data().budget - expense.amount;
-
-            expenses.push({
-                category: expense.category,
-                amount: expense.amount
-            })
-
+    
+            const existingExpense = expenses.find(e => e.category === expense.category);
+    
+            if (existingExpense) {
+                existingExpense.amount += expense.amount;
+            } else {
+                expenses.push({
+                    category: expense.category,
+                    amount: expense.amount
+                });
+            }
+    
             doc.ref.update({
-               expenses: expenses,
-               budget
-            })
+                expenses: expenses,
+                budget
+            });
         } catch (error) {
             throw new Error('Error while adding expense, please try again!');
         }
-    },
+    }
+    
 
 }

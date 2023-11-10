@@ -140,12 +140,15 @@ const editEvent = (values) => {
 */
 
 const mapReady = (map) => {
+    layer.value = mapLayers.createSingleLayer(store.editedEvent);
+    map.addLayer(layer.value);
+
     map.on('click', (e) => {
         location.value = toLonLat(e.coordinate);
-        map.removeLayer(layer.value)
+        map.removeLayer(layer.value);
         layer.value = mapLayers.createLayerOnClick(location.value);
-        map.addLayer(layer.value)
-    })
+        map.addLayer(layer.value);
+    });
 }
 
 

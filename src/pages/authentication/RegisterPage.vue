@@ -14,7 +14,7 @@
                     <BasicInput name="password" type="password" label="Password" />
                 </div>
                 <div class="mb-3">
-                    <BasicInput name="rePass" type="email" label="Email address" />
+                    <BasicInput name="rePass" type="password" label="Repeat password" />
                 </div>
                 <div class="mb-3">
                     <BasicInput name="country" type="text" label="Country" />

@@ -17,8 +17,16 @@ const props = defineProps({
   title: {
     type: String,
     default: "Chart"
+  },
+  type: {
+    type: String,
+    required: true
+  },
+  subtitle: {
+    type:String
   }
 })
+
 
 const chartOptions = ref({
   credits: {
@@ -26,6 +34,9 @@ const chartOptions = ref({
   },
   title: {
     text: props.title
+  },
+  subtitle: {
+    text: props.subtitle
   },
   series: props.data,
   xAxis: {
@@ -35,7 +46,7 @@ const chartOptions = ref({
     alternateGridColor: '#FDFFD5'
   },
   chart: {
-    type: 'column',
+    type: props.type,
     zoomType: 'x',
     resetZoomButton: {
       position: {
@@ -55,8 +66,6 @@ const chartOptions = ref({
       }
     }
   }
-  //plot options
-  //series
 })
 </script>
   

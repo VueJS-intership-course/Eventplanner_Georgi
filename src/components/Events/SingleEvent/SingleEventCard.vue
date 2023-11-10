@@ -6,7 +6,8 @@
         <div class="">
             <div class="card-header mb-4">
                 <h2 class="card-title">{{ store.currentEvent.name }}</h2>
-                <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.location, store.currentEvent.dateTime) }}
+                <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.location, store.currentEvent.dateTime)
+                }}
                 </p>
 
             </div>
@@ -27,12 +28,19 @@
                 <li class="list-group-item d-flex flex-row">
                     <div class="media-body">Ticket price: {{ store.currentEvent.price }}$</div>
                 </li>
+                <li v-if="isAdmin" class="list-group-item d-flex flex-row">
+                    <div class="media-body">Budget: {{ store.currentEvent.budget }}</div>
+                </li>
             </ul>
             <div class="card-footer d-flex">
                 <button v-if="!isAdmin && users.currentUser && !hasUserBoughtTIcket" type="button"
                     class="btn pmd-btn-flat pmd-ripple-effect btn-primary" @click="handleBuyTicket">Buy
                     Ticket</button>
-                <button v-if="isAdmin" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button" @click="openAddExpense">Add
+                <router-link v-if="isAdmin" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"
+                    :to="{ name: 'Event-Budget', params: { id: store.currentEvent.id } }"
+                    type="button">Analytics</router-link>
+                <button v-if="isAdmin" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" type="button"
+                    @click="openAddExpense">Add
                     Expense</button>
                 <button v-if="isAdmin" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" @click="editEvent"
                     type="button">Edit</button>
@@ -41,7 +49,7 @@
                 <p v-if="hasUserBoughtTIcket" class="fw-bold">You have already bought ticket for this event!</p>
             </div>
             <div>
-                
+
             </div>
         </div>
     </div>
@@ -81,7 +89,13 @@ const isAdmin = computed(() => users.isCurrentUserAdmin);
 */
 
 const deleteEvent = async () => {
-    await store.deleteEvent(store.currentEvent.id);
+    const isConfirmed = confirm(`Are you sure you want to delete ${store.currentEvent.name}`)
+
+    if(isConfirmed) {
+        await store.deleteEvent(store.currentEvent.id);
+    }else {
+        return
+    }
 
     router.push({ name: 'Event-Catalog' })
 }
@@ -124,7 +138,7 @@ const openAddExpense = () => {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 .card-footer {
     gap: 1rem;
 }

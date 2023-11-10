@@ -32,7 +32,7 @@ export const authStore = defineStore('authStore', {
         },
 
         async signInWithGoogle() {
-            await authServices.signInWIthGoogle()
+            await authServices.signInWithGoogle();
         },
 
         async signInWithFacebook(){

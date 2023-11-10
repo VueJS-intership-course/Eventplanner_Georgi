@@ -11,7 +11,7 @@
 
             <ul class="list-group mt-4" v-if="!isUserAdmin">
                 <li class="list-group-item">Time Zone: {{ store.currentUser.timeZone }}</li>
-                <li class="list-group-item">Tickets bought: {{ store.currentUser.tickets }}$</li>
+                <li class="list-group-item">Tickets bought: {{ store.currentUser.tickets }}</li>
                 <li class="list-group-item">Total spend money: {{ store.currentUser.total }}$</li>
             </ul>
 

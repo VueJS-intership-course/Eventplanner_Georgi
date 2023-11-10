@@ -23,9 +23,10 @@
    imports
 */
 import { useForm } from 'vee-validate';
-import { eventStore } from '../../../store/events/eventStore';
+import { eventStore } from '@/store/events/eventStore.js';
 import * as yup from 'yup';
 import { ref } from 'vue';
+import showNotifications from '@/utils/notifications.js'
 
 /*
    store
@@ -78,6 +79,8 @@ const handleAddExpense = handleSubmit(async (values) => {
 
     await store.addExpense(store.currentEvent, expense);
     
-    closeAddExpense()
+    closeAddExpense();
+
+    showNotifications(`Successfully added ${expense.category} expense with ${expense.amount}$ amount`)
 });
 </script>

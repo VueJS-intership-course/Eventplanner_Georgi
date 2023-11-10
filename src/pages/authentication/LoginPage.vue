@@ -40,7 +40,7 @@ import { useRouter } from 'vue-router';
 import { useForm } from 'vee-validate';
 import * as yup from 'yup';
 import { authStore } from '@/store/auth/authStore.js';
-import showNotification from '@/utils/notifications.js';
+import {authStateChangedPromise} from '../../main.js'
 
 /*
    router
@@ -83,7 +83,6 @@ const signIn = handleSubmit(async (values) => {
 
         router.push({ name: 'Event-Catalog' });
 
-        showNotification(`Welcome, ${values.name}`);
     } catch (error) {
         errorMsg.value = error.message
     }
@@ -97,8 +96,14 @@ const signInGoogle = async () => {
     try {
         await store.signInWithGoogle();
 
-        store.isEditing = true;
-        router.push({ name: 'Profile-Page' });
+        await authStateChangedPromise();
+
+        if (store.currentUser && !store.currentUser.timeZone) {
+            store.isEditing = true;
+            router.push({ name: 'Profile-Page' });
+        }else {
+            router.push({name:'Home-Page'})
+        }
 
     } catch (error) {
         errorMsg.value = error.message
@@ -112,9 +117,16 @@ const signInGoogle = async () => {
 const signInFacebook = async () => {
     try {
         await store.signInWithFacebook();
+        
+        await authStateChangedPromise();
 
-        store.isEditing = true;
-        router.push({ name: 'Profile-Page' });
+        if (store.currentUser && !store.currentUser.timeZone) {
+            store.isEditing = true;
+            router.push({ name: 'Profile-Page' });
+        }else {
+            router.push({name:'Home-Page'})
+        }
+
     } catch (error) {
         errorMsg.value = error.message
     }

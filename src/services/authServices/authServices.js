@@ -36,28 +36,36 @@ export default {
     },
 
 
-    async signInWIthGoogle() {
+    async signInWithGoogle() {
         try {
             const provider = new GoogleAuthProvider();
             provider.setCustomParameters({ prompt: 'select_account' });
-
+    
             const auth = getAuth();
-
-            const result = await signInWithPopup(auth, provider)
-
-
-            await firebaseData.fireStore.collection('users').add({
-                email: result.user.email,
-                username: result.user.displayName,
-                id: result.user.uid,
-                total:0,
-                tickets:0,
-                timeZone: '',
-            })
+            const result = await signInWithPopup(auth, provider);
+    
+            const email = result.user.email;
+    
+            const userExists = await firebaseData.fireStore
+                .collection('users')
+                .where('email', '==', email)
+                .get();
+    
+            if (userExists.empty) {
+                await firebaseData.fireStore.collection('users').add({
+                    email: result.user.email,
+                    username: result.user.displayName,
+                    id: result.user.uid,
+                    total: 0,
+                    tickets: 0,
+                    timeZone: '',
+                });
+            }
+    
         } catch (error) {
-           throw new Error('Error while signing up with google, please try again!')
+            throw new Error('Error while signing up with Google, please try again!');
         }
-    },
+    },    
 
 
     async getUserData(email) {

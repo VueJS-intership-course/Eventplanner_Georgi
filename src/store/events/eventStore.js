@@ -27,12 +27,18 @@ export const eventStore = defineStore('events', {
     }),
 
     getters: {
-        filteredEvents() {
-            const query = this.router.currentRoute.value.query;
+        searchedEvents() {
+            const filteredEvents = this.filteredEvents;
 
             if (this.searchQuery) {
-                return this.events.filter(event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+                return filteredEvents.filter(event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
             }
+
+            return filteredEvents;
+        },
+
+        filteredEvents() {
+            const query = this.router.currentRoute.value.query;
 
             return this.events.filter(event => {
                 const { startDate, endDate, location, ticketStatus } = query;
@@ -57,6 +63,7 @@ export const eventStore = defineStore('events', {
                 return meetsCriteria;
             });
         },
+
 
         hasUserBoughTicket(state) {
             return (userEmail) => {
@@ -109,7 +116,20 @@ export const eventStore = defineStore('events', {
 
         getFullAnalytics() {
             return [this.getAllTicketsInfo, this.getAllEventsDates];
+        },
+
+
+        singleEventAnalytics() {
+            return [{
+                name: 'Expenses',
+                type: 'pie',
+                data: this.currentEvent.expenses.map(expense => ({
+                    name: expense.category,
+                    y: expense.amount
+                }))
+            }];
         }
+
     },
 
     actions: {
@@ -181,7 +201,9 @@ export const eventStore = defineStore('events', {
 
 
         async addExpense(event, expense) {
-            await eventServices.addExpense(event, expense)
+            await eventServices.addExpense(event, expense);
+
+            this.getCurrentEvent(event.id)
         }
 
     }

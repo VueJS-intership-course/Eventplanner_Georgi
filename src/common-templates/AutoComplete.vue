@@ -45,7 +45,7 @@ const checkValidity = ref(false);
 
 const handleBlur = () => {
   checkValidity.value = true
-  isDropDownVisible.value = false
+  // isDropDownVisible.value = false
 }
 
 const searchValues = computed(() => props.data.filter(timeZone => timeZone.toLowerCase()

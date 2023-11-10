@@ -52,7 +52,7 @@ const router = useRouter()
 const store = authStore();
 
 /*
-   handle edit form
+   handle edit
 */
 
 const selectedTimeZone = ref(store.currentUser.timeZone);

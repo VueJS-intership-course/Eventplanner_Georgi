@@ -22,7 +22,7 @@ export default {
             });
 
             return data;
-            
+
         } catch (error) {
             throw new Error('Error while generating all events!');
         }
@@ -108,6 +108,7 @@ export default {
                 price: event.price,
                 date: event.date,
                 time: event.time,
+                country: await getCountryFromCoords(eventData.location),
                 dateTime: event.dateTime
             });
 

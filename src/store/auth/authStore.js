@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import authServices from "@/services/authServices/authServices.js";
+import authServices from "../../services/authServices/authServices.js";
 
 export const authStore = defineStore('authStore', {
     state: () => ({
@@ -26,7 +26,7 @@ export const authStore = defineStore('authStore', {
         async signUp(userData) {
             await authServices.signUp(userData)
         },
-        
+
         async signIn(email, password) {
             await authServices.signIn(email, password)
         },
@@ -35,7 +35,7 @@ export const authStore = defineStore('authStore', {
             await authServices.signInWithGoogle();
         },
 
-        async signInWithFacebook(){
+        async signInWithFacebook() {
             await authServices.signInWithFacebook()
         },
 
@@ -45,6 +45,7 @@ export const authStore = defineStore('authStore', {
 
         async editProfile(user) {
             await authServices.updateUsersProfile(user);
+            this.setCurrentUser(await authServices.getUserData(user.email));
         },
 
         async changePassword(email, currentPassword, newPassword) {

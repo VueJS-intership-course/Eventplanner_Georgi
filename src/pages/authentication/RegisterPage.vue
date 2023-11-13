@@ -87,7 +87,10 @@ const timeZoneSelcted = ref('');
 const errorMsg = ref(null)
 
 const signUp = handleSubmit(async (values) => {
-
+    
+    if(!constants.allTimeZones.find(tz => tz === timeZoneSelcted.value)) {
+        throw new Error('Please select valid time zone!')
+    }
     
     try {
         const userInfo = {

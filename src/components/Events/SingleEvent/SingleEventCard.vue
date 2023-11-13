@@ -2,10 +2,10 @@
     <div>
         <ErrorModal v-if="errorMsg" :erorrMsg="errorMsg"/>
         <div v-if="store.currentEvent" class="container d-flex mt-4 p-4 bg-light ">
-            <div class="pmd-card-media">
+            <div class="pmd-card-media p-3">
                 <img :src="store.currentEvent.imgSrc" width="600" height="500" class="img-fluid">
             </div>
-            <div class="">
+            <div>
                 <div class="card-header mb-4">
                     <h2 class="card-title">{{ store.currentEvent.name }}</h2>
                     <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.location,
@@ -38,7 +38,7 @@
                         <div class="media-body">Budget: {{ store.currentEvent.budget }}</div>
                     </li>
                 </ul>
-                <div class="card-footer d-flex">
+                <div class="card-footer d-flex p-3">
                     <div v-if="!isAdmin && users.currentUser && !hasUserBoughtTIcket && hasTicketsAvailable">
                         <button type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary"
                             @click="handleBuyTicket">Buy

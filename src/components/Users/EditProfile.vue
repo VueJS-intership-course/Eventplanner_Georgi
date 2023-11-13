@@ -78,11 +78,10 @@ const handleEdit = () => {
             store.editProfile(user);
         }
 
-        closeEdit()
+        closeEdit();
 
-        router.push({ name: 'Home-Page' });
 
-       showNotifications(`Profile has been edited!`);
+        showNotifications(`Profile has been edited!`);
     } catch (error) {
         errorMsg.value = error.message
     }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <input class="form-control" type="text" id="search" autocomplete="off" :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)" @focus="isDropDownVisible = true" @blur="handleBlur" />
+      @input="handleInput" @focus="isDropDownVisible = true" @blur="handleBlur" />
     <ul v-show="isDropDownVisible">
       <li v-for="timeZone in searchValues" :key="timeZone">
         <button class="btn btn-light" @mousedown.prevent.stop="handleButtonMouseDown"
@@ -16,7 +16,7 @@
 /*
    imports
 */
-import { ref, computed, onUnmounted } from 'vue';
+import { ref, computed, nextTick } from 'vue';
 
 /*
   emits
@@ -43,18 +43,19 @@ const props = defineProps({
 */
 const isDropDownVisible = ref(false);
 const checkValidity = ref(false);
-const blurTimeout = ref(null);
 
 const handleBlur = () => {
-  blurTimeout.value = setTimeout(() => {
+  nextTick(() => {
     checkValidity.value = true;
     isDropDownVisible.value = false;
-  }, 100);
+  });
 };
 
-const handleButtonMouseDown = () => {
-  clearTimeout(blurTimeout.value);
+const handleInput = (event) => {
+  emits('update:modelValue', event.target.value);
+  isDropDownVisible.value = true;
 };
+
 
 const searchValues = computed(() => props.data.filter(timeZone => timeZone.toLowerCase()
   .includes(props.modelValue.toLocaleLowerCase()))
@@ -75,9 +76,6 @@ const isValidTImeZone = computed(() => {
   }
 });
 
-onUnmounted(() => {
-  clearTimeout(blurTimeout.value);
-});
 </script>
 
 <style scoped lang="scss">

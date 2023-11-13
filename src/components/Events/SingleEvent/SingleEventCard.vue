@@ -35,7 +35,7 @@
                         <div class="media-body fw-bold text-danger">SOLD OUT!</div>
                     </li>
                     <li v-if="isAdmin" class="list-group-item d-flex flex-row">
-                        <div class="media-body">Budget: {{ store.currentEvent.budget }}</div>
+                        <div class="media-body">Budget: {{ store.currentEvent.budget }}$</div>
                     </li>
                 </ul>
                 <div class="card-footer d-flex p-3">

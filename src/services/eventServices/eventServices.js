@@ -98,11 +98,10 @@ export default {
             .where("id", "==", event.id)
             .get();
 
-        const doc = querySnapshot.docs[0];
+        const [doc] = querySnapshot.docs;
 
         try {
 
-            console.log(event);
             await doc.ref.update({
                 id: event.id,
                 name: event.name,
@@ -130,7 +129,7 @@ export default {
             .where("id", "==", eventId)
             .get();
         if (querySnapshot.docs.length) {
-            const doc = querySnapshot.docs[0];
+            const [doc] = querySnapshot.docs;
             try {
                 await doc.ref.delete();
             } catch (error) {
@@ -146,7 +145,7 @@ export default {
             .where("id", "==", event.id)
             .get();
 
-        const doc = querySnapshot.docs[0];
+        const [doc] = querySnapshot.docs;
 
         try {
             const updatedBoughtTickets = doc.data().boughtTickets;
@@ -179,7 +178,7 @@ export default {
             .where("id", "==", event.id)
             .get();
 
-        const doc = querySnapshot.docs[0];
+        const [doc] = querySnapshot.docs;
 
         try {
             const expenses = doc.data().expenses;

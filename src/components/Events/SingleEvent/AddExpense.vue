@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"/>
+        <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg" />
         <TheModal @click.self="closeAddExpense">
             <div class="card card-body">
                 <h3 class="text-center mb-4 fw-bold">Add expense</h3>
@@ -57,7 +57,8 @@ const { handleSubmit } = useForm({
             .required('This field is required'),
         expenseAmount: yup
             .number()
-            .required('This field is required')
+            .typeError('Amount must be a number')
+            .required("This field is required!")
     })
 })
 

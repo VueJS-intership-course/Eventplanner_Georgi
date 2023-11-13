@@ -72,9 +72,9 @@ export default {
         try {
             const userDoc = await firebaseData.fireStore.collection('users').where('email', '==', email).get();
 
-            const userData = userDoc.docs[0].data();
+            const [doc] = userDoc.docs;
 
-            return userData;
+            return doc.data();
 
         } catch (error) {
             console.error('Error retrieving user data:', error);
@@ -133,9 +133,9 @@ export default {
         try {
             const querySnapshot = await firebaseData.fireStore.collection('users').where('email', '==', user.email).get();
             
-            const userDoc = querySnapshot.docs[0];
+            const [doc] = querySnapshot.docs;
 
-            userDoc.ref.update({
+            doc.ref.update({
                username:user.username,
                timeZone:user.timeZone
             })
@@ -168,12 +168,12 @@ export default {
         try {
             const querySnapshot = await firebaseData.fireStore.collection('users').where('email', '==', user.email).get();
             
-            const userDoc = querySnapshot.docs[0];
+            const [doc] = querySnapshot.docs;
             
-            const tickets = userDoc.data().tickets + 1;
-            const total = userDoc.data().total + event.price;
+            const tickets = doc.data().tickets + 1;
+            const total = doc.data().total + event.price;
           
-            userDoc.ref.update({
+            doc.ref.update({
                 tickets,
                 total
             })

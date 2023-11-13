@@ -101,6 +101,8 @@ export default {
         const doc = querySnapshot.docs[0];
 
         try {
+
+            console.log(event);
             await doc.ref.update({
                 id: event.id,
                 name: event.name,
@@ -108,7 +110,7 @@ export default {
                 price: event.price,
                 date: event.date,
                 time: event.time,
-                country: await getCountryFromCoords(eventData.location),
+                country: await getCountryFromCoords(event.location),
                 dateTime: event.dateTime
             });
 

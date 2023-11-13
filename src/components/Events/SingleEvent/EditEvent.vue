@@ -79,7 +79,7 @@ import { ref } from 'vue';
 
 const schema = yup.object({
     name: yup.string().required("This field is required!"),
-    tickets: yup
+    ticket: yup
         .number()
         .typeError('Tickets must be a number')
         .required("This field is required!")
@@ -117,7 +117,7 @@ const errorMsg = ref(null);
 const location = ref([store.editedEvent.location[0], store.editedEvent.location[1]]);
 const layer = ref(null)
 
-const editEvent = (values) => {
+const editEvent = async (values) => {
     try {
 
         const event = {
@@ -134,14 +134,15 @@ const editEvent = (values) => {
         const isConfirmed = confirm('Are you sure you want to change this event?');
 
         if (isConfirmed) {
-            store.editEvent(event);
+             store.editEvent(event);
             showNotifications(`${event.name} is edited successfully!`);
         }
 
         store.closeModal();
 
     } catch (error) {
-        errorMsg.value = error;
+        store.closeModal();
+        errorMsg.value = error.message;
     }
 }
 

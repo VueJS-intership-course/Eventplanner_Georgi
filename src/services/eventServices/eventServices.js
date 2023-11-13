@@ -2,7 +2,7 @@ import firebaseData from '@/firebase/firebase-config.js';
 import { Event } from '@/utils/classes.js';
 import uploadImage from '@/utils/imageConvertor.js';
 import authServices from '@/services/authServices/authServices.js';
-import { getCountryFromCoords } from '../../utils/countryFromCoordinates';
+import { getCountryFromCoords } from '@/utils/countryFromCoordinates.js';
 
 export default {
     async getAll() {

@@ -40,7 +40,7 @@ import { useRouter } from 'vue-router';
 import { useForm } from 'vee-validate';
 import * as yup from 'yup';
 import { authStore } from '@/store/auth/authStore.js';
-import {authStateChangedPromise} from '../../main.js'
+import {authStateChangedPromise} from '@/main.js'
 
 /*
    router

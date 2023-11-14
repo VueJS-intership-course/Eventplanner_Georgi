@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import authServices from "@/services/authServices/authServices.js";
-import firebaseData from "../../firebase/firebase-config";
 
 export const authStore = defineStore('authStore', {
     state: () => ({
@@ -20,27 +19,6 @@ export const authStore = defineStore('authStore', {
     },
 
     actions: {
-        async authStateChangedPromise() {
-            return new Promise((resolve, reject) => {
-                const unsubscribe = firebaseData.fireAuth.onAuthStateChanged(async (user) => {
-                    if (user) {
-                        try {
-                            const userData = await authServices.getUserData(user.email);
-                            this.setCurrentUser(userData);
-                            unsubscribe();
-                            resolve(userData);
-                        } catch (error) {
-                            reject(error);
-                        }
-                    } else {
-                        this.setCurrentUser(null);
-                        unsubscribe();
-                        resolve(null);
-                    }
-                });
-            });
-        },
-
         setCurrentUser(user) {
             this.currentUser = user;
         },

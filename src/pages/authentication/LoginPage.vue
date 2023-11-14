@@ -40,7 +40,6 @@ import { useRouter } from 'vue-router';
 import { useForm } from 'vee-validate';
 import * as yup from 'yup';
 import { authStore } from '@/store/auth/authStore.js';
-
 /*
    router
 */
@@ -95,8 +94,6 @@ const signInGoogle = async () => {
     try {
         await store.signInWithGoogle();
 
-        await store.authStateChangedPromise();
-
         if (store.currentUser && !store.currentUser.timeZone) {
             store.isEditing = true;
             router.push({ name: 'Profile-Page' });
@@ -116,8 +113,6 @@ const signInGoogle = async () => {
 const signInFacebook = async () => {
     try {
         await store.signInWithFacebook();
-
-        await store.authStateChangedPromise();
 
         if (store.currentUser && !store.currentUser.timeZone) {
             store.isEditing = true;

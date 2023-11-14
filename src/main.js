@@ -23,8 +23,6 @@ pinia.use(({ store }) => {
 const app = createApp(App);
 
 app.use(pinia);
-const store = authStore();
-
 app.use(highChart);
 app.use(TimeConvertor);
 
@@ -33,11 +31,10 @@ app.component('TheModal', TheModal);
 app.component('ErrorModal', ErrorModal);
 app.component('BasicInput', BasicInput)
 
-
+const store = authStore();
 export function authStateChangedPromise() {
     return new Promise((resolve, reject) => {
         firebaseData.fireAuth.onAuthStateChanged(async (user) => {
-            console.log(user);
             if (user) {
                 try {
                     const userData = await authServices.getUserData(user.email);
@@ -57,6 +54,4 @@ export function authStateChangedPromise() {
 await authStateChangedPromise();
 
 app.use(router);
-
-
 app.mount('#app');

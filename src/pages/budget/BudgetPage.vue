@@ -3,8 +3,11 @@
         <div class="align-self-center">
             <h2 class="h1 fw-bold text-light">Analytics</h2>
         </div>
-        <div class="row">
-            <LineChart v-if="store.events" title="Events analytics" @page-filter="handleChartEvent" :data="data" type="column"/>
+        <div v-if="store.events" class="row">
+            <LineChart title="Events analytics" @page-filter="handleChartEvent" :data="data" type="column" />
+        </div>
+        <div v-if="!store.events">
+            <h2>There is no analytics yet!</h2>
         </div>
     </div>
 </template>

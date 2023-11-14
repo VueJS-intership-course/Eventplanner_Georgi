@@ -31,7 +31,6 @@ app.component('TheModal', TheModal);
 app.component('ErrorModal',ErrorModal);
 app.component('BasicInput', BasicInput)
 
-
 const store = authStore();
 
 

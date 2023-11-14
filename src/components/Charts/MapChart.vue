@@ -27,7 +27,10 @@ const emits = defineEmits(['page-filter'])
 
 const chartOptions = ref({
     chart: {
-        map: mapData
+        map: mapData,
+    },
+    credits: {
+        enabled: false
     },
     title: {
         text: props.title

@@ -36,6 +36,18 @@ export default {
     },
 
 
+    async forgotPassword(email) {
+        try {
+            await firebaseData.fireAuth.sendPasswordResetEmail(email);
+            console.log('Password reset email sent successfully.');
+            // Optionally, you can show a success message to the user
+        } catch (error) {
+            console.error('Error sending password reset email:', error.message);
+            // Handle the error, e.g., show an error message to the user
+        }
+    },
+
+
     async signInWithGoogle() {
         try {
             const provider = new GoogleAuthProvider();

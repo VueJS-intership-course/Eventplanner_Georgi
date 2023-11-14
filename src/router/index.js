@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "./routes";
 import { authStore } from '@/store/auth/authStore.js'
-import { authStateChangedPromise } from '@/main.js'
+import { authStateChangedPromise } from '../main.js'
 
 const router = createRouter({
     history: createWebHistory(),

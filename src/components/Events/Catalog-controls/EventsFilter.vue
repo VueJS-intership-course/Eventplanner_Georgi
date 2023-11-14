@@ -1,6 +1,6 @@
 <template>
     <TheModal @click.self="store.closeFilter">
-        <form @submit="handleFilters" method="get" class="filterer d-flex flex-column bg-light p-4">
+        <form @submit.prevent="handleFilters" class="filterer d-flex flex-column bg-light p-4">
             <div class="header mb-3 text-center">
                 <h3 class="fw-bold">Filter</h3>
             </div>
@@ -33,27 +33,14 @@
 </template>
 
 <script setup>
-/*
-   imports
-*/
-import { ref } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import { eventStore } from '@/store/events/eventStore.js';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
-/*
-   event store
-*/
 const store = eventStore();
-
-/*
-   router
-*/
 const router = useRouter();
+const route = useRoute();
 
-
-/*
-   handle filter form
-*/
 const startDate = ref(null);
 const endDate = ref('');
 const location = ref('');
@@ -78,10 +65,20 @@ const handleFilters = () => {
         queryParameters.ticketStatus = ticketStatus.value;
     }
 
-    store.closeFilter(); 
-    router.push({query:queryParameters});
-}
+    store.closeFilter();
+    router.push({ query: queryParameters });
+};
+
+onBeforeMount(() => {
+    const query = route.query;
+
+    startDate.value = query.startDate || null;
+    endDate.value = query.endDate || '';
+    location.value = query.location || '';
+    ticketStatus.value = query.ticketStatus || '';
+});
 </script>
+
 
 
 

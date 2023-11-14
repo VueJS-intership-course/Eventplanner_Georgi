@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "./routes";
 import { authStore } from '@/store/auth/authStore.js'
-import { authStateChangedPromise } from '../main.js'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -18,12 +17,11 @@ const router = createRouter({
 
 
 router.beforeResolve(async (to, _, next) => {
-    const user = await authStateChangedPromise();
     const store = authStore()
 
-    if (to.meta.isAuth && !user) {
+    if (to.meta.isAuth && !await store.authStateChangedPromise()) {
         next({ name: "SignIn-Page" });
-    } else if (to.meta.notAuth && user) {
+    } else if (to.meta.notAuth && await store.authStateChangedPromise()) {
         next({ name: "Home-Page" });
     } else if (to.meta.requireAdmin && !store.currentUser.isAdmin) {
         next({ name: 'Home-Page' })

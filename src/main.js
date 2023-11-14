@@ -5,11 +5,9 @@ import highChart from '@/plugins/highChart.js';
 import TimeConvertor from '@/plugins/TimeConvertor.js';
 import router from '@/router/index.js';
 import { createPinia } from 'pinia';
-import firebaseData from '@/firebase/firebase-config.js';
 import { authStore } from '@/store/auth/authStore.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import authServices from '@/services/authServices/authServices.js';
 import TheModal from '@/common-templates/TheModal.vue';
 import BasicInput from '@/common-templates/BasicInput.vue'
 import ErrorModal from '@/common-templates/ErrorModal.vue';
@@ -34,28 +32,7 @@ app.component('BasicInput', BasicInput)
 const store = authStore();
 
 
-export function authStateChangedPromise() {
-    return new Promise((resolve, reject) => {
-        const unsubscribe = firebaseData.fireAuth.onAuthStateChanged(async (user) => {
-            if (user) {
-                try {
-                    const userData = await authServices.getUserData(user.email);
-                    store.setCurrentUser(userData);
-                    unsubscribe();
-                    resolve(userData);
-                } catch (error) {
-                    reject(error);
-                }
-            } else {
-                store.setCurrentUser(null);
-                unsubscribe();
-                resolve(null);
-            }
-        });
-    });
-}
-
-authStateChangedPromise()
+store.authStateChangedPromise()
 
 
 app.mount('#app');

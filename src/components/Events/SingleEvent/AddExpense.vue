@@ -6,7 +6,7 @@
                 <h3 class="text-center mb-4 fw-bold">Add expense</h3>
                 <form @submit="handleAddExpense">
                     <div class="form-group">
-                        <BasicInput type="select" :selectOptions="options" name="category" label="Expense Category" />
+                        <BasicInput type="select" :selectOptions="constants.expenseOptions" name="category" label="Expense Category" />
                     </div>
                     <div class="form-group">
                         <BasicInput type="number" label="Amount" name="expenseAmount" />
@@ -29,7 +29,8 @@ import { useForm } from 'vee-validate';
 import { eventStore } from '@/store/events/eventStore.js';
 import * as yup from 'yup';
 import { ref } from 'vue';
-import showNotifications from '@/utils/notifications.js'
+import showNotifications from '@/utils/notifications.js';
+import constants from '@/utils/constants.js';
 
 /*
    store
@@ -62,20 +63,6 @@ const { handleSubmit } = useForm({
     })
 })
 
-const options = ref([
-    {
-        value: 'rent',
-        label: 'Rent place'
-    },
-    {
-        value: 'food',
-        label: 'Food'
-    },
-    {
-        value: 'logistics',
-        label: 'Logistics'
-    }
-])
 
 
 const handleAddExpense = handleSubmit(async (values) => {

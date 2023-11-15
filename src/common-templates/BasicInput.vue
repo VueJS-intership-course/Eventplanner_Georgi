@@ -10,7 +10,14 @@
 </template>
   
 <script setup>
+/*
+   imports
+*/
 import { useField } from "vee-validate";
+
+/*
+   props
+*/
 const props = defineProps({
     name: {
         type: String,
@@ -34,6 +41,9 @@ const props = defineProps({
     }
 });
 
+/*
+   handle value and error message
+*/
 const { value, errorMessage } = useField(() => props.name);
 </script>
   

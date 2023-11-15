@@ -38,7 +38,9 @@ const props = defineProps({
 
 const emits = defineEmits(['close-error']);
 
-
+/*
+   close error modal
+*/
 const closeModal = () => {
     emits('close-error')
 }

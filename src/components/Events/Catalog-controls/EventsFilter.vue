@@ -33,14 +33,32 @@
 </template>
 
 <script setup>
+/*
+   imports
+*/
 import { ref, onBeforeMount } from 'vue';
 import { eventStore } from '@/store/events/eventStore.js';
 import { useRoute, useRouter } from 'vue-router';
 
+/*
+   store
+*/
 const store = eventStore();
+
+/*
+   router
+*/
 const router = useRouter();
+
+/*
+   route
+*/
 const route = useRoute();
 
+
+/*
+   handle filters
+*/
 const startDate = ref(null);
 const endDate = ref('');
 const location = ref('');
@@ -69,6 +87,10 @@ const handleFilters = () => {
     router.push({ query: queryParameters });
 };
 
+
+/*
+   save filters data
+*/
 onBeforeMount(() => {
     const query = route.query;
 

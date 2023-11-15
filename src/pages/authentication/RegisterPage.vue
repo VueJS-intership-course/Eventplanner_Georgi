@@ -58,10 +58,10 @@ const router = useRouter();
 const store = authStore();
 
 /*
-   Sign Up
+  validation
 */
 
-const {handleSubmit} = useForm({
+const { handleSubmit } = useForm({
     validationSchema: yup.object({
         email: yup.string().email("Enter a valid email!").required("This field is required!"),
         username: yup
@@ -82,16 +82,19 @@ const {handleSubmit} = useForm({
     })
 })
 
+/*
+   Sign Up 
+*/
 
 const timeZoneSelcted = ref('');
 const errorMsg = ref(null)
 
 const signUp = handleSubmit(async (values) => {
-    
-    if(!constants.allTimeZones.find(tz => tz === timeZoneSelcted.value)) {
+
+    if (!constants.allTimeZones.find(tz => tz === timeZoneSelcted.value)) {
         throw new Error('Please select valid time zone!')
     }
-    
+
     try {
         const userInfo = {
             email: values.email,

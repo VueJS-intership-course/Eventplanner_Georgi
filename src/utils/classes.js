@@ -1,5 +1,5 @@
 export class Event {
-    constructor(date, id, imgSrc, location, name, price, ticket, budget, country, boughtTIckets, expenses, time, dateTime) {
+    constructor(date, id, imgSrc, location, name, price, ticket, budget, country, boughtTIckets, expenses, time, dateTime,offset) {
         this.date = date;
         this.id = id;
         this.imgSrc = imgSrc;
@@ -13,5 +13,6 @@ export class Event {
         this.country = country;
         this.boughtTickets = boughtTIckets;
         this.expenses = expenses;
+        this.offset = offset;
     }
 }

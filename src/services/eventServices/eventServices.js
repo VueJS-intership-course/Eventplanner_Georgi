@@ -14,9 +14,9 @@ export default {
                 .get();
 
             querySnapshot.forEach((doc) => {
-                const { date, id, imgSrc, location, name, price, ticket, country, budget, boughtTickets, expenses, time, dateTime } = doc.data();
+                const { date, id, imgSrc, location, name, price, ticket, country, budget, boughtTickets, expenses, time, dateTime,offset} = doc.data();
 
-                const event = new Event(date, id, imgSrc, location, name, price, ticket, budget, country, boughtTickets, expenses, time, dateTime);
+                const event = new Event(date, id, imgSrc, location, name, price, ticket, budget, country, boughtTickets, expenses, time, dateTime, offset);
 
                 data.push(event);
             });
@@ -47,7 +47,8 @@ export default {
                 date: eventData.date,
                 time: eventData.time,
                 boughtTickets: [],
-                expenses: []
+                expenses: [],
+                offset: eventData.offset
             });
 
             const message = `${eventData.name} event is available on Eventify, check it out and don't miss the chance to buy ticket`

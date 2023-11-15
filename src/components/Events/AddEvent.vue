@@ -142,6 +142,7 @@ const addEvent = handleSubmit((values) => {
             price: values.price,
             dateTime: moment.tz(`${values.date}T${values.time}`, tzlookup(location.value[1], location.value[0])).utc().toISOString(),
             location: location.value,
+            offset: moment.tz.zone(tzlookup(location.value[1], location.value[0])).utcOffset(moment.tz(`${values.date}T${values.time}`, tzlookup(location.value[1], location.value[0]))) / 60,
             budget: values.budget,
             date: values.date,
             time: values.time

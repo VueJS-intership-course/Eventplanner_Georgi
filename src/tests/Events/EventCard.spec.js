@@ -6,7 +6,6 @@ import TimeConvertor from '../../plugins/TimeConvertor';
 import { authStore } from '../../store/auth/authStore.js'
 import { createPinia, setActivePinia } from 'pinia';
 
-
 setActivePinia(createPinia())
 
 const mockApp = {
@@ -52,6 +51,19 @@ const wrapper = mount(EventCard, {
         })],
     }
 })
+jest.mock('moment-timezone', () => {
+    const originalMoment = jest.requireActual('moment-timezone');
+
+    return {
+        ...originalMoment,
+        tz: jest.fn(() => ({
+            format: jest.fn((formatString) => `Mocked formatted time using format string: ${formatString}`),
+        })),
+        utc: jest.fn(() => ({
+            format: jest.fn((formatString) => `Mocked formatted time using format string: ${formatString}`),
+        }))
+    };
+});
 
 
 const store = authStore()
@@ -96,3 +108,5 @@ it('should show SOLD OUT if there is no tickets available', () => {
     })
     expect(wrapper.findAll('.tag__item').length).toBe(3)
 })
+
+

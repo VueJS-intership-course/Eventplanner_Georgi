@@ -5,18 +5,16 @@ import { authStore } from '@/store/auth/authStore.js'
 export default {
   install: (app) => {
     app.config.globalProperties.$formatDateInTimeZone = (location, date) => {
-      const eventTimeZone = tzlookup(location[0], location[1])
-      const originalTime = moment.tz(`${date}`, eventTimeZone);
+      const originalTime = moment.utc(date);
 
-      const store = authStore()
+      const store = authStore();
 
       if (store.currentUser && store.currentUser.timeZone) {
         const targetTime = originalTime.tz(store.currentUser.timeZone).format('dddd, MMMM Do YYYY, h:mm:ss a');
-
-        return targetTime
+        return targetTime;
       }
 
-      return moment.utc(date).format('dddd, MMMM Do YYYY, h:mm:ss a')
+      return originalTime.format('dddd, MMMM Do YYYY, h:mm:ss a');
     };
   },
 };

@@ -70,6 +70,8 @@ import mapLayers from '@/utils/mapLayers.js';
 import MapComp from '@/components/Map/MapComp.vue';
 import * as yup from 'yup';
 import { ref } from 'vue';
+import tzlookup from 'tz-lookup';
+import moment from 'moment-timezone';
 
 
 /*
@@ -128,13 +130,13 @@ const editEvent = async (values) => {
             date: values.date,
             time: values.time,
             location: location.value,
-            dateTime: new Date(values.date + 'T' + values.time + 'Z').toISOString(),
+            dateTime: moment.tz(`${values.date}T${values.time}`, tzlookup(location.value[1], location.value[0])).utc().toISOString(),
         }
 
         const isConfirmed = confirm('Are you sure you want to change this event?');
 
         if (isConfirmed) {
-             store.editEvent(event);
+            store.editEvent(event);
             showNotifications(`${event.name} is edited successfully!`);
         }
 

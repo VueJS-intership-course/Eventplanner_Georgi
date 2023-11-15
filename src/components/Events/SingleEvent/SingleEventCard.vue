@@ -47,7 +47,7 @@
                     <div v-if="isAdmin" class="admin-controls d-flex ">
                         <div>
                             <router-link class="btn pmd-btn-flat pmd-ripple-effect btn-primary"
-                                :to="{ name: 'Event-Budget', params: { id: store.currentEvent.id } }"
+                                :to="{ name: 'Event-Analytics', params: { id: store.currentEvent.id } }"
                                 type="button">Analytics</router-link>
                         </div>
                         <div>

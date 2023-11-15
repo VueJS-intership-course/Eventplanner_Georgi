@@ -60,7 +60,7 @@ const chartOptions = ref({
       cursor: 'pointer',
       events: {
         click: function (event) {
-          var monthIndex = event.point.options.x;
+          const monthIndex = event.point.options.x;
           emits('page-filter', monthIndex);
         }
       }

@@ -62,7 +62,9 @@ import MapComp from '@/components/Map/MapComp.vue'
 import * as yup from 'yup';
 import { ref } from 'vue';
 import mapLayers from '@/utils/mapLayers.js';
-import showNotifications from '@/utils/notifications.js'
+import showNotifications from '@/utils/notifications.js';
+import tzlookup from 'tz-lookup';
+import moment from 'moment-timezone';
 
 
 /*
@@ -138,7 +140,7 @@ const addEvent = handleSubmit((values) => {
             name: values.name,
             ticket: values.tickets,
             price: values.price,
-            dateTime: new Date(values.date + 'T' + values.time + 'Z').toISOString(),
+            dateTime: moment.tz(`${values.date}T${values.time}`, tzlookup(location.value[1], location.value[0])).utc().toISOString(),
             location: location.value,
             budget: values.budget,
             date: values.date,

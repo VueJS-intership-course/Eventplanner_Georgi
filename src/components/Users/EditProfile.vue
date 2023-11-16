@@ -76,12 +76,12 @@ const handleEdit = () => {
 
         if (isConfirmed) {
             store.editProfile(user);
+            showNotifications(`Profile has been edited!`);
         }
 
         closeEdit();
 
 
-        showNotifications(`Profile has been edited!`);
     } catch (error) {
         errorMsg.value = error.message
     }

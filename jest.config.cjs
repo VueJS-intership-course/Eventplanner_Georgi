@@ -28,5 +28,5 @@ module.exports = {
         "firebase": "firebase/compat/app",
         '^vue3-toastify$': 'vue3-toastify',
         "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-    }
+    },
 }

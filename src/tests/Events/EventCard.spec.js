@@ -46,7 +46,7 @@ const wrapper = mount(EventCard, {
         stubs: ['router-link'],
         plugins: [TimeConvertor, createTestingPinia({
             initialState: {
-                usersStore: authStore()
+                authStore: authStore()
             },
         })],
     }
@@ -66,22 +66,26 @@ jest.mock('moment-timezone', () => {
 });
 
 
-const store = authStore()
 
 it('should have the right title', () => {
     expect(wrapper.find('.postcard__title').text()).toBe('Lili Ivanova Concert');
 })
 
 it('should have the correct img', () => {
-    expect(wrapper.find('.postcard__img').element.src).toBe('https://firebasestorage.googleapis.com/v0/b/eventsapp-1c1b0.appspot.com/o/products%2Fsubdirectory%2FLili_Ivanova.jpg%2FLili_Ivanova.jpg?alt=media&token=08392fbe-341b-4b8a-af35-b24bdbd664f9')
+    const eventImage = wrapper.find('.postcard__img')
+
+    expect(eventImage.attributes('src')).toBe('https://firebasestorage.googleapis.com/v0/b/eventsapp-1c1b0.appspot.com/o/products%2Fsubdirectory%2FLili_Ivanova.jpg%2FLili_Ivanova.jpg?alt=media&token=08392fbe-341b-4b8a-af35-b24bdbd664f9')
+    expect(eventImage.attributes('alt')).toBe('Lili Ivanova Concert')
 })
 
 it('should have the correct country', () => {
-    expect(wrapper.findAll('.tag__item').length).toBe(4)
+   const eventInformation = wrapper.findAll('.tag__item');
+
+    expect(eventInformation.length).toBe(4)
 })
 
 
-it('should show SOLD OUT if there is no tickets available', () => {
+it('should show SOLD OUT and not show tickets information if there is no tickets available', () => {
 
     const wrapper = mount(EventCard, {
         props: {
@@ -106,7 +110,14 @@ it('should show SOLD OUT if there is no tickets available', () => {
             })],
         }
     })
-    expect(wrapper.findAll('.tag__item').length).toBe(3)
-})
+    
+    const eventInformation = wrapper.findAll('.tag__item');
+
+
+    expect(eventInformation.length).toBe(3);
+    expect(wrapper.text()).toContain('SOLD OUT!');
+});
+
+
 
 

@@ -10,24 +10,24 @@
                             store.currentUser.username
                         }}</span>
                     </div>
-                    <div>
+                    <div class="nav-control">
                         <router-link class="nav-link text-light me-3 fw-bold"
                             :to="{ name: 'Event-Catalog' }">Events</router-link>
                     </div>
-                    <div>
-                        <router-link v-if="!isAuthenticated" class="nav-link text-light me-3 fw-bold"
+                    <div v-if="!isAuthenticated" class="nav-control">
+                        <router-link  class="nav-control text-light me-3 fw-bold"
                             :to="{ name: 'SignUp-Page' }">Sign Up</router-link>
                     </div>
-                    <div>
-                        <router-link v-if="!isAuthenticated" class="nav-link text-light me-3 fw-bold"
+                    <div v-if="!isAuthenticated" class="nav-control">
+                        <router-link  class="nav-link text-light me-3 fw-bold"
                             :to="{ name: 'SignIn-Page' }">Sign In</router-link>
                     </div>
-                    <div>
-                        <router-link v-if="isAuthenticated" class="nav-link text-light me-3 fw-bold"
+                    <div v-if="isAuthenticated" class="nav-control">
+                        <router-link class="nav-link text-light me-3 fw-bold"
                             :to="{ name: 'Profile-Page' }">Profile</router-link>
                     </div>
-                    <div>
-                        <button v-if="isAuthenticated" class="nav-link text-light me-3 fw-bold"
+                    <div v-if="isAuthenticated" class="nav-control">
+                        <button  class="nav-link text-light me-3 fw-bold"
                             @click="signOut">Logout</button>
                     </div>
                 </div>

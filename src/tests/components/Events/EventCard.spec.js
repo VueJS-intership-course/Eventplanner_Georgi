@@ -2,8 +2,8 @@ import EventCard from '@/components/Events/EventCard.vue';
 import { it, expect } from '@jest/globals';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from "@pinia/testing";
-import TimeConvertor from '../../plugins/TimeConvertor';
-import { authStore } from '../../store/auth/authStore.js'
+import TimeConvertor from '../../../plugins/TimeConvertor.js';
+import { authStore } from '../../../store/auth/authStore.js'
 import { createPinia, setActivePinia } from 'pinia';
 
 setActivePinia(createPinia())

@@ -1,7 +1,8 @@
 module.exports = {
     preset: 'ts-jest',
     transform: {
-        '\\.js$': ['babel-jest', { configFile: './babel.config.json' }],
+        "^.+\\.(js|jsx|ts|tsx)$": "babel-jest",
+        "\\.[jt]sx?$": "babel-jest",
         "^.+\\.(ts|tsx)?$": "ts-jest",
         "^.+\\.vue$": "vue3-jest",
         "^.+\\.tsx?$": "ts-jest"
@@ -30,14 +31,6 @@ module.exports = {
         "firebase": "firebase/compat/app",
         '^vue3-toastify$': 'vue3-toastify',
         "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+        "^@/common-templates/TheModal\\.vue$": "identity-obj-proxy",
     },
-    globals: {
-        "ts-jest": {
-            tsconfig: false,
-            useESM: true,
-            babelConfig: true,
-            plugins: ["babel-plugin-transform-vite-meta-glob"],
-        },
-    }
-
 }

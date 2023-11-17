@@ -1,4 +1,4 @@
-import EventCard from '@/components/Events/EventCard.vue';
+import EventCard from '@/components/Events/Catalog/EventCard.vue';
 import { it, expect } from '@jest/globals';
 import { mount } from '@vue/test-utils';
 import { createTestingPinia } from "@pinia/testing";

@@ -1,4 +1,4 @@
-import EmptyEvents from '@/components/Events/EmptyEvents.vue';
+import EmptyEvents from '@/components/Events/Catalog/EmptyEvents.vue';
 import { it, expect } from '@jest/globals';
 import { mount } from '@vue/test-utils';
 

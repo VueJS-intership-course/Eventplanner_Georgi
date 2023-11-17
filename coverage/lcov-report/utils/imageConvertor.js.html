@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for utils/emailSender.js</title>
+    <title>Code coverage report for utils/imageConvertor.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">utils</a> emailSender.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">utils</a> imageConvertor.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>0/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>0/13</span>
             </div>
         
             
@@ -85,10 +85,37 @@
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -97,39 +124,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import emailjs from '@emailjs/browser'; 
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import firebase from "firebase/compat/app";
+import 'firebase/compat/storage'
 &nbsp;
-const templateId = 'template_7823293';
-const userId = '1bSLw8IKYjG-jf0PZ';
+function <span class="fstat-no" title="function not covered" >uploadImage(</span>file) {
+<span class="cstat-no" title="statement not covered" >    return new Promise(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
 &nbsp;
-function <span class="fstat-no" title="function not covered" >sendCustomEmail(</span>userEmail, userName, message) {
-    const params = <span class="cstat-no" title="statement not covered" >{</span>
-        to_email: userEmail,
-        recipient_name: userName,
-        message,
-    };
+        const storageRef = <span class="cstat-no" title="statement not covered" >firebase.storage().ref();</span>
+        const collectionRef = <span class="cstat-no" title="statement not covered" >storageRef.child('products/subdirectory/' + file.name);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    emailjs.send('service_ejhlbig', templateId, params, userId)</span>
-        .then(<span class="fstat-no" title="function not covered" >fu</span>nction (response) {
-<span class="cstat-no" title="statement not covered" >            console.log('Email sent:', response);</span>
-        })
-        .catch(<span class="fstat-no" title="function not covered" >fu</span>nction (error) {
-<span class="cstat-no" title="statement not covered" >            console.error('Email not sent:', error);</span>
+<span class="cstat-no" title="statement not covered" >        if (file.size &gt; 1024 * 1024) {</span>
+<span class="cstat-no" title="statement not covered" >            reject('Image size exceeded 1MB limit');</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+        const imageRef = <span class="cstat-no" title="statement not covered" >collectionRef.child(file.name);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        imageRef.put(file).then(<span class="fstat-no" title="function not covered" >sn</span>apshot =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('Image uploaded successfully.');</span>
+<span class="cstat-no" title="statement not covered" >            snapshot.ref.getDownloadURL().then(<span class="fstat-no" title="function not covered" >do</span>wnloadURL =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                resolve(downloadURL);</span>
+            }).catch(<span class="fstat-no" title="function not covered" >_ </span>=&gt; {
+<span class="cstat-no" title="statement not covered" >                return</span>
+            });
+        }).catch(<span class="fstat-no" title="function not covered" >_ </span>=&gt; {
+<span class="cstat-no" title="statement not covered" >            return</span>
         });
+    });
 }
 &nbsp;
+export default uploadImage
 &nbsp;
-export default sendCustomEmail</pre></td></tr></table></pre>
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

@@ -48,7 +48,7 @@ const props = defineProps({
 
 
 <style scoped lang="scss">
-@import '../../styles/variables.scss';
+@import '../../../styles/variables.scss';
 
 .postcard {
     flex-wrap: wrap;

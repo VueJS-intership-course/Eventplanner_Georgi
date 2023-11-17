@@ -2,7 +2,7 @@ import TheHeader from '@/common-templates/TheHeader.vue';
 import { mount } from '@vue/test-utils';
 import { it, expect } from '@jest/globals';
 import { setActivePinia, createPinia } from 'pinia';
-import {  createTestingPinia } from '@pinia/testing';
+import { createTestingPinia } from '@pinia/testing';
 
 setActivePinia(createPinia())
 
@@ -14,6 +14,13 @@ jest.mock("firebase/app", () => {
     };
 });
 
+jest.mock('vue-router', () => ({
+    useRoute: jest.fn(),
+    useRouter: jest.fn(() => ({
+        push: () => { }
+    }))
+}))
+
 
 const wrapper = mount(TheHeader, {
     global: {
@@ -21,18 +28,18 @@ const wrapper = mount(TheHeader, {
             initialState: {
                 authStore: {
                     currentUser: {
-                        username:'Georgi',
-                        email:'georgi@abv.bg',
+                        username: 'Georgi',
+                        email: 'georgi@abv.bg',
                     }
                 }
             }
         })],
-        stubs:['router-link']
+        stubs: ['router-link']
     }
 });
 
 
-it('should not show login and sign up buttons if there is current user',async () => {
+it('should not show login and sign up buttons if there is current user', async () => {
     const navControls = wrapper.findAll('.nav-control');
 
     expect(wrapper.vm.isAuthenticated).toBe(true)
@@ -41,7 +48,7 @@ it('should not show login and sign up buttons if there is current user',async ()
 })
 
 
-it('should show login and sign up buttons if there is no current user',async () => {
+it('should show login and sign up buttons if there is no current user', async () => {
     const wrapper = mount(TheHeader, {
         global: {
             plugins: [createTestingPinia({
@@ -51,7 +58,7 @@ it('should show login and sign up buttons if there is no current user',async () 
                     }
                 }
             })],
-            stubs:['router-link']
+            stubs: ['router-link']
         }
     });
 

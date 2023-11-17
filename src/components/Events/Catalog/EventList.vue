@@ -16,8 +16,8 @@
    imports
 */
 import { eventStore } from '@/store/events/eventStore.js';
-import EventCard from '@/components/Events/EventCard.vue';
-import EmptyEvents from '@/components/Events/EmptyEvents.vue';
+import EventCard from '@/components/Events/Catalog/EventCard.vue';
+import EmptyEvents from '@/components/Events/Catalog/EmptyEvents.vue';
 
 /*
    get all events
@@ -33,7 +33,7 @@ store.getAllEvents();
 
 <style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
-@import '../../styles/variables.scss';
+@import '../../../styles/variables.scss';
 
 
 

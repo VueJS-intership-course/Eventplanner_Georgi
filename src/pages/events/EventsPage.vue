@@ -19,7 +19,7 @@
    imports
 */
 import EventControls from '@/components/Events/Catalog-controls/EventControls.vue';
-import EventList from '@/components/Events/EventList.vue';
+import EventList from '@/components/Events/Catalog/EventList.vue';
 import AddEvent from '@/components/Events/AddEvent.vue';
 import { eventStore } from '@/store/events/eventStore.js';
 

@@ -1,11 +1,11 @@
 import ErrorModal from '@/common-templates/ErrorModal.vue';
-import { mount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import { it, expect } from '@jest/globals';
 
-const wrapper = mount(ErrorModal, {
+const wrapper = shallowMount(ErrorModal, {
     props: {
         errorMsg: 'Error message',
-    }
+    },
 });
 
 it('should show the error message', async () => {

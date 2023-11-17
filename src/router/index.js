@@ -9,7 +9,7 @@ const router = createRouter({
         {
             path: '/:pathMatch(.*)*',
             name: 'Not-Found',
-            component: () => import('@/pages/NotFound.vue'),
+            component: () => import('@/pages/notFound/NotFound.vue'),
         },
     ],
     linkActiveClass: 'active'

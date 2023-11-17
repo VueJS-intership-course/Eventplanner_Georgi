@@ -89,7 +89,7 @@ const chartOptions = ref({
 
 <style scoped>
 .chart-container {
-    height: 400px;
+    /* height: 400px; */
     width: 100%;
 }
 </style>

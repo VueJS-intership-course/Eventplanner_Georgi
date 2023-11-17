@@ -1,25 +1,10 @@
 module.exports = {
     preset: 'ts-jest',
     transform: {
-        "^.+\\.(js|jsx|ts|tsx)$": "babel-jest",
+        '\\.js$': ['babel-jest', { configFile: './babel.config.json' }],
         "^.+\\.(ts|tsx)?$": "ts-jest",
         "^.+\\.vue$": "vue3-jest",
-        "^.+\\.tsx?$": [
-            'ts-jest',
-            {
-              diagnostics: {
-                ignoreCodes: [1343]
-              },
-              astTransformers: {
-                before: [
-                  {
-                    path: 'node_modules/ts-jest-mock-import-meta',  
-                    options: { metaObjectReplacement: { url: 'https://www.url.com' } }
-                  }
-                ]
-              }
-            }
-        ]
+        "^.+\\.tsx?$": "ts-jest"
     },
     moduleFileExtensions: [
         "js",
@@ -51,7 +36,7 @@ module.exports = {
             tsconfig: false,
             useESM: true,
             babelConfig: true,
-            plugins: ["babel-plugin-transform-vite-meta-env"],
+            plugins: ["babel-plugin-transform-vite-meta-glob"],
         },
     }
 

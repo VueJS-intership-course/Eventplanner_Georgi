@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for common-templates/AutoComplete.vue</title>
+    <title>Code coverage report for common-templates/TheHeader.vue</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">common-templates</a> AutoComplete.vue</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">common-templates</a> TheHeader.vue</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.85% </span>
+                <span class="strong">78.26% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/14</span>
+                <span class='fraction'>18/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">16.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/5</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.85% </span>
+                <span class="strong">78.26% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/14</span>
+                <span class='fraction'>18/23</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -162,13 +162,19 @@
 <a name='L97'></a><a href='#L97'>97</a>
 <a name='L98'></a><a href='#L98'>98</a>
 <a name='L99'></a><a href='#L99'>99</a>
-<a name='L100'></a><a href='#L100'>100</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -262,102 +268,105 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-  &lt;div&gt;
-    &lt;input class="form-control" type="text" id="search" autocomplete="off" :value="modelValue"
-      @input="handleInput" @focus="isDropDownVisible = true" @blur="handleBlur" /&gt;
-    &lt;ul v-show="isDropDownVisible"&gt;
-      &lt;li v-for="timeZone in searchValues" :key="timeZone"&gt;
-        &lt;button class="btn btn-light" @mousedown.prevent.stop="handleButtonMouseDown"
-          @click.prevent="selectTimeZone(timeZone)"&gt;{{ timeZone }}&lt;/button&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;p v-if="isValidTImeZone &amp;&amp; checkValidity" class="text-danger"&gt;{{ isValidTImeZone }}&lt;/p&gt;
-  &lt;/div&gt;
+    &lt;nav class="navbar navbar-expand-lg mb-5 p-2"&gt;
+        &lt;div class="container-fluid"&gt;
+            &lt;router-link class="navbar-brand text-xl me-7 fw-bold text-light"
+                :to="{ name: 'Home-Page' }"&gt;Eventify&lt;/router-link&gt;
+            &lt;div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup"&gt;
+                &lt;div class="navbar-nav"&gt;
+                    &lt;div&gt;
+                        &lt;span class="navbar-welcome-message nav-link me-3 fw-bold " v-if="store.currentUser"&gt;Hello, {{
+                            store.currentUser.username
+                        }}&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class="nav-control"&gt;
+                        &lt;router-link class="nav-link text-light me-3 fw-bold"
+                            :to="{ name: 'Event-Catalog' }"&gt;Events&lt;/router-link&gt;
+                    &lt;/div&gt;
+                    &lt;div v-if="!isAuthenticated" class="nav-control"&gt;
+                        &lt;router-link  class="nav-control text-light me-3 fw-bold"
+                            :to="{ name: 'SignUp-Page' }"&gt;Sign Up&lt;/router-link&gt;
+                    &lt;/div&gt;
+                    &lt;div v-if="!isAuthenticated" class="nav-control"&gt;
+                        &lt;router-link  class="nav-link text-light me-3 fw-bold"
+                            :to="{ name: 'SignIn-Page' }"&gt;Sign In&lt;/router-link&gt;
+                    &lt;/div&gt;
+                    &lt;div v-if="isAuthenticated" class="nav-control"&gt;
+                        &lt;router-link class="nav-link text-light me-3 fw-bold"
+                            :to="{ name: 'Profile-Page' }"&gt;Profile&lt;/router-link&gt;
+                    &lt;/div&gt;
+                    &lt;div v-if="isAuthenticated" class="nav-control"&gt;
+                        &lt;button  class="nav-link text-light me-3 fw-bold"
+                            @click="signOut"&gt;Logout&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
 &lt;/template&gt;
 &nbsp;
 &lt;script setup&gt;
 /*
    imports
 */
-import { ref, computed, nextTick } from 'vue';
+import { computed, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { authStore } from '@/store/auth/authStore.js';
 &nbsp;
 /*
-  emits
+   router
 */
-const emits = defineEmits(['update:modelValue']);
+&nbsp;
+const router = useRouter();
 &nbsp;
 /*
-  props
+   users store
 */
-const props = defineProps({
-  modelValue: {
-    type: String,
-    required: true,
-  },
-  data: {
-    type: Array,
-    required: true,
-  },
-});
 &nbsp;
+const store = authStore();
+&nbsp;
+const isAuthenticated = computed(() =&gt; store.isCurrentUserEmpty)
 &nbsp;
 /*
-   handling custom autocomplete dropdown
+    Sign Out
 */
-const isDropDownVisible = ref(false);
-const checkValidity = ref(false);
 &nbsp;
-const handleBlur = () =&gt; {
-  nextTick(() =&gt; {
-    checkValidity.value = true;
-    isDropDownVisible.value = false;
-  });
+const errorMsg = ref('')
+&nbsp;
+const signOut = async () =&gt; {
+    try {
+        await store.logout();
+        router.push({ name: 'Home-Page' })
+    } catch (error) {
+        errorMsg.value = error.message
+    }
 };
 &nbsp;
-const handleInput = (event) =&gt; {
-  emits('update:modelValue', event.target.value);
-  isDropDownVisible.value = true;
-};
-&nbsp;
-&nbsp;
-const searchValues = computed(() =&gt; props.data.filter(timeZone =&gt; timeZone.toLowerCase()
-  .includes(props.modelValue.toLocaleLowerCase()))
-  .slice(0, 10)
-  .sort((a, b) =&gt; a.localeCompare(b))
-);
-&nbsp;
-const selectTimeZone = (val) =&gt; {
-  emits('update:modelValue', val);
-  isDropDownVisible.value = false;
-};
-&nbsp;
-const isValidTImeZone = computed(() =&gt; {
-  if (checkValidity.value) {
-    return !props.data.find(timeZone =&gt; timeZone === props.modelValue) ? 'Please select a valid time zone!' : null;
-  } else {
-    return null;
-  }
-});
 &nbsp;
 &lt;/script&gt;
 &nbsp;
 &lt;style scoped lang="scss"&gt;
-ul {
-  position: absolute;
-  flex-direction: column;
-  padding: 0;
-  justify-content: center;
-  z-index: 4;
-  list-style: none;
-  max-height: 300px;
-  overflow-y: auto;
+@import '../styles/variables.scss';
 &nbsp;
-  button {
-    width: 100%;
-    padding: 1rem;
-    max-width: 212px;
-    min-width: 212px;
-  }
+.navbar {
+    @include page-background;
+    vertical-align: middle;
+&nbsp;
+    .navbar-brand {
+        font-size: 3.2rem;
+        font-family: $page-important;
+    };
+&nbsp;
+    .active:not(.navbar-brand) {
+        text-decoration: underline;
+        text-underline-offset: 0.5rem;
+        text-decoration-thickness: 20%;
+    };
+&nbsp;
+    .navbar-welcome-message {
+        color: $welcome-message-color;
+    }
+&nbsp;
 }
 &lt;/style&gt;
 &nbsp;</pre></td></tr></table></pre>

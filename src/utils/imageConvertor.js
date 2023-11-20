@@ -15,7 +15,6 @@ function uploadImage(file) {
         const imageRef = collectionRef.child(file.name);
 
         imageRef.put(file).then(snapshot => {
-            console.log('Image uploaded successfully.');
             snapshot.ref.getDownloadURL().then(downloadURL => {
                 resolve(downloadURL);
             }).catch(_ => {
@@ -25,7 +24,7 @@ function uploadImage(file) {
             return
         });
     });
-}
+}34
 
 export default uploadImage
 

@@ -24,19 +24,22 @@ useRouter.mockImplementationOnce(() => ({
     push
 }))
 
-const wrapper = mount(EventSearch, {
-    global: {
-        plugins: [createTestingPinia({
-            initialState: {
-                eventStore: eventStore()
-            },
-        })],
-        components: {
-            'TheModal': TheModal
-        }
-    },
-});
+let wrapper;
 
+beforeEach(() => {
+    wrapper = mount(EventSearch, {
+        global: {
+            plugins: [createTestingPinia({
+                initialState: {
+                    eventStore: eventStore()
+                },
+            })],
+            components: {
+                'TheModal': TheModal
+            }
+        },
+    });
+})
 
 jest.mock("firebase/app", () => {
     return {
@@ -46,6 +49,19 @@ jest.mock("firebase/app", () => {
     };
 });
 
+
+
+it('should trigger the handle filters', async () => {
+    const handleFilters = jest.spyOn(wrapper.vm, 'handleFilters');
+    const locationInput = wrapper.find('input[name="location"]');
+
+    await locationInput.setValue('Spain');
+    await wrapper.find('button').trigger('submit');
+    await wrapper.vm.$nextTick();
+
+
+    expect(handleFilters).toBeCalled()
+})
 
 
 it('should handle filters correctly', async () => {
@@ -59,3 +75,5 @@ it('should handle filters correctly', async () => {
     expect(push).toBeCalled();
     expect(push).toBeCalledTimes(1)
 });
+
+

@@ -12,7 +12,6 @@
                         store.currentEvent.dateTime)
                     }}
                     </p>
-
                 </div>
                 <div class="card-body mb-4">
                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quis est nam,

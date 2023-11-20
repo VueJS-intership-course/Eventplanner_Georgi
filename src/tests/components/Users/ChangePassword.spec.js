@@ -9,7 +9,6 @@ import ErrorModal from '@/common-templates/ErrorModal.vue'
 
 setActivePinia(createPinia());
 
-
 jest.mock("firebase/app", () => {
     return {
         initializeApp: jest.fn(),
@@ -27,28 +26,41 @@ jest.mock('vue-router', () => ({
 }))
 
 
-const wrapper = mount(ChangePassword, {
-    global: {
-        plugins: [createTestingPinia({
-            initialState: {
-                authStore: {
-                    isEditPass: true
-                }
-            },
-        })],
-        stubs: [ 'BasicInput', 'ErrorModal'],
-        components: {
-            'TheModal': TheModal
-        }
-    }
-});
-
 describe('ChangePassword.vue', () => {
+    let wrapper;
+
+    beforeEach(() => {
+        wrapper = mount(ChangePassword, {
+            global: {
+                plugins: [createTestingPinia({
+                    initialState: {
+                        authStore: {
+                            isEditPass: true
+                        }
+                    },
+                })],
+                stubs: ['BasicInput', 'ErrorModal'],
+                components: {
+                    'TheModal': TheModal
+                }
+            }
+        });
+    })
+
 
     it('handles change password form submission', async () => {
         await wrapper.find('form').trigger('submit.prevent');
 
         expect(wrapper.vm.errorMsg).toBeNull();
     });
+
+    it('should trigger the rightEvent', async () => {
+        const spy = jest.spyOn(wrapper.vm, 'handleChangePassword');
+
+        await wrapper.find('form').trigger('submit.prevent');
+
+        expect(spy).toBeCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+    })
 
 });

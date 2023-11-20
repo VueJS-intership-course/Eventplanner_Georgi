@@ -4,7 +4,7 @@ import { it, expect, describe, beforeEach } from '@jest/globals';
 import { authStore } from '../../../store/auth/authStore';
 import { createTestingPinia } from '@pinia/testing';
 import { createPinia, setActivePinia } from 'pinia';
-
+import authMocks from '../../__mocks__/auth.js';
 
 setActivePinia(createPinia())
 
@@ -26,13 +26,7 @@ describe('Client', () => {
                 plugins: [createTestingPinia({
                     initialState: {
                         authStore: {
-                            currentUser: {
-                                username: 'Georgi',
-                                email: 'georgi@abv.bg',
-                                tickets: 0,
-                                total: 0,
-                                timeZone: 'Europe/Madrid'
-                            }
+                            currentUser: authMocks.client
                         }
                     },
                 })],
@@ -82,11 +76,7 @@ describe('Admin', () => {
                 plugins: [createTestingPinia({
                     initialState: {
                         authStore: {
-                            currentUser: {
-                                username: 'Georgi',
-                                email: 'georgi@abv.bg',
-                                isAdmin: true
-                            }
+                            currentUser: authMocks.admin
                         }
                     },
                 })],
@@ -98,7 +88,8 @@ describe('Admin', () => {
 
     it('should not show other info for admin', () => {
         const info = wrapper.find('.list-group');
-    
+        
+        expect(wrapper.vm.isUserAdmin).toBe(true)
         expect(info.exists()).toBe(false)
     })
     

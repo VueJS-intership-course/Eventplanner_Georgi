@@ -5,7 +5,7 @@ exports[`WelcomeCard matches snapshot 1`] = `
   <div class="card-img-overlay mt-5">
     <h5 class="card-title fw-bold">Welcome to Eventify</h5>
     <p class="card-text mb-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur porro, accusamus voluptatibus nihil eius in ad veritatis odit maiores ipsum veniam inventore minus, fugit neque, pariatur dolor omnis. Laborum, aliquid.</p>
-    <routerlink class="btn btn-primary" to="[object Object]">See events</routerlink>
+    <router-link-stub class="btn btn-primary" to="[object Object]"></router-link-stub>
   </div>
 </div>
 `;

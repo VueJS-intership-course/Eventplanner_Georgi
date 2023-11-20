@@ -1,10 +1,9 @@
 import ProfileCard from '@/components/Users/ProfileCard.vue';
 import { mount } from '@vue/test-utils';
 import { it, expect, describe, beforeEach } from '@jest/globals';
-import { authStore } from '../../../store/auth/authStore';
 import { createTestingPinia } from '@pinia/testing';
 import { createPinia, setActivePinia } from 'pinia';
-import authMocks from '../../__mocks__/auth.js';
+import authMocks from '@/tests/__mocks__/auth.js';
 
 setActivePinia(createPinia())
 

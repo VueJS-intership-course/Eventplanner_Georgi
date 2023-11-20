@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils';
 import { it, expect } from '@jest/globals';
 import { setActivePinia, createPinia } from 'pinia';
 import { createTestingPinia } from '@pinia/testing';
+import authMocks from '@/tests/__mocks__/auth.js';
 
 setActivePinia(createPinia())
 
@@ -27,10 +28,7 @@ const wrapper = mount(TheHeader, {
         plugins: [createTestingPinia({
             initialState: {
                 authStore: {
-                    currentUser: {
-                        username: 'Georgi',
-                        email: 'georgi@abv.bg',
-                    }
+                    currentUser: authMocks.client
                 }
             }
         })],

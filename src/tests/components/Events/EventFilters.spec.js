@@ -4,7 +4,7 @@ import { it, expect } from '@jest/globals';
 import { eventStore } from '@/store/events/eventStore.js'
 import { createTestingPinia } from '@pinia/testing';
 import { createPinia, setActivePinia } from 'pinia';
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import TheModal from '@/common-templates/TheModal.vue'
 
 

@@ -5,8 +5,8 @@ import { createTestingPinia } from '@pinia/testing';
 import { createPinia, setActivePinia } from 'pinia';
 import { useRouter } from 'vue-router';
 import TimeConvertor from '@/plugins/TimeConvertor.js';
-import eventsMocks from '../../__mocks__/events.js';
-import authMocks from '../../__mocks__/auth.js';
+import eventsMocks from '@/tests/__mocks__/events.js';
+import authMocks from '@/tests/__mocks__/auth.js';
 
 
 setActivePinia(createPinia())
@@ -32,7 +32,7 @@ jest.mock('vue-router', () => ({
     }))
 }))
 
-jest.mock('../../../utils/notifications.js')
+jest.mock('@/utils/notifications.js')
 
 const push = jest.fn()
 useRouter.mockImplementationOnce(() => ({
@@ -155,12 +155,11 @@ describe('Client specific', () => {
     })
 
 
-    it('should show only "Buy Ticket" button if user is not adming',async () => {
-        await wrapper.vm.$nextTick()
-
+    it('should show only "Buy Ticket" button if user is not adming', async () => {
         expect(wrapper.find('button').text()).toBe('Buy Ticket');
         expect(wrapper.findAll('button').length).toBe(1)
     })
+ 
 })
 
 

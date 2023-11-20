@@ -4,7 +4,6 @@ import { it, expect } from '@jest/globals';
 import { createPinia, setActivePinia } from 'pinia';
 import { createTestingPinia } from '@pinia/testing';
 import TheModal from '@/common-templates/TheModal.vue';
-import ErrorModal from '@/common-templates/ErrorModal.vue'
 
 
 setActivePinia(createPinia());

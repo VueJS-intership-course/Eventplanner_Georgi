@@ -8,7 +8,6 @@ import TimeConvertor from '@/plugins/TimeConvertor.js';
 import eventsMocks from '@/tests/__mocks__/events.js';
 import authMocks from '@/tests/__mocks__/auth.js';
 
-
 setActivePinia(createPinia())
 
 const mockApp = {
@@ -32,7 +31,7 @@ jest.mock('vue-router', () => ({
     }))
 }))
 
-jest.mock('@/utils/notifications.js')
+jest.mock('@/utils/notifications.js', () => ({}))
 
 const push = jest.fn()
 useRouter.mockImplementationOnce(() => ({
@@ -43,7 +42,7 @@ jest.mock("firebase/app", () => {
     return {
         initializeApp: jest.fn(),
         auth: jest.fn(),
-        firestore: jest.fn()
+        firestore: jest.fn(),
     };
 });
 
@@ -120,6 +119,7 @@ describe('Event specific data', () => {
         });
 
         it('should not show tickets information if SOLD out', () => {
+            expect(wrapper.vm.hasTicketsAvailable).toBe(false)
             expect(wrapper.text()).not.toContain('Tickets available:')
             expect(wrapper.text()).not.toContain('Ticket price:')
         })

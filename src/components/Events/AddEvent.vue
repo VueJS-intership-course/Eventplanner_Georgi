@@ -24,9 +24,7 @@
                             <BasicInput type="time" name="time" label="Time" />
                         </div>
                         <div class="form-group col-lg-12">
-                            <label class="form-control-label" for="form-group-input">Image</label>
-                            <input @change="handleEventImage" type="file" class="form-control" id="form-group-input"
-                                name="imgSrc" />
+                            <BasicInput type="file" name="imgSrc" label="Image" />
                         </div>
                         <div class="form-group col-lg-12">
                             <BasicInput type="number" name="budget" label="Budget" />
@@ -96,6 +94,7 @@ const { handleSubmit } = useForm({
         budget: yup
             .string()
             .required('This field is required'),
+        imgSrc: yup.string().required('Image is required'),
     })
 })
 
@@ -151,7 +150,7 @@ const addEvent = handleSubmit((values) => {
         const isConfirmed = confirm(`Are you sure you want to add ${values.name}?`)
 
         if (isConfirmed) {
-            store.addEvent(newEvent, img.value);
+            store.addEvent(newEvent, values.imgSrc);
 
             showNotifications(`${newEvent.name} is added to the catalog!`);
         }

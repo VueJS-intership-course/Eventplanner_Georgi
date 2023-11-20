@@ -44,6 +44,9 @@ const props = defineProps({
 const isDropDownVisible = ref(false);
 const checkValidity = ref(false);
 
+/*
+   handle blur
+*/
 const handleBlur = () => {
   nextTick(() => {
     checkValidity.value = true;
@@ -51,23 +54,32 @@ const handleBlur = () => {
   });
 };
 
+
 const handleInput = (event) => {
   emits('update:modelValue', event.target.value);
   isDropDownVisible.value = true;
 };
 
-
+/*
+   show options
+*/
 const searchValues = computed(() => props.data.filter(timeZone => timeZone.toLowerCase()
   .includes(props.modelValue.toLocaleLowerCase()))
   .slice(0, 10)
   .sort((a, b) => a.localeCompare(b))
 );
 
+/*
+   handle time zone option click
+*/
 const selectTimeZone = (val) => {
   emits('update:modelValue', val);
   isDropDownVisible.value = false;
 };
 
+/*
+  handle time zone validation
+*/
 const isValidTImeZone = computed(() => {
   if (checkValidity.value) {
     return !props.data.find(timeZone => timeZone === props.modelValue) ? 'Please select a valid time zone!' : null;

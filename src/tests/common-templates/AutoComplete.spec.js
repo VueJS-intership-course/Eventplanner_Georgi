@@ -6,7 +6,7 @@ const wrapper = mount(AutoComplete, {
     props: {
         modelValue: '',
         'onUpdate:modelValue': (e) => wrapper.setProps({ modelValue: e }),
-        data: ['1', '2', '3', '4', '5', '6']
+        data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
     }
 });
 
@@ -18,6 +18,15 @@ it('should show the possible selections on focus', async () => {
     expect(wrapper.vm.isDropDownVisible).toBe(true)
     expect(wrapper.find('ul').isVisible()).toBe(true)
 });
+
+
+it('should show the correct number of selections when focus', async () => {
+    const input = wrapper.find('input');
+
+    await input.trigger('focus');
+
+    expect(wrapper.findAll('li').length).toBe(10)
+})
 
 it('should not show the selections on blur', async () => {
     const input = wrapper.find('input')

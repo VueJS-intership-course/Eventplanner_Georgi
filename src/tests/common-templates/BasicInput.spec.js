@@ -12,7 +12,7 @@ it('should be normal input if the type is not a select', () => {
             placeholder: 'Write down your username'
         }
     })
-    
+
     expect(wrapper.find('input[placeholder="Write down your username"]').exists()).toBe(true);
     expect(wrapper.find('label').text()).toBe('Username:');
 });
@@ -26,8 +26,27 @@ it('should be select if type is select with select options', () => {
             selectOptions: ['africa', 'europe', 'asia']
         }
     })
-    
+
     expect(wrapper.find('select').exists()).toBe(true);
     expect(wrapper.findAll('option').length).toBe(3)
 })
+
+
+it('should handle input of type file correctly', async () => {
+    const wrapper = mount(BasicInput, {
+        props: {
+            name: 'Image',
+            type: 'file',
+            label: 'Image'
+        }
+    });
+
+    const file = new File(['hello'], 'hello.jpg', { type: 'image/jpeg' });
+
+    const mockEvent = { target: { files: [file] } };
+
+    await wrapper.vm.handleFileChange(mockEvent);
+
+    expect(wrapper.vm.value).toBeInstanceOf(File)
+});
 

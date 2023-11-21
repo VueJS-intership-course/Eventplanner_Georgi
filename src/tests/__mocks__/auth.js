@@ -4,7 +4,7 @@ export default {
         email: 'georgi@abv.bg',
         tickets: 0,
         total: 0,
-        timeZone: 'Europe/Madrid'
+        timeZone: 'Europe/Madrid',
     },
 
     admin: {

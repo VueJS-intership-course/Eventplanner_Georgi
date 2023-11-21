@@ -155,11 +155,35 @@ describe('Client specific', () => {
     })
 
 
-    it('should show only "Buy Ticket" button if user is not adming', async () => {
+    it('should show only "Buy Ticket" button if user is not admin', async () => {
         expect(wrapper.find('button').text()).toBe('Buy Ticket');
         expect(wrapper.findAll('button').length).toBe(1)
     })
+
  
+})
+
+
+describe('Client with already bought ticket', () => {
+    const wrapper = mount(SingleEventCard, {
+        global: {
+            plugins: [TimeConvertor, createTestingPinia({
+                initialState: {
+                    events: {
+                        currentEvent: eventsMocks.eventWithUserBoughtTicket
+                    },
+                    authStore: {
+                        currentUser: authMocks.client
+                    }
+                }
+            })]
+        }
+    });
+
+
+    it('should show "You already bought ticket" text', () => {
+        expect(wrapper.text()).toContain('You have already bought ticket for this event!')
+    })
 })
 
 

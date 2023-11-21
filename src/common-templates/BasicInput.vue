@@ -42,8 +42,14 @@ const props = defineProps({
     }
 });
 
+/*
+  handle value and error message
+*/
 const { value, errorMessage } = useField(() => props.name);
 
+/*
+   handle input type file
+*/
 const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
 

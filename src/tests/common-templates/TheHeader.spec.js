@@ -4,7 +4,6 @@ import { it, expect } from '@jest/globals';
 import { setActivePinia, createPinia } from 'pinia';
 import { createTestingPinia } from '@pinia/testing';
 import authMocks from '@/tests/__mocks__/auth.js';
-import firebase from 'firebase/compat';
 
 setActivePinia(createPinia())
 

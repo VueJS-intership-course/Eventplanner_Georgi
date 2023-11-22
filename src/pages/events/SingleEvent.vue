@@ -7,11 +7,11 @@
             <div>
                 <SingleEventCard />
             </div>
-            <div>
-                <AddExpense v-if="store.isAddExpense"/>
+            <div v-if="store.isAddExpense">
+                <AddExpense/>
             </div>
-            <div>
-                <MapComp v-if="store.currentEvent" @map-ready="onMapReady" />
+            <div v-if="store.currentEvent">
+                <MapComp @map-ready="onMapReady" />
             </div>
         </div>
     </div>

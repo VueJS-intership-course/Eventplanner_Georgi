@@ -15,7 +15,7 @@
                             :to="{ name: 'Event-Catalog' }">Events</router-link>
                     </div>
                     <div v-if="!isAuthenticated" class="nav-control">
-                        <router-link  class="nav-control text-light me-3 fw-bold"
+                        <router-link  class="nav-link text-light me-3 fw-bold"
                             :to="{ name: 'SignUp-Page' }">Sign Up</router-link>
                     </div>
                     <div v-if="!isAuthenticated" class="nav-control">

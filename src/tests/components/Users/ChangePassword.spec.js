@@ -8,23 +8,6 @@ import TheModal from '@/common-templates/TheModal.vue';
 
 setActivePinia(createPinia());
 
-jest.mock("firebase/app", () => {
-    return {
-        initializeApp: jest.fn(),
-        auth: jest.fn(),
-        firestore: jest.fn()
-    };
-});
-
-
-jest.mock('vue-router', () => ({
-    useRoute: jest.fn(),
-    useRouter: jest.fn(() => ({
-        push: () => { }
-    }))
-}))
-
-
 describe('ChangePassword.vue', () => {
     let wrapper;
 

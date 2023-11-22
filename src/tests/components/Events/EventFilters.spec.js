@@ -10,14 +10,6 @@ import TheModal from '@/common-templates/TheModal.vue'
 
 setActivePinia(createPinia());
 
-jest.mock('vue-router', () => ({
-    useRoute: jest.fn(() => ({
-        query: {}
-    })),
-    useRouter: jest.fn(() => ({
-        push: () => { }
-    }))
-}))
 
 const push = jest.fn()
 useRouter.mockImplementationOnce(() => ({

@@ -20,15 +20,6 @@ const mockApp = {
 
 TimeConvertor.install(mockApp);
 
-jest.mock("firebase/app", () => {
-    return {
-        initializeApp: jest.fn(),
-        auth: jest.fn(),
-        firestore: jest.fn()
-    };
-});
-
-
 const wrapper = mount(EventCard, {
     props: {
         eventData: eventsMocks.eventWithTickets

@@ -7,15 +7,6 @@ import authMocks from '@/tests/__mocks__/auth.js';
 
 setActivePinia(createPinia())
 
-jest.mock("firebase/app", () => {
-    return {
-        initializeApp: jest.fn(),
-        auth: jest.fn(),
-        firestore: jest.fn()
-    };
-});
-
-
 describe('Client', () => {
     let wrapper;
 

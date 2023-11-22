@@ -8,6 +8,7 @@ module.exports = {
         "^.+\\.tsx?$": "ts-jest",
         '^.+\\.css$': 'jest-transform-stub',
     },
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
     moduleFileExtensions: [
         "js",
         "json",

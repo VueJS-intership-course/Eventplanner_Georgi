@@ -22,29 +22,10 @@ const mockApp = {
 TimeConvertor.install(mockApp);
 
 
-jest.mock('vue-router', () => ({
-    useRoute: jest.fn(() => ({
-        query: {}
-    })),
-    useRouter: jest.fn(() => ({
-        push: () => { }
-    }))
-}))
-
-jest.mock('@/utils/notifications.js', () => ({}))
-
 const push = jest.fn()
 useRouter.mockImplementationOnce(() => ({
     push
 }))
-
-jest.mock("firebase/app", () => {
-    return {
-        initializeApp: jest.fn(),
-        auth: jest.fn(),
-        firestore: jest.fn(),
-    };
-});
 
 
 jest.mock('moment-timezone', () => {
@@ -167,6 +148,7 @@ describe('Client specific', () => {
 describe('Client with already bought ticket', () => {
     const wrapper = mount(SingleEventCard, {
         global: {
+            stubs: ['router-link', 'ErrorModal'],
             plugins: [TimeConvertor, createTestingPinia({
                 initialState: {
                     events: {
@@ -176,7 +158,7 @@ describe('Client with already bought ticket', () => {
                         currentUser: authMocks.client
                     }
                 }
-            })]
+            })],
         }
     });
 

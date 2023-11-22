@@ -6,24 +6,6 @@ import { setActivePinia, createPinia } from 'pinia';
 
 setActivePinia(createPinia())
 
-jest.mock("firebase/app", () => {
-    return {
-        initializeApp: jest.fn(),
-        auth: jest.fn(),
-        firestore: jest.fn(),
-    };
-});
-
-
-jest.mock('vue-router', () => ({
-    useRoute: jest.fn(() => ({
-        query: {}
-    })),
-    useRouter: jest.fn(() => ({
-        push: () => { }
-    }))
-}))
-
 
 const wrapper = shallowMount(HomePage, {
     global: {

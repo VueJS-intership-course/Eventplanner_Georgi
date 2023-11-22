@@ -8,23 +8,6 @@ import authMocks from '@/tests/__mocks__/auth.js';
 setActivePinia(createPinia())
 
 
-jest.mock("firebase/app", () => {
-    return {
-        initializeApp: jest.fn(),
-        auth: jest.fn(),
-        firestore: jest.fn()
-    };
-});
-
-
-
-jest.mock('vue-router', () => ({
-    useRoute: jest.fn(),
-    useRouter: jest.fn(() => ({
-        push: () => { }
-    }))
-}))
-
 describe('Client', () => {
     const wrapper = mount(TheHeader, {
         global: {
@@ -59,7 +42,7 @@ describe('Client', () => {
 
         expect(wrapper.vm.store.logout).toBeCalled()
     })
-})
+});
 
 
 it('should show login and sign up buttons if there is no current user', async () => {
@@ -82,6 +65,6 @@ it('should show login and sign up buttons if there is no current user', async ()
     expect(wrapper.vm.isAuthenticated).toBe(false)
     expect(navControls.length).toBe(4);
     
-})
+});
 
 

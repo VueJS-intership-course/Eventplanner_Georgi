@@ -39,6 +39,9 @@ describe('Client', () => {
         }
     });
 
+    it('should show clients name in the header', () => {
+        expect(wrapper.find('.navbar-welcome-message').text()).toBe('Hello, Georgi')
+    })
 
     it('should not show login and sign up buttons if there is current user', async () => {
         const navControls = wrapper.findAll('.nav-control');

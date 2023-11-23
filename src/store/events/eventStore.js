@@ -5,7 +5,7 @@ import moment from "moment";
 export const eventStore = defineStore('events', {
     state: () => ({
         events: null,
-        searchQuery: null,
+        searchQuery: '',
         editedEvent: {
             name: '',
             ticket: '',
@@ -27,15 +27,6 @@ export const eventStore = defineStore('events', {
     }),
 
     getters: {
-        searchedEvents() {
-            const filteredEvents = this.filteredEvents;
-
-            if (this.searchQuery) {
-                return filteredEvents.filter(event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
-            }
-
-            return filteredEvents;
-        },
 
         filteredEvents() {
             const query = this.router.currentRoute.value.query;
@@ -64,7 +55,7 @@ export const eventStore = defineStore('events', {
                     }
                 }
 
-                return meetsCriteria;
+                return meetsCriteria && event.name.toLowerCase().includes(this.searchQuery.toLowerCase());
             });
         },
 

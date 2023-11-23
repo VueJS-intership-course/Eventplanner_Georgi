@@ -60,7 +60,6 @@ const handleAddExpense = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/variables.scss';
 
 .container {
   @include page-background

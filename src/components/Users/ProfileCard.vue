@@ -17,14 +17,13 @@
 
             <div class="buttons mt-4 d-flex justify-content-center">
                 <button v-if="!isUserAdmin" class="btn btn-outline-primary px-4" @click="editOpen">Edit profile</button>
-                <router-link v-if="isUserAdmin" class="btn btn-outline-primary px-4" :to="{name:'Analytics-Page'}">Analytics</router-link>
+                <router-link v-if="isUserAdmin" class="btn btn-outline-primary px-4"
+                    :to="{ name: 'Analytics-Page' }">Analytics</router-link>
                 <button class="btn btn-outline-primary px-4 ml-3" @click="openEditPass">Change password</button>
             </div>
         </div>
 
-        <div v-if="store.isEditPass">
-            <ChangePassword />
-        </div>
+        <ChangePassword v-if="store.isEditPass" />
     </div>
 </template>
 
@@ -64,14 +63,12 @@ const openEditPass = () => {
 <style scoped lang="scss">
 .card {
     border: none;
-
     position: relative;
     overflow: hidden;
     border-radius: 8px;
 }
 
 .card:before {
-
     content: "";
     position: absolute;
     left: 0;

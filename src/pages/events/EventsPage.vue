@@ -1,15 +1,9 @@
 <template>
     <div class="container">
-        <div v-if="store.isAddClicked">
-            <add-event></add-event>
-        </div>
+        <add-event v-if="store.isAddClicked" />
         <div class="wrapper d-flex flex-column flex-wrap mt-4">
-            <div>
-                <EventControls />
-            </div>
-            <div class="align-self-center p-3">
-                <EventList />
-            </div>
+            <EventControls />
+            <EventList class="align-self-center p-3"/>
         </div>
     </div>
 </template>
@@ -32,7 +26,6 @@ const store = eventStore()
 
 
 <style scoped lang="scss">
-@import '../../styles/variables.scss';
 .wrapper {
     border-radius: 4%;
     @include page-background

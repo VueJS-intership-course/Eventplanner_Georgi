@@ -15,11 +15,11 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-@import '../styles/variables.scss';
 
 img {
     filter: blur(1px);
     -webkit-filter: blur(3px);
+    
 }
 
 .card-title {

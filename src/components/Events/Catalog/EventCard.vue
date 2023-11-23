@@ -6,9 +6,7 @@
         <div class="postcard__text t-dark">
             <h1 class="postcard__title red">{{ eventData.name }}</h1>
             <div class="postcard__subtitle small">
-                <time :datetime="$formatDateInTimeZone(eventData.location, eventData.dateTime)">
-                    <span>{{ $formatDateInTimeZone(eventData.location, eventData.dateTime) }}</span>
-                </time>
+                <span>{{ $formatDateInTimeZone(eventData.location, eventData.dateTime) }}</span>
             </div>
             <div class="postcard__bar"></div>
             <div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
@@ -48,8 +46,6 @@ const props = defineProps({
 
 
 <style scoped lang="scss">
-@import '../../../styles/variables.scss';
-
 .postcard {
     flex-wrap: wrap;
     display: flex;

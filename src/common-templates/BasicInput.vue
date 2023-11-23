@@ -34,7 +34,6 @@ const props = defineProps({
     },
     selectOptions: {
         type: Array,
-        required: false
     },
     placeholder: {
         type: String,
@@ -59,7 +58,6 @@ const handleFileChange = (event) => {
 </script>
 
 <style scoped lang="scss">
-@import '../styles/variables.scss';
 
 span {
     color: $form-wrong-input;

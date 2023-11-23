@@ -9,7 +9,6 @@
 <script setup></script>
 
 <style lang="scss" scoped>
-@import '../styles/variables.scss';
 
 .back-modal {
     @include modal-style;

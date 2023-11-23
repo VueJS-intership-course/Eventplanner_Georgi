@@ -14,22 +14,25 @@
                         <router-link class="nav-link text-light me-3 fw-bold"
                             :to="{ name: 'Event-Catalog' }">Events</router-link>
                     </div>
-                    <div v-if="!isAuthenticated" class="nav-control">
-                        <router-link  class="nav-link text-light me-3 fw-bold"
-                            :to="{ name: 'SignUp-Page' }">Sign Up</router-link>
-                    </div>
-                    <div v-if="!isAuthenticated" class="nav-control">
-                        <router-link  class="nav-link text-light me-3 fw-bold"
-                            :to="{ name: 'SignIn-Page' }">Sign In</router-link>
-                    </div>
-                    <div v-if="isAuthenticated" class="nav-control">
-                        <router-link class="nav-link text-light me-3 fw-bold"
-                            :to="{ name: 'Profile-Page' }">Profile</router-link>
-                    </div>
-                    <div v-if="isAuthenticated" class="nav-control">
-                        <button  class="nav-link text-light me-3 fw-bold"
-                            @click="signOut">Logout</button>
-                    </div>
+                    <template v-if="isAuthenticated">
+                        <div class="nav-control">
+                            <router-link class="nav-link text-light me-3 fw-bold"
+                                :to="{ name: 'Profile-Page' }">Profile</router-link>
+                        </div>
+                        <div class="nav-control">
+                            <button class="nav-link text-light me-3 fw-bold" @click="signOut">Logout</button>
+                        </div>
+                    </template>
+                    <template v-if="!isAuthenticated">
+                        <div class="nav-control">
+                            <router-link class="nav-link text-light me-3 fw-bold" :to="{ name: 'SignUp-Page' }">Sign
+                                Up</router-link>
+                        </div>
+                        <div class="nav-control">
+                            <router-link class="nav-link text-light me-3 fw-bold" :to="{ name: 'SignIn-Page' }">Sign
+                                In</router-link>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -77,8 +80,6 @@ const signOut = async () => {
 </script>
 
 <style scoped lang="scss">
-@import '../styles/variables.scss';
-
 .navbar {
     @include page-background;
     vertical-align: middle;
@@ -86,13 +87,17 @@ const signOut = async () => {
     .navbar-brand {
         font-size: 3.2rem;
         font-family: $page-important;
-    };
+    }
+
+    ;
 
     .active:not(.navbar-brand) {
         text-decoration: underline;
         text-underline-offset: 0.5rem;
         text-decoration-thickness: 20%;
-    };
+    }
+
+    ;
 
     .navbar-welcome-message {
         color: $welcome-message-color;

@@ -4,7 +4,7 @@
             <h2 class="h1 fw-bold text-light">Analytics</h2>
         </div>
         <div v-if="store.events" class="row">
-            <LineChart title="Events analytics" @page-filter="handleChartEvent" :data="data" type="column" />
+            <LineChart :categories="constants.eventsChartCategories" title="Events analytics" @page-filter="handleChartEvent" :data="data" type="column" />
         </div>
         <div v-if="!store.events">
             <h2>There is no analytics yet!</h2>
@@ -21,6 +21,7 @@ import { eventStore } from '@/store/events/eventStore.js';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import moment from 'moment';
+import constants from '@/utils/constants.js';
 
 /*
   router
@@ -59,7 +60,6 @@ const handleChartEvent = (monthIndex) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/variables.scss';
 
 .container {
     @include page-background;

@@ -10,8 +10,6 @@
 
 
 <style scoped lang="scss">
-@import '../../../styles/variables.scss';
-
 .card {
     width: 100%;
     padding: 3rem 4rem;

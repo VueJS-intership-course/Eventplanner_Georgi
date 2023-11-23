@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ErrorModal @close-error="closeError" v-if="errorMsg" :erorrMsg="errorMsg"/>
+        <ErrorModal @close-error="closeError" v-if="errorMsg" :erorrMsg="errorMsg" />
         <div v-if="store.currentEvent" class="container d-flex mt-4 p-4 bg-light ">
             <div class="pmd-card-media p-3">
                 <img :src="store.currentEvent.imgSrc" width="600" height="500" class="img-fluid">

@@ -1,16 +1,15 @@
 <template>
     <div class="event-header d-flex justify-content-between p-4 mb-5">
+        <Teleport v-if="events.isFiltering" to="body">
+            <EventsFilter />
+        </Teleport>
         <div v-if="isUserAdmin" class="add-event-menu">
             <button class="btn btn-primary" @click="openAdd">Add Event</button>
         </div>
-
         <div class="filter-controls d-flex">
             <button @click="openFilter" class="btn btn-primary">Filter by</button>
             <button @click="resetFilter" v-if="hasQueryParameters" class="btn btn-primary">Reset Filter</button>
         </div>
-        <Teleport v-if="events.isFiltering" to="body">
-            <EventsFilter />
-        </Teleport>
         <div>
             <EventSearch v-model="searchValue" />
         </div>

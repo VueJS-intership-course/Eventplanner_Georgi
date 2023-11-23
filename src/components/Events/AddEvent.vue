@@ -6,7 +6,7 @@
                 <div class="card-header p-1 h4">
                     Add Event
                 </div>
-                <div class="card-body p-">
+                <div class="card-body">
                     <form @submit="addEvent" role="form" class="row">
                         <div class="form-group col-lg-4 ">
                             <BasicInput type="text" name="name" label="Name" />
@@ -109,7 +109,6 @@ const store = eventStore();
     adding event
 */
 
-const img = ref(null);
 const errorMsg = ref(null);
 
 /*
@@ -163,21 +162,8 @@ const addEvent = handleSubmit((values) => {
         store.closeAdd()
     }
 })
-
-const handleEventImage = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        img.value = file;
-    }
-};
-
-
 </script>
 
 
 <style scoped lang="scss">
-span {
-    color: red;
-    font-size: smaller;
-}
 </style>

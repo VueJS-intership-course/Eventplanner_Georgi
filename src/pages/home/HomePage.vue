@@ -1,12 +1,8 @@
 <template>
     <div class="container d-flex flex-column  justify-conent-center mt-5 p-5">
-        <div class="mb-5">
-            <WelcomeCard />
-        </div>
-        <div class="events-map">
-            <h2 class="subHead fw-bold text-center text-light">Events worldwide</h2>
-            <MapChart v-if="store.eventStatistic" :data="store.eventStatistic" name="Event information" @page-filter="handleMapChartClick" title="Events" />
-        </div>
+        <WelcomeCard class="mb-5"/>
+        <MapChart v-if="store.eventStatistic" :data="store.eventStatistic" name="Event information"
+            @page-filter="handleMapChartClick" title="Events Worldwide" />
     </div>
 </template>
 
@@ -42,13 +38,11 @@ store.getStatistics();
    handle map click
 */
 const handleMapChartClick = (countryName) => {
-    router.push({name: 'Event-Catalog', query: {location: countryName}});
+    router.push({ name: 'Event-Catalog', query: { location: countryName } });
 }
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/variables.scss';
-
 .container {
     @include page-background;
 

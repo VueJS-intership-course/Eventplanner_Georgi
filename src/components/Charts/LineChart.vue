@@ -24,6 +24,10 @@ const props = defineProps({
   },
   subtitle: {
     type: String
+  },
+  categories: {
+    type:Array,
+    required:true
   }
 })
 
@@ -40,7 +44,7 @@ const chartOptions = ref({
   },
   series: props.data,
   xAxis: {
-    categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    categories: props.categories
   },
   yAxis: {
     alternateGridColor: '#FDFFD5'

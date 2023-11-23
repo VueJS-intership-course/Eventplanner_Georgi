@@ -15,5 +15,6 @@ export default {
             value: 'logistics',
             label: 'Logistics'
         }
-    ]
+    ],
+    eventsChartCategories:['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 }

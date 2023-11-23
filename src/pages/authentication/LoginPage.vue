@@ -140,7 +140,6 @@ const closeError = () => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../styles/variables.scss';
 
 form {
     @include form-auth;

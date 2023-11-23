@@ -1,8 +1,8 @@
 <template>
     <section>
-        <div class="container py-2" v-if="store.events !== null && store.searchedEvents.length">
+        <div class="container py-2" v-if="store.events !== null && store.filteredEvents.length">
             <TransitionGroup name="list" tag="ul">
-                <event-card v-for="event in store.searchedEvents" :key="event.id" :event-data="event"></event-card>
+                <event-card v-for="event in store.filteredEvents" :key="event.id" :event-data="event"></event-card>
             </TransitionGroup>
         </div>
         <div v-else>

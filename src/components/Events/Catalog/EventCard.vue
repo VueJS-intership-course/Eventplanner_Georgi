@@ -6,6 +6,7 @@
         <div class="postcard__text t-dark">
             <h1 class="postcard__title red">{{ eventData.name }}</h1>
             <div class="postcard__subtitle small">
+                {{ eventData.dateTime }}
                 <time :datetime="$formatDateInTimeZone(eventData.location, eventData.dateTime)">
                     <span>{{ $formatDateInTimeZone(eventData.location, eventData.dateTime) }}</span>
                 </time>
@@ -18,8 +19,10 @@
                 illum quos!</div>
             <ul class="postcard__tagbox">
                 <li class="tag__item">Country: {{ eventData.country }}</li>
-                <li v-if="eventData.ticket" class="tag__item">Ticlets available: {{ eventData.ticket }}</li>
-                <li v-if="eventData.ticket" class="tag__item">Price: {{ eventData.price }}$</li>
+                <template v-if="eventData.ticket">
+                <li  class="tag__item">Ticlets available: {{ eventData.ticket }}</li>
+                <li  class="tag__item">Price: {{ eventData.price }}$</li>
+            </template>
                 <li v-if="!eventData.ticket" class="tag__item fw-bold text-danger">SOLD OUT!</li>
                 <li class="tag__item">
                     <router-link :to="{ name: 'Single-Event', params: { id: eventData.id } }"
@@ -43,12 +46,11 @@ const props = defineProps({
     }
 });
 
-
 </script>
 
 
 <style scoped lang="scss">
-@import '../../../styles/variables.scss';
+@import '@/styles/variables.scss';
 
 .postcard {
     flex-wrap: wrap;

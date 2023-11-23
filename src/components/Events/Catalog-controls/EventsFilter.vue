@@ -106,9 +106,9 @@ onBeforeMount(() => {
 
 <style scoped lang="scss">
     .filterer {
-        position: absolute !important;
-        left: 40%;
-        width: fit-content !important;
+        position: absolute ;
+        left: 30%;
+        width: 50%;
         top: 60%;
     }
 </style>

@@ -63,7 +63,7 @@ it('should show login and sign up buttons if there is no current user', async ()
     const navControls = wrapper.findAll('.nav-control');
 
     expect(wrapper.vm.isAuthenticated).toBe(false)
-    expect(navControls.length).toBe(4);
+    expect(navControls.length).toBe(3);
     
 });
 

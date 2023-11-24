@@ -1,10 +1,9 @@
 import moment from 'moment-timezone';
-import tzlookup from 'tz-lookup';
 import { authStore } from '@/store/auth/authStore.js'
 
 export default {
   install: (app) => {
-    app.config.globalProperties.$formatDateInTimeZone = (location, date) => {
+    app.config.globalProperties.$formatDateInTimeZone = (date) => {
       const store = authStore()
 
       if (store.currentUser && store.currentUser.timeZone) {

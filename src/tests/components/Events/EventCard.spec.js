@@ -42,7 +42,9 @@ jest.mock('moment-timezone', () => {
             format: jest.fn((formatString) => `Mocked formatted time using format string: ${formatString}`),
         })),
         utc: jest.fn(() => ({
-            format: jest.fn((formatString) => `Mocked formatted time using format string: ${formatString}`),
+            local: jest.fn(() => ({
+                format: jest.fn((formatString) => `Mocked formatted time using format string: ${formatString}`)
+            }))
         }))
     };
 });

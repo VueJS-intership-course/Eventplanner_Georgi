@@ -40,7 +40,13 @@ jest.mock('moment-timezone', () => {
             })),
         })),
         utc: jest.fn(() => ({
-            format: jest.fn((formatString) => `Mocked formatted time using format string: ${formatString}`),
+            tz: jest.fn(() => ({
+                format: jest.fn((formatString) => `Mocked formatted time using format string: ${formatString}`)
+            })),
+            local: jest.fn(() => ({
+                format: jest.fn((formatString) => `Mocked formatted time using format string: ${formatString}`)
+            }))
+            
         }))
     };
 });
@@ -62,7 +68,7 @@ describe('Event specific data', () => {
                 })]
             }
         });
-
+   
         it('should show events name', () => {
             expect(wrapper.find('.card-title').text()).toBe('Lili Ivanova Concert')
         })

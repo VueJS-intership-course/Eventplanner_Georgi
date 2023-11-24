@@ -8,10 +8,7 @@
             <div>
                 <div class="card-header mb-4">
                     <h2 class="card-title">{{ store.currentEvent.name }}</h2>
-                    <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.location,
-                        store.currentEvent.dateTime)
-                    }}
-                    </p>
+                    <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.dateTime)}}</p>
                 </div>
                 <div class="card-body mb-4">
                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quis est nam,
@@ -99,6 +96,9 @@ const store = eventStore();
 */
 const users = authStore();
 
+/*
+  is user admin
+*/
 const isAdmin = computed(() => users.isCurrentUserAdmin);
 
 
@@ -147,7 +147,7 @@ const handleBuyTicket = async () => {
             await store.handleBuyTicket(users.currentUser, store.currentEvent);
             showNotifications(`Successfuly bought ticket for ${store.currentEvent.name}`)
         }
-        
+
     } catch (error) {
         errorMsg.value = error.message;
     }

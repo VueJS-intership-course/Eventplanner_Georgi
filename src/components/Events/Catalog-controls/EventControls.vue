@@ -31,7 +31,7 @@ import { useRouter } from 'vue-router';
    router
 */
 
-const router = useRouter()
+const router = useRouter();
 
 /*
    is user admin
@@ -52,7 +52,7 @@ const searchValue = ref('');
 
 
 watch(() => searchValue.value, (newVal) => {
-    events.searchQuery = newVal
+    events.searchQuery = newVal;
 })
 
 /*
@@ -64,7 +64,7 @@ const hasQueryParameters = computed(() => Object.keys(router.currentRoute.value.
 
 
 const resetFilter = () => {
-    events.filterReset()
+    events.filterReset();
 }
 
 
@@ -78,7 +78,7 @@ const openFilter = () => {
 */
 
 const openAdd = () => {
-    events.isAddClicked = true
+    events.isAddClicked = true;
 }
 </script>
 

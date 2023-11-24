@@ -157,8 +157,7 @@ const addEvent = handleSubmit((values) => {
 
     } catch (error) {
         errorMsg.value = error.message;
-
-        store.closeAdd()
+        store.closeAdd();
     }
 })
 </script>

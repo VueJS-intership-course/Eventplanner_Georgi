@@ -150,7 +150,6 @@ const addEvent = handleSubmit((values) => {
 
         if (isConfirmed) {
             store.addEvent(newEvent, values.imgSrc);
-
             showNotifications(`${newEvent.name} is added to the catalog!`);
         }
 

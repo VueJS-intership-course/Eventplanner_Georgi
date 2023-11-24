@@ -118,12 +118,8 @@ const deleteEvent = async () => {
 
         if (isConfirmed) {
             await store.deleteEvent(store.currentEvent.id);
-        } else {
-            return
+            router.push({ name: 'Event-Catalog' })
         }
-
-        router.push({ name: 'Event-Catalog' })
-
     } catch (error) {
         errorMsg.value = error.message;
     }
@@ -149,11 +145,9 @@ const handleBuyTicket = async () => {
         const isConfirmed = confirm(`Are you sure you want to buy ticket for ${store.currentEvent.name}`)
         if (isConfirmed) {
             await store.handleBuyTicket(users.currentUser, store.currentEvent);
-
             showNotifications(`Successfuly bought ticket for ${store.currentEvent.name}`)
-        } else {
-            return;
         }
+        
     } catch (error) {
         errorMsg.value = error.message;
     }

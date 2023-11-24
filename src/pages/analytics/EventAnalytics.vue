@@ -22,11 +22,6 @@ import { eventStore } from '@/store/events/eventStore.js';
 import { useRouter } from 'vue-router';
 
 /*
-   router
-*/
-const router = useRouter();
-
-/*
    props
 */
 const props = defineProps({
@@ -35,6 +30,12 @@ const props = defineProps({
     required: true
   }
 })
+
+/*
+   router
+*/
+const router = useRouter();
+
 
 /*
   store
@@ -55,12 +56,11 @@ const data = computed(() => store.singleEventAnalytics);
 /*handle add expenses if empty */
 const handleAddExpense = () => {
   store.isAddExpense = true;
-  router.push({ name: 'Single-Event'})
+  router.push({ name: 'Single-Event' })
 }
 </script>
 
 <style lang="scss" scoped>
-
 .container {
   @include page-background
 }

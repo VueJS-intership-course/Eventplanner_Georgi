@@ -36,6 +36,7 @@
 /*
    props
 */
+import { computed } from 'vue';
 
 const props = defineProps({
     eventData: {

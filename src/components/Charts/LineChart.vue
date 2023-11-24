@@ -27,7 +27,6 @@ const props = defineProps({
   },
   categories: {
     type:Array,
-    required:true
   }
 })
 

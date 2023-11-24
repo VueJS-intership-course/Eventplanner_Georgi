@@ -78,6 +78,8 @@ const handleAddExpense = handleSubmit(async (values) => {
 
         showNotifications(`Successfully added ${expense.category} expense with ${expense.amount}$ amount`)
     } catch (error) {
+        closeAddExpense();
+
         errorMsg.value = error.message
     }
 });

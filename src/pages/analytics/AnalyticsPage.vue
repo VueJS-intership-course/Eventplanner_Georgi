@@ -36,7 +36,7 @@ const store = eventStore();
 /*
    get all events
 */
-// store.getAllEvents()
+store.getAllEvents()
 
 /*
    get line chart analytics data

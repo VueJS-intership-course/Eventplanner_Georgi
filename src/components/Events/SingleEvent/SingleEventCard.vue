@@ -8,7 +8,8 @@
             <div>
                 <div class="card-header mb-4">
                     <h2 class="card-title">{{ store.currentEvent.name }}</h2>
-                    <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.dateTime)}}</p>
+                    <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.dateTime) }}</p>
+                    <p v-if="isEventExpired" class="fw-bold text-danger">Event Date Expired</p>
                 </div>
                 <div class="card-body mb-4">
                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quis est nam,
@@ -21,12 +22,14 @@
                     <li class="list-group-item d-flex flex-row">
                         <span class="media-body">Country: {{ store.currentEvent.country }}</span>
                     </li>
-                    <li class="list-group-item d-flex flex-row" v-if="hasTicketsAvailable">
-                        <span class="media-body">Tickets available: {{ store.currentEvent.ticket }}</span>
-                    </li>
-                    <li class="list-group-item d-flex flex-row" v-if="hasTicketsAvailable">
-                        <div class="media-body">Ticket price: {{ store.currentEvent.price }}$</div>
-                    </li>
+                    <template v-if="hasTicketsAvailable">
+                        <li class="list-group-item d-flex flex-row">
+                            <span class="media-body">Tickets available: {{ store.currentEvent.ticket }}</span>
+                        </li>
+                        <li class="list-group-item d-flex flex-row">
+                            <div class="media-body">Ticket price: {{ store.currentEvent.price }}$</div>
+                        </li>
+                    </template>
                     <li class="list-group-item d-flex flex-row" v-if="!hasTicketsAvailable">
                         <div class="media-body fw-bold text-danger">SOLD OUT!</div>
                     </li>
@@ -60,8 +63,8 @@
                                 type="button">Delete</button>
                         </div>
                     </div>
-                    <div>
-                        <p v-if="hasUserBoughtTIcket" class="fw-bold">You have already bought ticket for this event!</p>
+                    <div v-if="hasUserBoughtTIcket">
+                        <p class="fw-bold">You have already bought ticket for this event!</p>
                     </div>
                 </div>
             </div>
@@ -165,6 +168,11 @@ const hasUserBoughtTIcket = computed(() => users.currentUser ? store.hasUserBoug
 */
 
 const hasTicketsAvailable = computed(() => store.currentEvent.ticket > 0);
+
+/*
+   is event expired
+*/
+const isEventExpired = computed(() => new Date() > new Date(store.currentEvent.date));
 
 /*
    handle add expense

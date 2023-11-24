@@ -2,10 +2,10 @@
     <div>
         <label class="form-control-label" :for="name">{{ `${label}:` }}</label>
         <input v-if="type === 'file'" class="form-control" @change="handleFileChange" :placeholder="placeholder" :type="type" />
-        <select v-else-if="type === 'select'" class="form-control" v-model="value">
+        <select v-if="type === 'select'" class="form-control" v-model="value">
             <option v-for="option in selectOptions" :value="option.value">{{ option.label }}</option>
         </select>
-        <input v-else class="form-control" :placeholder="placeholder" v-model="value" :type="type" />
+        <input v-if="type !== 'file' && type !=='select'" class="form-control" :placeholder="placeholder" v-model="value" :type="type" />
         <span>{{ errorMessage }}</span>
     </div>
 </template>

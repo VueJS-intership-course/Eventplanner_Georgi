@@ -50,7 +50,6 @@ import { useForm } from 'vee-validate';
 
 const router = useRouter();
 
-
 /*
     store
 */

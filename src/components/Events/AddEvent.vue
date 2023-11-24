@@ -93,7 +93,8 @@ const { handleSubmit } = useForm({
             .required('This field is required'),
         budget: yup
             .string()
-            .required('This field is required'),
+            .required('This field is required')
+            .min(5000, 'Minimum 5000 for events budget'),
         imgSrc: yup.string().required('Image is required'),
     })
 })

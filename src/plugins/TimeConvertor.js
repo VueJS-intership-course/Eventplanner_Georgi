@@ -8,7 +8,6 @@ export default {
 
       if (store.currentUser && store.currentUser.timeZone) {
         const targetTime = moment.utc(date).tz(store.currentUser.timeZone).format('dddd, MMMM Do YYYY, h:mm:ss a');
-
         return targetTime
       }
 

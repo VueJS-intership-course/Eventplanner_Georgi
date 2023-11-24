@@ -1,6 +1,5 @@
 import { createApp, markRaw } from 'vue'
-import '@/styles-config/bootstrap-config.js'
-import '@/styles/style.scss';
+import '@/styles/styles-config.js'
 import App from '@/App.vue'
 import router from '@/router/index.js';
 import { createPinia } from 'pinia';

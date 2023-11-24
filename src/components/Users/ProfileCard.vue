@@ -41,6 +41,9 @@ import ChangePassword from '@/components/Users/ChangePassword.vue';
 
 const store = authStore();
 
+/*
+   is user Admin
+*/
 const isUserAdmin = computed(() => store.isCurrentUserAdmin)
 
 

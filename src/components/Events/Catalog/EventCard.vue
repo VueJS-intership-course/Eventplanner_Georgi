@@ -6,7 +6,7 @@
         <div class="postcard__text t-dark">
             <h1 class="postcard__title red">{{ eventData.name }}</h1>
             <div class="postcard__subtitle small">
-                <span>{{ $formatDateInTimeZone(eventData.location, eventData.dateTime) }}</span>
+                <span>{{ $formatDateInTimeZone( eventData.dateTime) }}</span>
             </div>
             <div class="postcard__bar"></div>
             <div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,

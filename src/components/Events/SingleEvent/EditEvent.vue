@@ -7,36 +7,22 @@
                     Add Event
                 </div>
                 <div class="card-body p-4">
-                    <Form @submit="editEvent" :validation-schema="schema" role="form" class="row">
+                    <form @submit="editEvent" role="form" class="row">
                         <div class="form-group col-lg-4 ">
-                            <label class="form-control-label" for="form-group-input">Name</label>
-                            <Field type="text" class="form-control" id="form-group-input" :value="store.editedEvent.name"
-                                name="name" />
-                            <ErrorMessage name="name" />
+                            <BasicInput type="text" :value="store.editedEvent.name" label="Name" name="name" />
                         </div>
                         <div class="form-group col-lg-4 ">
-                            <label class="form-control-label" for="form-group-input">Tickets</label>
-                            <Field type="number" class="form-control" id="form-group-input"
-                                :value="store.editedEvent.ticket" name="ticket" />
-                            <ErrorMessage name="ticket" />
+                            <BasicInput type="text" :value="store.editedEvent.ticket" name="ticket" label="Tickets"
+                                placeholder="Enter tickets amount" />
                         </div>
                         <div class="form-group col-lg-4 mb-3">
-                            <label class="form-control-label" for="form-group-input">Price</label>
-                            <Field type="number" class="form-control" id="form-group-input" :value="store.editedEvent.price"
-                                name="price" />
-                            <ErrorMessage name="price" />
+                            <BasicInput type="number" :value="store.editedEvent.price" name="price" label="Price" />
                         </div>
                         <div class="form-group col-lg-12 mb-3">
-                            <label class="form-control-label" for="form-group-input">Date</label>
-                            <Field type="date" class="form-control" id="form-group-input" :value="store.editedEvent.date"
-                                name="date" />
-                            <ErrorMessage name="date" />
+                            <BasicInput type="date" :value="store.editedEvent.date" name="date" label="Date" />
                         </div>
                         <div class="form-group col-lg-12 mb-3">
-                            <label class="form-control-label" for="form-group-input">Time</label>
-                            <Field type="time" class="form-control" id="form-group-input" :value="store.editedEvent.time"
-                                name="time" />
-                            <ErrorMessage name="time" />
+                            <BasicInput type="time" :value="store.editedEvent.time" name="time" label="Time" />
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-control-label">Choose location</label>
@@ -50,7 +36,7 @@
                         <div class="form-group col-lg-6">
                             <button class="btn btn-primary float-end mt-4" for="form-group-input">Edit Event</button>
                         </div>
-                    </Form>
+                    </form>
                 </div>
             </div>
         </TheModal>
@@ -63,7 +49,7 @@
 */
 
 import { eventStore } from '@/store/events/eventStore.js';
-import { Form, Field, ErrorMessage } from 'vee-validate';
+import { useForm } from 'vee-validate';
 import showNotifications from '@/utils/notifications.js'
 import { toLonLat } from 'ol/proj';
 import mapLayers from '@/utils/mapLayers.js';
@@ -79,28 +65,30 @@ import moment from 'moment-timezone';
 */
 
 
-const schema = yup.object({
-    name: yup.string().required("This field is required!"),
-    ticket: yup
-        .number()
-        .typeError('Tickets must be a number')
-        .required("This field is required!")
-        .min(20, 'Minimum 20 tickets should be available'),
-    price: yup
-        .number()
-        .typeError('Price must be a number')
-        .required("This field is required!"),
-    date: yup
-        .date()
-        .test('date', 'Selected date must be later than today', function (value) {
-            const today = new Date();
-            return value && value >= today;
-        }),
-    time: yup
-        .string()
-        .required('This field is required'),
-})
+const { handleSubmit } = useForm({
+    validationSchema: yup.object({
+        name: yup.string().required("This field is required!"),
+        ticket: yup
+            .number()
+            .typeError('Tickets must be a number')
+            .required("This field is required!")
+            .min(20, 'Minimum 20 tickets should be available'),
+        price: yup
+            .number()
+            .typeError('Price must be a number')
+            .required("This field is required!"),
+        date: yup
+            .date()
+            .test('date', 'Selected date must be later than today', function (value) {
+                const today = new Date();
+                return value && value >= today;
+            }),
+        time: yup
+            .string()
+            .required('This field is required'),
+    })
 
+})
 
 
 /*
@@ -119,7 +107,7 @@ const errorMsg = ref(null);
 const location = ref([store.editedEvent.location[0], store.editedEvent.location[1]]);
 const layer = ref(null)
 
-const editEvent = async (values) => {
+const editEvent = handleSubmit(async (values) => {
     try {
 
         const event = {
@@ -140,13 +128,13 @@ const editEvent = async (values) => {
             showNotifications(`${event.name} is edited successfully!`);
         }
 
-        store.closeModal();
 
     } catch (error) {
-        store.closeModal();
         errorMsg.value = error.message;
     }
-}
+
+    store.closeModal();
+})
 
 /*
    map handling

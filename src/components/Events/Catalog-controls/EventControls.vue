@@ -9,7 +9,7 @@
             <button @click="resetFilter" v-if="hasQueryParameters" class="btn btn-primary">Reset Filter</button>
         </div>
         <div>
-            <EventSearch v-model="searchValue" />
+            <EventSearch v-model="searchQuery" />
         </div>
     </div>
 </template>
@@ -48,12 +48,15 @@ const isUserAdmin = computed(() => users.isCurrentUserAdmin);
 
 const events = eventStore();
 
-const searchValue = ref('');
 
 
-watch(() => searchValue.value, (newVal) => {
+
+const searchQuery = computed({
+  get: () => events.searchQuery,
+  set: (newVal) => {
     events.searchQuery = newVal;
-})
+  },
+});
 
 /*
   filters

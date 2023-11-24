@@ -1,65 +1,33 @@
 <template>
-    <div>
-        <label class="form-control-label" :for="name">{{ `${label}:` }}</label>
-        <input v-if="type === 'file'" class="form-control" @change="handleFileChange" :placeholder="placeholder" :type="type" />
-        <select v-if="type === 'select'" class="form-control" v-model="value">
+    <div class="mb-3">
+        <label class="form-label">{{ label }}</label>
+        <Field v-if="type !== 'select' && type !== 'file'" :value="value" :name="name" v-slot="{ field }">
+            <input :placeholder="placeholder" :type="type" class="form-control" v-bind="field">
+        </Field>
+        <Field v-if="type === 'file'" :name="name" v-slot="{ handleChange, handleBlur }">
+            <input class="form-control" type="file" @change="handleChange" @blur="handleBlur" />
+        </Field>
+        <Field v-if="type === 'select'" class="form-control" :as="'select'" :name="name" :value="value">
             <option v-for="option in selectOptions" :value="option.value">{{ option.label }}</option>
-        </select>
-        <input v-if="type !== 'file' && type !=='select'" class="form-control" :placeholder="placeholder" v-model="value" :type="type" />
-        <span>{{ errorMessage }}</span>
+        </Field>
+        <ErrorMessage :name="name" class="text-danger" />
     </div>
 </template>
-
+  
 <script setup>
-/*
-   imports
-*/
-import { useField } from "vee-validate";
+import { Field, ErrorMessage} from "vee-validate";
 
-/*
-   props
-*/
 const props = defineProps({
-    name: {
-        type: String,
-        required: true
-    },
-    type: {
-        type: String,
-        required: true
-    },
     label: {
         type: String,
         required: true
     },
-    selectOptions: {
-        type: Array,
-    },
-    placeholder: {
-        type: String,
-        default: 'Write down here'
-    }
+    type: { type: String, required: true },
+    name: { type: String, required: true },
+    value: { type: [String, Number, Date] },
+    selectOptions: { type: Array },
+    placeholder: { type: String },
 });
 
-/*
-  handle value and error message
-*/
-const { value, errorMessage } = useField(() => props.name);
-
-/*
-   handle input type file
-*/
-const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
-
-    value.value = selectedFile;
-
-};
 </script>
-
-<style scoped lang="scss">
-
-span {
-    color: $form-wrong-input;
-}
-</style>
+  

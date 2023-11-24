@@ -9,16 +9,16 @@
                 <div class="card-body">
                     <form @submit="addEvent" role="form" class="row">
                         <div class="form-group col-lg-4 ">
-                            <BasicInput type="text" name="name" label="Name" />
+                            <BasicInput type="text" placeholder="enter event name" name="name" label="Name" />
                         </div>
                         <div class="form-group col-lg-4 ">
-                            <BasicInput type="number" name="tickets" label="Tickets" />
+                            <BasicInput type="number" placeholder="enter event ticket"  name="tickets" label="Tickets" />
                         </div>
                         <div class="form-group col-lg-4">
-                            <BasicInput type="number" name="price" label="Price" />
+                            <BasicInput type="number" placeholder="enter event ticket price"  name="price" label="Price" />
                         </div>
                         <div class="form-group col-lg-12 ">
-                            <BasicInput type="date" name="date" label="Date" />
+                            <BasicInput type="date"  name="date" label="Date" />
                         </div>
                         <div class="form-group col-lg-12 ">
                             <BasicInput type="time" name="time" label="Time" />
@@ -27,7 +27,7 @@
                             <BasicInput type="file" name="imgSrc" label="Image" />
                         </div>
                         <div class="form-group col-lg-12">
-                            <BasicInput type="number" name="budget" label="Budget" />
+                            <BasicInput type="number" placeholder="enter event budget"  name="budget" label="Budget" />
                         </div>
                         <div class="col-lg-12 mb-4">
                             <label class="form-control-label">Choose location</label>
@@ -92,7 +92,7 @@ const { handleSubmit } = useForm({
             .string()
             .required('This field is required'),
         budget: yup
-            .string()
+            .number()
             .required('This field is required')
             .min(5000, 'Minimum 5000 for events budget'),
         imgSrc: yup.string().required('Image is required'),
@@ -147,6 +147,7 @@ const addEvent = handleSubmit((values) => {
             time: values.time
         }
 
+        console.log(newEvent, values.imgSrc);
         const isConfirmed = confirm(`Are you sure you want to add ${values.name}?`)
 
         if (isConfirmed) {

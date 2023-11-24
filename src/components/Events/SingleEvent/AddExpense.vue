@@ -9,7 +9,7 @@
                         <BasicInput type="select" :selectOptions="constants.expenseOptions" name="category" label="Expense Category" />
                     </div>
                     <div class="form-group">
-                        <BasicInput type="number" label="Amount" name="expenseAmount" />
+                        <BasicInput type="number" label="Amount" name="expenseAmount" placeholder="enter event expense"/>
                     </div>
                     <div class="form-group mt-4 text-center">
                         <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">Save</button>

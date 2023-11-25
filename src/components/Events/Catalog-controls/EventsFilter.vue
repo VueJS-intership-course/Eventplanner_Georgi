@@ -84,7 +84,7 @@ const handleFilters = () => {
     }
 
     store.closeFilter();
-    router.push({ query: queryParameters });
+    router.replace({ query: queryParameters });
 };
 
 

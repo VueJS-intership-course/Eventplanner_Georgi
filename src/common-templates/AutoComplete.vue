@@ -1,15 +1,14 @@
 <template>
-  <div>
-    <input class="form-control" type="text" id="search" autocomplete="off" :value="modelValue"
-      @input="handleInput" @focus="isDropDownVisible = true" @blur="handleBlur" />
-    <ul v-show="isDropDownVisible">
-      <li v-for="timeZone in searchValues" :key="timeZone">
-        <button class="btn btn-light" @mousedown.prevent.stop="handleButtonMouseDown"
-          @click.prevent="selectTimeZone(timeZone)">{{ timeZone }}</button>
-      </li>
-    </ul>
-    <p v-if="isValidTImeZone && checkValidity" class="text-danger">{{ isValidTImeZone }}</p>
-  </div>
+  <label for="time-zone" class="form-label">{{ label }}</label>
+  <input class="form-control" type="text" id="search" autocomplete="off" :class="{ invalid: isValidTImeZone }"
+    :value="modelValue" @input="handleInput" @focus="isDropDownVisible = true" @blur="handleBlur" />
+  <ul v-show="isDropDownVisible">
+    <li v-for="timeZone in searchValues" :key="timeZone">
+      <button class="btn btn-light" @mousedown.prevent.stop="handleButtonMouseDown"
+        @click.prevent="selectTimeZone(timeZone)">{{ timeZone }}</button>
+    </li>
+  </ul>
+  <span v-if="isValidTImeZone && checkValidity" class="text-danger">{{ isValidTImeZone }}</span>
 </template>
 
 <script setup>
@@ -35,6 +34,10 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  label: {
+    type: String,
+    default: 'Auto Complete'
+  }
 });
 
 
@@ -107,5 +110,9 @@ ul {
     max-width: 212px;
     min-width: 212px;
   }
+}
+
+.invalid {
+  border: 2px solid red;
 }
 </style>

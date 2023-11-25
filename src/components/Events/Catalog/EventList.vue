@@ -1,13 +1,9 @@
 <template>
     <section>
-        <div class="container py-2" v-if="store.events !== null && store.filteredEvents.length">
-            <TransitionGroup name="list" tag="ul">
-                <event-card v-for="event in store.filteredEvents" :key="event.id" :event-data="event"></event-card>
-            </TransitionGroup>
-        </div>
-        <div v-if="!store.events || !store.filteredEvents.length">
-            <empty-events></empty-events>
-        </div>
+        <TransitionGroup v-if="store.events !== null && store.filteredEvents.length" name="list" tag="ul">
+            <event-card v-for="event in store.filteredEvents" :key="event.id" :event-data="event"></event-card>
+        </TransitionGroup>
+        <empty-events v-if="!store.events || !store.filteredEvents.length"></empty-events>
     </section>
 </template>
 
@@ -32,12 +28,11 @@ store.getAllEvents();
 
 
 <style scoped lang="scss">
-
-
-
 .light {
     background: #f3f5f7;
-};
+}
+
+;
 
 
 #pageHeaderTitle {

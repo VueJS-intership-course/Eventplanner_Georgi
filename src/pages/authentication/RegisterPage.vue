@@ -1,8 +1,8 @@
 <template>
     <div>
-        <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
         <div class="container d-flex flex-column jusitfy-content-center align-items-center">
             <form @submit.self="signUp" class="d-flex flex-column align-items-center justify-content-center">
+                <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
                 <h1 class="text-light mb-4">Sign Up</h1>
                 <div class="mb-3">
                     <BasicInput name="email" type="email" label="Email address" />
@@ -20,8 +20,7 @@
                     <BasicInput name="country" type="text" label="Country" />
                 </div>
                 <div class="mb-4">
-                    <label for="time-zone" class="form-label text-light">Time zone</label>
-                    <auto-complete v-model="timeZoneSelcted" :data="constants.allTimeZones"></auto-complete>
+                    <auto-complete label="Time Zone" v-model="timeZoneSelcted" :data="constants.allTimeZones"></auto-complete>
                 </div>
                 <div class="controls">
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -125,7 +124,6 @@ const closeError = () => {
 </script>
 
 <style lang="scss" scoped>
-
 form {
     @include form-auth
 }

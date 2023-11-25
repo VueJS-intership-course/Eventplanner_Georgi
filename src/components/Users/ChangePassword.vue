@@ -1,19 +1,19 @@
 <template>
-    <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
     <TheModal @click.self="closeEdit">
         <div class="card card-body">
+            <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
             <h3 class="text-center mb-4 fw-bold">Change password</h3>
             <form @submit="handleChangePassword">
                 <div class="form-group has-error">
-                    <BasicInput type="password" id="currPass" name="currPass" label="Current password"
+                    <BasicInput type="password" name="currPass" label="Current password"
                         placeholder="Write down your current password" />
                 </div>
                 <div class="form-group">
-                    <BasicInput type="password" id="newPass" name="newPass" label="New Password"
+                    <BasicInput type="password" name="newPass" label="New Password"
                         placeholder="Write down your new password" />
                 </div>
                 <div class="form-group">
-                    <BasicInput type="password" id="rePass" name="rePass" label="Repeat New Password"
+                    <BasicInput type="password" name="rePass" label="Repeat New Password"
                         placeholder="Repeat your new password" />
                 </div>
                 <div class="form-group mt-4 text-center">

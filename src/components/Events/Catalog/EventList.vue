@@ -28,20 +28,6 @@ store.getAllEvents();
 
 
 <style scoped lang="scss">
-.light {
-    background: #f3f5f7;
-}
-
-;
-
-
-#pageHeaderTitle {
-    margin: 2rem 0;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 2.5rem;
-}
-
 .list-enter-active,
 .list-leave-active {
     transition: all 0.6s ease;

@@ -2,13 +2,9 @@
     <div>
         <EditEvent v-if="store.isEditing" />
         <div class="signle-event container d-flex flex-column justify-content-center align-items-center p-4 mt-4">
-            <div>
-                <SingleEventCard />
-            </div>
-                <AddExpense v-if="store.isAddExpense"/>
-            <div v-if="store.currentEvent">
-                <MapComp @map-ready="onMapReady" />
-            </div>
+            <AddExpense v-if="store.isAddExpense" />
+            <SingleEventCard />
+            <MapComp v-if="store.currentEvent" @map-ready="onMapReady" />
         </div>
     </div>
 </template>

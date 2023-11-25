@@ -60,6 +60,6 @@ it('should show error message if value doesn\'t exist', async () => {
     await input.setValue('Hello');
     await input.trigger('blur');
 
-    expect(wrapper.find('p.text-danger').exists()).toBe(true)
-    expect(wrapper.find('p.text-danger').text()).toBe('Please select a valid time zone!')
+    expect(wrapper.find('span.text-danger').exists()).toBe(true)
+    expect(wrapper.find('span.text-danger').text()).toBe('Please select a valid time zone!')
 })

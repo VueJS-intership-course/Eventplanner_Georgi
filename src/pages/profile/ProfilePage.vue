@@ -1,16 +1,12 @@
 <template>
     <div class="container d-flex flex-column justify-content-center mt-4 p-5">
         <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-md-7">
-                <ProfileCard />
-            </div>
+            <ProfileCard class="col-md-7" />
             <div v-if="usersEvents && !isUserAdmin" class="d-flex flex-column justify-content-center align-items-center">
                 <h2 class="fw-bold text-light">My events calendar</h2>
                 <CalendarComponent :data="usersEvents" @date-click="handleCalendarClick" />
             </div>
-            <div v-if="store.isEditing">
-                <EditProfile />
-            </div>
+            <EditProfile v-if="store.isEditing" />
         </div>
     </div>
 </template>
@@ -46,6 +42,9 @@ events.getAllEvents()
 */
 const usersEvents = computed(() => store.currentUser ? events.usersEvent(store.currentUser.email) : null)
 
+/*
+   check if user is admin
+*/
 const isUserAdmin = computed(() => store.isCurrentUserAdmin)
 
 /*
@@ -59,7 +58,6 @@ const handleCalendarClick = (event) => {
 </script>
 
 <style lang="scss" scoped>
-
 .container {
     @include page-background;
 

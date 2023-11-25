@@ -11,9 +11,9 @@ import TheModal from '@/common-templates/TheModal.vue'
 setActivePinia(createPinia());
 
 
-const push = jest.fn()
+const replace = jest.fn()
 useRouter.mockImplementationOnce(() => ({
-    push
+    replace
 }))
 
 let wrapper;
@@ -64,8 +64,8 @@ it('should handle filters correctly', async () => {
     await wrapper.vm.$nextTick();
 
 
-    expect(push).toBeCalled();
-    expect(push).toBeCalledTimes(1)
+    expect(replace).toBeCalled();
+    expect(replace).toBeCalledTimes(1)
 });
 
 

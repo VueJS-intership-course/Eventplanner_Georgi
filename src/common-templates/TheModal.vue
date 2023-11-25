@@ -6,11 +6,21 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { onBeforeMount, onBeforeUnmount } from 'vue';
+
+onBeforeMount(() => {
+    document.body.style.overflow = 'hidden';
+})
+
+onBeforeUnmount(() => {
+    document.body.style.overflow = '';
+})
+</script>
 
 <style lang="scss" scoped>
 
 .back-modal {
     @include modal-style;
-}
+};
 </style>

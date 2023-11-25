@@ -81,7 +81,6 @@ const handleEdit = () => {
 
         closeEdit();
 
-
     } catch (error) {
         errorMsg.value = error.message
     }
@@ -93,7 +92,7 @@ const handleEdit = () => {
 */
 
 const closeError = () => {
-    errorMsg.value = null
+    errorMsg.value = null;
 }
 
 </script>

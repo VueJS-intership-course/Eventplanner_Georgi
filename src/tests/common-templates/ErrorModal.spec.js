@@ -14,9 +14,6 @@ const wrapper = mount(ErrorModal, {
     }
 });
 
-it('should show the error message', async () => {
-    expect(wrapper.find('.modal-body').text()).toBe('Error message');
-});
 
 it('matches snapshot', async () => {
     expect(wrapper.html()).toMatchSnapshot();

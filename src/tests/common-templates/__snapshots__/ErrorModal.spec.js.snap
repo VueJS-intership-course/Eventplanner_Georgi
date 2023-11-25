@@ -1,19 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches snapshot 1`] = `
-<div class="back-modal">
-  <div class="add-modal container py-3 d-flex justify-content-center">
-    <div class="error-modal bg-light p-4" id="exampleModalCenter">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header mb-2 p-3">
-            <h5 class="modal-title text-danger fw-bold" id="exampleModalCenterTitle">Error occured</h5><button class="btn btn-primary"><span>×</span></button>
-          </div>
-          <div class="modal-body mb-3 p-3">Error message</div>
-          <div class="modal-footer p-3"><button type="button" class="btn btn-outline-primary">Close</button></div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="alert alert-danger" role="alert">
+  <p>Error message</p>
 </div>
 `;

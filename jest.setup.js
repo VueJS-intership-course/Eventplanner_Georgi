@@ -1,12 +1,3 @@
-jest.mock('vue-router', () => ({
-    useRoute: jest.fn(() => ({
-        query: {}
-    })),
-    useRouter: jest.fn(() => ({
-        push: () => { }
-    }))
-}))
-
 jest.mock("firebase/app", () => {
     return {
         initializeApp: jest.fn(),
@@ -20,7 +11,8 @@ jest.mock('vue-router', () => ({
         query: {}
     })),
     useRouter: jest.fn(() => ({
-        push: () => { }
+        push: () => { },
+        replace: () => { }
     }))
 }))
 

@@ -1,31 +1,29 @@
 <template>
-    <div>
-        <div class="container d-flex flex-column jusitfy-content-center align-items-center">
-            <form @submit="signIn" class="d-flex flex-column align-items-center justify-content-center">
-                <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
-                <h1 class="text-light mb-4">Sign In</h1>
-                <div class="mb-3">
-                    <BasicInput name="email" type="email" label="Email address" />
-                </div>
-                <div class="mb-3">
-                    <BasicInput name="password" type="password" label="Password" />
-                </div>
-                <div class="controls">
-                    <button type="submit" class="btn btn-primary mb-4">Submit</button>
-                </div>
+    <div class="container d-flex flex-column jusitfy-content-center align-items-center">
+        <form @submit="signIn" class="d-flex flex-column align-items-center justify-content-center">
+            <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
+            <h1 class="text-light mb-4">Sign In</h1>
+            <div class="mb-3">
+                <BasicInput name="email" type="email" label="Email address" />
+            </div>
+            <div class="mb-3">
+                <BasicInput name="password" type="password" label="Password" />
+            </div>
+            <div class="controls">
+                <button type="submit" class="btn btn-primary mb-4">Submit</button>
+            </div>
 
-                <div class="text-center text-light">
-                    <p>Not a member? <router-link :to="{ name: 'SignUp-Page' }">Sign Up</router-link></p>
-                    <p>or sign up with:</p>
-                    <button @click="signInGoogle" type="button" class="btn btn-danger btn-floating mx-1">
-                        <i class="bi bi-google"></i>
-                    </button>
-                    <button @click="signInFacebook" type="button" class="btn btn-primary btn-floating mx-1">
-                        <i class="bi bi-facebook"></i>
-                    </button>
-                </div>
-            </Form>
-        </div>
+            <div class="text-center text-light">
+                <p>Not a member? <router-link :to="{ name: 'SignUp-Page' }">Sign Up</router-link></p>
+                <p>or sign up with:</p>
+                <button @click="signInGoogle" type="button" class="btn btn-danger btn-floating mx-1">
+                    <i class="bi bi-google"></i>
+                </button>
+                <button @click="signInFacebook" type="button" class="btn btn-primary btn-floating mx-1">
+                    <i class="bi bi-facebook"></i>
+                </button>
+            </div>
+        </Form>
     </div>
 </template>
 

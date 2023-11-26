@@ -1,5 +1,6 @@
 <template>
     <div class="calendar bg-light">
+        <h2 class="text-center fw-bold text-primary">{{ props.title }}</h2>
         <FullCalendar :options='calendarOptions' />
     </div>
 </template>

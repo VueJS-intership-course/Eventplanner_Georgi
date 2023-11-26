@@ -1,7 +1,7 @@
 <template>
     <div class="card p-3 py-5 bg-light">
         <div class="text-center">
-            <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+            <img :src="constants.defaultUserImage"
                 width="100" class="rounded-circle">
         </div>
 
@@ -34,6 +34,7 @@
 import { computed } from 'vue';
 import { authStore } from '@/store/auth/authStore.js';
 import ChangePassword from '@/components/Users/ChangePassword.vue';
+import constants from '@/utils/constants.js';
 
 /*
    store

@@ -1,24 +1,22 @@
 <template>
-    <div>
-        <TheModal @click.self="closeAddExpense">
-            <div class="card card-body">
-                <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg" />
-                <h3 class="text-center mb-4 fw-bold">Add expense</h3>
-                <form @submit="handleAddExpense">
-                    <div class="form-group">
-                        <BasicInput type="select" :selectOptions="constants.expenseOptions" name="category"
-                            label="Expense Category" />
-                    </div>
-                    <div class="form-group">
-                        <BasicInput type="number" label="Amount" name="expenseAmount" placeholder="enter event expense" />
-                    </div>
-                    <div class="form-group mt-4 text-center">
-                        <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">Save</button>
-                    </div>
-                </form>
-            </div>
-        </TheModal>
-    </div>
+    <TheModal @click.self="closeAddExpense">
+        <div class="card card-body">
+            <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg" />
+            <h3 class="text-center mb-4 fw-bold">Add expense</h3>
+            <form @submit="handleAddExpense">
+                <div class="form-group">
+                    <BasicInput type="select" :selectOptions="constants.expenseOptions" name="category"
+                        label="Expense Category" />
+                </div>
+                <div class="form-group">
+                    <BasicInput type="number" label="Amount" name="expenseAmount" placeholder="enter event expense" />
+                </div>
+                <div class="form-group mt-4 text-center">
+                    <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </TheModal>
 </template>
 
 

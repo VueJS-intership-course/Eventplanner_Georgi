@@ -1,50 +1,48 @@
 <template>
-    <div>
-        <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
-        <TheModal @click.self="store.closeAdd">
-            <div class="card shadow rounded-2 my-auto">
-                <div class="card-header p-1 h4">
-                    Add Event
-                </div>
-                <div class="card-body">
-                    <form @submit="addEvent" role="form" class="row">
-                        <div class="form-group col-lg-4 ">
-                            <BasicInput type="text" placeholder="enter event name" name="name" label="Name" />
-                        </div>
-                        <div class="form-group col-lg-4 ">
-                            <BasicInput type="number" placeholder="enter event ticket"  name="tickets" label="Tickets" />
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <BasicInput type="number" placeholder="enter event ticket price"  name="price" label="Price" />
-                        </div>
-                        <div class="form-group col-lg-12 ">
-                            <BasicInput type="date"  name="date" label="Date" />
-                        </div>
-                        <div class="form-group col-lg-12 ">
-                            <BasicInput type="time" name="time" label="Time" />
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <BasicInput type="file" name="imgSrc" label="Image" />
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <BasicInput type="number" placeholder="enter event budget"  name="budget" label="Budget" />
-                        </div>
-                        <div class="col-lg-12 mb-4">
-                            <label class="form-control-label">Choose location</label>
-                            <div class="mb-4">
-                                <input type="text" v-model="location[1]" readonly> <input type="text" v-model="location[0]"
-                                    readonly>
-                            </div>
-                            <MapComp :is-small="true" @map-ready="mapReady" />
-                        </div>
-                        <div class="form-group col-lg-6">
-                            <button class="btn btn-primary float-end mt-4" for="form-group-input">Add Event</button>
-                        </div>
-                    </form>
-                </div>
+    <TheModal @click.self="store.closeAdd">
+        <div class="card shadow rounded-2 my-auto">
+            <div class="card-header p-1 h4">
+                Add Event
             </div>
-        </TheModal>
-    </div>
+            <div class="card-body">
+                <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
+                <form @submit="addEvent" role="form" class="row">
+                    <div class="form-group col-lg-4 ">
+                        <BasicInput type="text" placeholder="enter event name" name="name" label="Name" />
+                    </div>
+                    <div class="form-group col-lg-4 ">
+                        <BasicInput type="number" placeholder="enter tickets amount" name="tickets" label="Tickets" />
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <BasicInput type="number" placeholder="enter ticket price" name="price" label="Price" />
+                    </div>
+                    <div class="form-group col-lg-12 ">
+                        <BasicInput type="date" name="date" label="Date" />
+                    </div>
+                    <div class="form-group col-lg-12 ">
+                        <BasicInput type="time" name="time" label="Time" />
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <BasicInput type="file" name="imgSrc" label="Image" />
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <BasicInput type="number" placeholder="enter event budget" name="budget" label="Budget" />
+                    </div>
+                    <div class="col-lg-12 mb-4">
+                        <label class="form-control-label">Choose location</label>
+                        <div class="mb-4">
+                            <input type="text" v-model="location[1]" readonly> <input type="text" v-model="location[0]"
+                                readonly>
+                        </div>
+                        <MapComp :is-small="true" @map-ready="mapReady" />
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <button class="btn btn-primary float-end mt-4" for="form-group-input">Add Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </TheModal>
 </template>
 
 
@@ -159,11 +157,9 @@ const addEvent = handleSubmit((values) => {
 
     } catch (error) {
         errorMsg.value = error.message;
-        store.closeAdd();
     }
 })
 </script>
 
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

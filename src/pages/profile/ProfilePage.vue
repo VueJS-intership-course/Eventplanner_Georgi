@@ -1,13 +1,9 @@
 <template>
     <div class="container d-flex flex-column justify-content-center mt-4 p-5">
-        <div class="row d-flex justify-content-center align-items-center">
-            <ProfileCard class="col-md-7" />
-            <div v-if="usersEvents && !isUserAdmin" class="d-flex flex-column justify-content-center align-items-center">
-                <h2 class="fw-bold text-light">My events calendar</h2>
-                <CalendarComponent :data="usersEvents" @date-click="handleCalendarClick" />
-            </div>
-            <EditProfile v-if="store.isEditing" />
-        </div>
+        <ProfileCard class="col-md-7 mx-auto" />
+        <CalendarComponent class="col-md-7 mx-auto" v-if="usersEvents && !isUserAdmin" :data="usersEvents"
+            title="My events calendar" @date-click="handleCalendarClick" />
+        <EditProfile v-if="store.isEditing" />
     </div>
 </template>
 
@@ -60,9 +56,6 @@ const handleCalendarClick = (event) => {
 <style lang="scss" scoped>
 .container {
     @include page-background;
-
-    .row {
-        gap: 2rem;
-    }
+    gap:3rem
 }
 </style>

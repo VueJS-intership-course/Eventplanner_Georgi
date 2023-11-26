@@ -1,6 +1,7 @@
 <template>
     <div class="alert alert-danger" role="alert" @click="closeModal">
-        <p>{{ errorMsg }}</p>
+        <h4 class="fw-bold text-danger text-center">Error occured!</h4>
+        <p class="text-danger text-center">{{ errorMsg }}</p>
     </div>
 </template>
 

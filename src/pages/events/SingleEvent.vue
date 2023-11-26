@@ -1,11 +1,9 @@
 <template>
-    <div>
+    <div class="signle-event container d-flex flex-column justify-content-center align-items-center p-4 mt-4">
         <EditEvent v-if="store.isEditing" />
-        <div class="signle-event container d-flex flex-column justify-content-center align-items-center p-4 mt-4">
-            <AddExpense v-if="store.isAddExpense" />
-            <SingleEventCard />
-            <MapComp v-if="store.currentEvent" @map-ready="onMapReady" />
-        </div>
+        <AddExpense v-if="store.isAddExpense" />
+        <SingleEventCard />
+        <MapComp v-if="store.currentEvent" @map-ready="onMapReady" />
     </div>
 </template>
 
@@ -62,16 +60,8 @@ const onMapReady = (map) => {
 
 <style scoped lang="scss">
 .signle-event {
-    width: 100%;
     gap: 2.5rem;
     @include page-background;
-
-    .container {
-        justify-content: center;
-        align-items: center;
-        gap: 2rem;
-
-    }
 }
 </style>
 

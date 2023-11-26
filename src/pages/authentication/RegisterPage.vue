@@ -1,32 +1,30 @@
 <template>
-    <div>
-        <div class="container d-flex flex-column jusitfy-content-center align-items-center">
-            <form @submit.self="signUp" class="d-flex flex-column align-items-center justify-content-center">
-                <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
-                <h1 class="text-light mb-4">Sign Up</h1>
-                <div class="mb-3">
-                    <BasicInput name="email" type="email" label="Email address" />
-                </div>
-                <div class="mb-3">
-                    <BasicInput name="username" type="text" label="Username" />
-                </div>
-                <div class="mb-3">
-                    <BasicInput name="password" type="password" label="Password" />
-                </div>
-                <div class="mb-3">
-                    <BasicInput name="rePass" type="password" label="Repeat password" />
-                </div>
-                <div class="mb-3">
-                    <BasicInput name="country" type="text" label="Country" />
-                </div>
-                <div class="mb-4">
-                    <auto-complete label="Time Zone" v-model="timeZoneSelcted" :data="constants.allTimeZones"></auto-complete>
-                </div>
-                <div class="controls">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
+    <div class="container d-flex flex-column jusitfy-content-center align-items-center">
+        <form @submit.self="signUp" class="d-flex flex-column align-items-center justify-content-center">
+            <ErrorModal @close-error="closeError" v-if="errorMsg" :errorMsg="errorMsg"></ErrorModal>
+            <h1 class="text-light mb-4">Sign Up</h1>
+            <div class="mb-3">
+                <BasicInput name="email" type="email" label="Email address" />
+            </div>
+            <div class="mb-3">
+                <BasicInput name="username" type="text" label="Username" />
+            </div>
+            <div class="mb-3">
+                <BasicInput name="password" type="password" label="Password" />
+            </div>
+            <div class="mb-3">
+                <BasicInput name="rePass" type="password" label="Repeat password" />
+            </div>
+            <div class="mb-3">
+                <BasicInput name="country" type="text" label="Country" />
+            </div>
+            <div class="mb-4">
+                <auto-complete label="Time Zone" v-model="timeZoneSelcted" :data="constants.allTimeZones"></auto-complete>
+            </div>
+            <div class="controls">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
     </div>
 </template>
 

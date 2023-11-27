@@ -1,6 +1,6 @@
 <template>
     <TheModal @click.self="store.closeFilter">
-        <form @submit.prevent="handleFilters" class="filterer d-flex flex-column bg-light p-4">
+        <form @submit.prevent="handleFilters" class="card card-body d-flex flex-column bg-light p-4">
             <div class="header mb-3 text-center">
                 <h3 class="fw-bold">Filter</h3>
             </div>

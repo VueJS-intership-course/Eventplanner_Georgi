@@ -83,14 +83,20 @@ const errorMsg = ref(null)
 const handleChangePassword = handleSubmit(async (values) => {
     try {
 
+        const userCredentials = {
+            email: store.currentUser.email,
+            currPass: values.currPass,
+            newPass: values.newPass
+        }
+
         const isConfirmed = confirm('Are you sure you want to change your password?');
 
         if (isConfirmed) {
-            await store.changePassword(store.currentUser.email, values.currPass, values.newPass);
+            await store.changePassword(userCredentials);
+            closeEdit();
             router.push({ name: 'SignIn-Page' })
         }
 
-        closeEdit();
 
     } catch (error) {
         errorMsg.value = error.message

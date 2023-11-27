@@ -72,9 +72,7 @@ const handleAddExpense = handleSubmit(async (values) => {
         };
 
         await store.addExpense(store.currentEvent, expense);
-
         closeAddExpense();
-
         showNotifications(`Successfully added ${expense.category} expense with ${expense.amount}$ amount`)
     } catch (error) {
         errorMsg.value = error.message

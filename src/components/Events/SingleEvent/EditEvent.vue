@@ -124,9 +124,9 @@ const editEvent = handleSubmit(async (values) => {
         if (isConfirmed) {
             store.editEvent(event);
             showNotifications(`${event.name} is edited successfully!`);
+            store.closeModal();
         }
 
-        store.closeModal();
 
     } catch (error) {
         errorMsg.value = error.message;

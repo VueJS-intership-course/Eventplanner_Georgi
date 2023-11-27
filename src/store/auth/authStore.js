@@ -27,8 +27,8 @@ export const authStore = defineStore('authStore', {
             await authServices.signUp(userData)
         },
 
-        async signIn(email, password) {
-            await authServices.signIn(email, password)
+        async signIn(userCredentails) {
+            await authServices.signIn(userCredentails)
         },
 
         async signInWithGoogle() {
@@ -48,8 +48,8 @@ export const authStore = defineStore('authStore', {
             this.setCurrentUser(await authServices.getUserData(user.email));
         },
 
-        async changePassword(email, currentPassword, newPassword) {
-            await authServices.changePassword(email, currentPassword, newPassword);
+        async changePassword(userCredentails) {
+            await authServices.changePassword(userCredentails);
         }
     }
 })

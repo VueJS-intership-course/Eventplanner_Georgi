@@ -5,14 +5,10 @@
             <h3 class="text-center mb-4 fw-bold">Profile information</h3>
             <form @submit.prevent="handleEdit">
                 <div class="form-group has-error">
-                    <label for="email">Email</label>
-                    <input class="form-control input-lg" readonly id="email" :value="store.currentUser.email" name="email"
-                        type="text" />
+                    <BasicInput type="email" name="email" :readonly="true" :value="store.currentUser.email" label="Email"/>
                 </div>
                 <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input class="form-control input-lg" placeholder="Sequrity Answer" name="username" v-model="username"
-                        type="text" />
+                    <BasicInput type="text" name="username" :value="store.currentUser.username" label="Username"/>
                 </div>
                 <div class="form-group">
                     <label>TimeZone: </label>
@@ -35,6 +31,8 @@ import AutoComplete from '@/common-templates/AutoComplete.vue';
 import constants from '@/utils/constants.js';
 import { ref } from 'vue';
 import showNotifications from '@/utils/notifications.js'
+import { useForm } from 'vee-validate';
+import * as yup from 'yup';
 
 
 /*
@@ -42,12 +40,23 @@ import showNotifications from '@/utils/notifications.js'
 */
 const store = authStore();
 
+
+/*
+   validation
+*/
+
+const {handleSubmit} = useForm({
+    validationSchema: yup.object({
+        email: yup.string(),
+        username: yup.string().required('This field is required')
+    })
+})
+
 /*
    handle edit
 */
 
 const selectedTimeZone = ref(store.currentUser.timeZone);
-const username = ref(store.currentUser.username);
 
 const closeEdit = () => {
     store.isEditing = false
@@ -55,11 +64,11 @@ const closeEdit = () => {
 
 const errorMsg = ref(null)
 
-const handleEdit = () => {
+const handleEdit = handleSubmit((values) => {
     try {
         const user = {
-            email: store.currentUser.email,
-            username: username.value,
+            email: values.email,
+            username: values.username,
             timeZone: selectedTimeZone.value
         }
 
@@ -68,14 +77,14 @@ const handleEdit = () => {
         if (isConfirmed) {
             store.editProfile(user);
             showNotifications(`Profile has been edited!`);
+            closeEdit();
         }
 
-        closeEdit();
 
     } catch (error) {
         errorMsg.value = error.message
     }
-};
+})
 
 
 /*

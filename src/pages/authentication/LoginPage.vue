@@ -74,7 +74,12 @@ const { handleSubmit } = useForm({
 
 const signIn = handleSubmit(async (values) => {
     try {
-        await store.signIn(values.email, values.password);
+        const userCredentials = {
+            email: values.email,
+            password: values.password
+        }
+
+        await store.signIn(userCredentials);
 
         router.push({ name: 'Event-Catalog' });
 

@@ -19,17 +19,17 @@ export default {
                         username: user.username,
                         timeZone: user.timeZone,
                         tickets: 0,
-                        total:0
+                        total: 0
                     });
             }
         } catch (error) {
-          throw new Error('Error while signing up, please try again!')
+            throw new Error('Error while signing up, please try again!')
         }
     },
 
-    async signIn(email, password) {
+    async signIn(userCredentails) {
         try {
-            await firebaseData.fireAuth.signInWithEmailAndPassword(email, password);
+            await firebaseData.fireAuth.signInWithEmailAndPassword(userCredentails.email, userCredentails.password);
         } catch (error) {
             throw new Error('Invalid email or password')
         }
@@ -39,17 +39,17 @@ export default {
         try {
             const provider = new GoogleAuthProvider();
             provider.setCustomParameters({ prompt: 'select_account' });
-    
+
             const auth = getAuth();
             const result = await signInWithPopup(auth, provider);
-    
+
             const email = result.user.email;
-    
+
             const userExists = await firebaseData.fireStore
                 .collection('users')
                 .where('email', '==', email)
                 .get();
-    
+
             if (userExists.empty) {
                 await firebaseData.fireStore.collection('users').add({
                     email: result.user.email,
@@ -60,11 +60,11 @@ export default {
                     timeZone: '',
                 });
             }
-    
+
         } catch (error) {
             throw new Error('Error while signing up with Google, please try again!');
         }
-    },    
+    },
 
 
     async getUserData(email) {
@@ -84,23 +84,26 @@ export default {
 
     async signInWithFacebook() {
         try {
-             const provider = new FacebookAuthProvider();
-        const auth = getAuth();
+            const provider = new FacebookAuthProvider();
+            const auth = getAuth();
 
+            const result = await signInWithPopup(auth, provider);
 
-        const result = await signInWithPopup(auth, provider);
+            const userRef = firebaseData.fireStore.collection('users').doc(result.user.uid);
+            const userDoc = await userRef.get();
 
-
-        await firebaseData.fireStore.collection('users').add({
-            email: result.user.email,
-            username: result.user.displayName,
-            id: result.user.uid,
-            total:0,
-            tickets:0,
-            timeZone: ''
-        })
+            if (!userDoc.exists) {
+                await userRef.set({
+                    email: result.user.email,
+                    username: result.user.displayName,
+                    id: result.user.uid,
+                    total: 0,
+                    tickets: 0,
+                    timeZone: ''
+                });
+            }
         } catch (error) {
-           throw new Error('Error while signing up with Facebook, please try again!')
+            throw new Error('Error while signing up with Facebook, please try again!');
         }
     },
 
@@ -123,7 +126,7 @@ export default {
     async logout() {
         try {
             await firebaseData.fireAuth.signOut();
-            
+
         } catch (error) {
             throw new Error('Error while loging out, please try again!')
         }
@@ -132,34 +135,34 @@ export default {
     async updateUsersProfile(user) {
         try {
             const querySnapshot = await firebaseData.fireStore.collection('users').where('email', '==', user.email).get();
-            
+
             const [doc] = querySnapshot.docs;
 
             doc.ref.update({
-               username:user.username,
-               timeZone:user.timeZone
+                username: user.username,
+                timeZone: user.timeZone
             })
         } catch (error) {
             throw new Error('Error while updating profile, please try again!')
         }
     },
 
-    async changePassword(email, currentPassword, newPassword) {
+    async changePassword(userCredentails) {
         try {
             const user = firebaseData.fireAuth.currentUser;
 
             if (user) {
-                const credential = EmailAuthProvider.credential(email, currentPassword);
+                const credential = EmailAuthProvider.credential(userCredentails.email, userCredentails.currPass);
                 await reauthenticateWithCredential(user, credential);
 
-                await updatePassword(user, newPassword);
+                await updatePassword(user, userCredentails.newPass);
 
                 await this.logout()
             } else {
                 throw new Error("User is not authenticated or found.");
             }
         } catch (error) {
-           throw new Error('Error while changing password, please try again!')
+            throw new Error('Error while changing password, please try again!')
         }
     },
 
@@ -167,12 +170,12 @@ export default {
     async addTicketInformation(user, event) {
         try {
             const querySnapshot = await firebaseData.fireStore.collection('users').where('email', '==', user.email).get();
-            
+
             const [doc] = querySnapshot.docs;
-            
+
             const tickets = doc.data().tickets + 1;
             const total = doc.data().total + event.price;
-          
+
             doc.ref.update({
                 tickets,
                 total

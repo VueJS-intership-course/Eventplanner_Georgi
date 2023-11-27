@@ -30,9 +30,9 @@ export default {
 
 
 
-    async addEvent(eventData, file) {
+    async addEvent(eventData) {
         try {
-            const blobImg = await uploadImage(file)
+            const blobImg = await uploadImage(eventData.imgSrc)
 
             await firebaseData.fireStore.collection("events").add({
                 id: crypto.randomUUID(),

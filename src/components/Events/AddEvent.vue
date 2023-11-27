@@ -142,18 +142,19 @@ const addEvent = handleSubmit((values) => {
             offset: moment.tz.zone(tzlookup(location.value[1], location.value[0])).utcOffset(moment.tz(`${values.date}T${values.time}`, tzlookup(location.value[1], location.value[0]))) / 60,
             budget: values.budget,
             date: values.date,
-            time: values.time
+            time: values.time,
+            imgSrc: values.imgSrc
         }
 
         console.log(newEvent, values.imgSrc);
         const isConfirmed = confirm(`Are you sure you want to add ${values.name}?`)
 
         if (isConfirmed) {
-            store.addEvent(newEvent, values.imgSrc);
+            store.addEvent(newEvent);
             showNotifications(`${newEvent.name} is added to the catalog!`);
+            store.closeAdd();
         }
 
-        store.closeAdd();
 
     } catch (error) {
         errorMsg.value = error.message;

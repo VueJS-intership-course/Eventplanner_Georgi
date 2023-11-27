@@ -1,14 +1,9 @@
 <template>
     <div class="container d-flex flex-column justify-content-center p-5">
-        <div class="align-self-center">
-            <h2 class="fw-bold text-light">Analytics</h2>
-        </div>
-        <div v-if="store.events">
-            <LineChart :categories="constants.eventsChartCategories" title="Events analytics" @page-filter="handleChartEvent" :data="data" type="column" />
-        </div>
-        <div v-if="!store.events" class="align-self-center">
-            <h3 class="fw-bold text-light">There is no analytics yet!</h3>
-        </div>
+        <h2 class="fw-bold text-light align-self-center">Analytics</h2>
+        <LineChart v-if="store.events" :categories="constants.eventsChartCategories" title="Events analytics"
+            @page-filter="handleChartEvent" :data="data" type="column" />
+        <h3 v-if="!store.events" class="fw-bold text-light align-self-center">There is no analytics yet!</h3>
     </div>
 </template>
 
@@ -60,7 +55,6 @@ const handleChartEvent = (monthIndex) => {
 </script>
 
 <style lang="scss" scoped>
-
 .container {
     @include page-background;
     gap: 2rem

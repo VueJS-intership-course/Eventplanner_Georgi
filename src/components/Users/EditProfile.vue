@@ -66,6 +66,10 @@ const errorMsg = ref(null)
 
 const handleEdit = handleSubmit((values) => {
     try {
+        if (!constants.allTimeZones.find(tz => tz === selectedTimeZone.value)) {
+        throw new Error('Please select valid time zone!')
+    }
+
         const user = {
             email: values.email,
             username: values.username,

@@ -12,7 +12,6 @@
             <div class="controls">
                 <button type="submit" class="btn btn-primary mb-4">Submit</button>
             </div>
-
             <div class="text-center text-light">
                 <p>Not a member? <router-link :to="{ name: 'SignUp-Page' }">Sign Up</router-link></p>
                 <p>or sign up with:</p>

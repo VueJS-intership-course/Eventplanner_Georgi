@@ -1,6 +1,6 @@
 <template>
     <TheModal @click.self="store.closeAdd">
-        <div class="card shadow rounded-2 my-auto">
+        <div class="card shadow rounded-1 my-auto">
             <div class="card-header p-1 h4">
                 Add Event
             </div>
@@ -70,7 +70,7 @@ import moment from 'moment-timezone';
 
 const { handleSubmit } = useForm({
     validationSchema: yup.object({
-        name: yup.string().required("This field is required!"),
+        name: yup.string().trim().required("This field is required!"),
         tickets: yup
             .number()
             .typeError('Tickets must be a number')

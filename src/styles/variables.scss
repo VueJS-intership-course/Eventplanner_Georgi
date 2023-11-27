@@ -15,6 +15,13 @@ $main-blue: #0076bd !default;
 $main-blue-rgb-015: rgba(0, 118, 189, 0.1) !default;
 $welcome-message-color:rgb(19, 25, 105);
 
+@mixin page-background {
+    background: rgb(29, 194, 217);
+    background: linear-gradient(90deg, rgba(29, 194, 217, 1) 0%, rgba(126, 105, 212, 0.8183648459383753) 94%);
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 2%;
+}
+
 @mixin form-auth {
     @include page-background;
     padding: 2rem;
@@ -26,15 +33,6 @@ $welcome-message-color:rgb(19, 25, 105);
         font-weight: bolder;
     }
 };
-
-
-@mixin page-background {
-    background: rgb(29, 194, 217);
-    background: linear-gradient(90deg, rgba(29, 194, 217, 1) 0%, rgba(126, 105, 212, 0.8183648459383753) 94%);
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 2%;
-}
-
 
 @mixin modal-style {
     position: fixed;

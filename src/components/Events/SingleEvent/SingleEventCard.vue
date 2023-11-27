@@ -1,12 +1,12 @@
 <template>
     <div>
-        <ErrorModal @close-error="closeError" v-if="errorMsg" :erorrMsg="errorMsg" />
         <div v-if="store.currentEvent" class="container d-flex mt-4 p-4 bg-light ">
             <div class="pmd-card-media p-3">
                 <img :src="store.currentEvent.imgSrc" width="600" height="500" class="img-fluid">
             </div>
             <div>
                 <div class="card-header mb-4">
+                    <ErrorModal @close-error="closeError" v-if="errorMsg" :erorrMsg="errorMsg" />
                     <h2 class="card-title">{{ store.currentEvent.name }}</h2>
                     <p class="card-subtitle">{{ $formatDateInTimeZone(store.currentEvent.dateTime) }}</p>
                     <p v-if="isEventExpired" class="fw-bold text-danger">Event Date Expired</p>
@@ -161,7 +161,7 @@ const handleBuyTicket = async () => {
     has user bought ticket
 */
 
-const hasUserBoughtTIcket = computed(() => users.currentUser ? store.hasUserBoughTicket(users.currentUser.email) : null)
+const hasUserBoughtTIcket = computed(() => users.currentUser ? store.hasUserBoughTicket(users.currentUser.email) : false)
 
 /*
    has available tickets

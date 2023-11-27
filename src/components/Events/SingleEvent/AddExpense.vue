@@ -5,7 +5,7 @@
             <h3 class="text-center mb-4 fw-bold">Add expense</h3>
             <form @submit="handleAddExpense">
                 <div class="form-group">
-                    <BasicInput type="select" :selectOptions="constants.expenseOptions" name="category"
+                    <BasicInput as="select" type="select" :selectOptions="constants.expenseOptions" name="category"
                         label="Expense Category" />
                 </div>
                 <div class="form-group">
@@ -57,6 +57,7 @@ const { handleSubmit } = useForm({
             .required('This field is required'),
         expenseAmount: yup
             .number()
+            .min(0)
             .typeError('Amount must be a number')
             .required("This field is required!")
     })

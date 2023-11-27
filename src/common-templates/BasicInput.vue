@@ -1,15 +1,19 @@
 <template>
-    <label class="form-label">{{ label }}</label>
-    <Field v-if="type !== 'select'" :value="value" :name="name" :readonly="readonly" class="form-control" :type="type" :class="{ 'is-invalid': meta.touched && !meta.valid }" :placeholder="placeholder"/>
-    <Field v-if="type === 'select'" class="form-control" :as="'select'" :name="name" :value="value"
-        :class="{ 'is-invalid': meta.touched && !meta.valid }">
-        <option v-for="option in selectOptions" :value="option.value">{{ option.label }}</option>
-    </Field>
-    <ErrorMessage :name="name" class="text-danger" />
+    <div>
+        <label class="form-label">{{ label }}</label>
+        <Field v-bind="{ ...attributes }" :class="{ 'is-invalid': meta.touched && !meta.valid }"
+            class="form-control">
+            <option v-if="as==='select'" v-for="option in selectOptions" :value="option.value">{{ option.label }}</option>
+        </Field>
+        <slot name="error" :error="name">
+            <ErrorMessage :name="name" class="text-danger" />
+        </slot>
+    </div>
 </template>
   
 <script setup>
 import { Field, ErrorMessage, useField } from "vee-validate";
+import { computed } from "vue";
 
 const props = defineProps({
     label: {
@@ -18,7 +22,7 @@ const props = defineProps({
     },
     type: {
         type: String,
-        required: true,
+        default: 'text'
     },
     name: {
         type: String,
@@ -34,13 +38,26 @@ const props = defineProps({
         type: String,
     },
     readonly: {
-        type:Boolean,
+        type: Boolean,
         default: false
+    },
+    as: {
+        type: String,
+        default: 'input'
     }
 });
 
 const { meta } = useField(props.name);
+
+const attributes = computed(() => ({
+    readonly: props.readonly,
+    type: props.type,
+    value: props.value,
+    name: props.name,
+    placeholder: props.placeholder,
+    as: props.as !== 'input' ? props.as : 'input',
+}))
+
 </script>
   
 <style scoped></style>
-  

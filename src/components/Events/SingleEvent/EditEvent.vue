@@ -65,7 +65,7 @@ import moment from 'moment-timezone';
 
 const { handleSubmit } = useForm({
     validationSchema: yup.object({
-        name: yup.string().required("This field is required!"),
+        name: yup.string().trim().required("This field is required!"),
         ticket: yup
             .number()
             .typeError('Tickets must be a number')

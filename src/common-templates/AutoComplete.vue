@@ -1,14 +1,18 @@
 <template>
-  <label for="time-zone" class="form-label">{{ label }}</label>
-  <input class="form-control" type="text" id="search" autocomplete="off" :class="{ invalid: isValidTImeZone }"
-    :value="modelValue" @input="handleInput" @focus="isDropDownVisible = true" @blur="handleBlur" />
-  <ul v-show="isDropDownVisible">
-    <li v-for="timeZone in searchValues" :key="timeZone">
-      <button class="btn btn-light" @mousedown.prevent.stop="handleButtonMouseDown"
-        @click.prevent="selectTimeZone(timeZone)">{{ timeZone }}</button>
-    </li>
-  </ul>
-  <span v-if="isValidTImeZone && checkValidity" class="text-danger">{{ isValidTImeZone }}</span>
+  <div class="input-container">
+    <label for="time-zone" class="form-label">{{ label }}</label>
+    <input class="form-control" ref="searchField" type="text" id="search" autocomplete="off"
+      :class="{ invalid: isValidTImeZone }" v-model="searchValue" @focus="handleFocus" @blur="handleBlur" />
+    <ul v-show="isDropDownVisible">
+      <li v-for="timeZone in searchValues" :key="timeZone">
+        <button class="btn btn-light" :class="{ 'selected': modelValue === timeZone }"
+          @mousedown.prevent.stop="handleButtonMouseDown" @click.prevent="selectTimeZone(timeZone)">{{ timeZone
+          }}</button>
+      </li>
+      <li v-if="!searchValues.length" class="message-notFound bg-light">Result not found</li>
+    </ul>
+    <span v-if="isValidTImeZone && checkValidity" class="text-danger">{{ isValidTImeZone }}</span>
+  </div>
 </template>
 
 <script setup>
@@ -21,6 +25,8 @@ import { ref, computed, nextTick } from 'vue';
   emits
 */
 const emits = defineEmits(['update:modelValue']);
+
+const searchField = ref(null)
 
 /*
   props
@@ -46,28 +52,31 @@ const props = defineProps({
 */
 const isDropDownVisible = ref(false);
 const checkValidity = ref(false);
-
+const searchValue = ref(props.modelValue);
 /*
    handle blur
 */
 const handleBlur = () => {
   nextTick(() => {
+    searchValue.value = props.modelValue
     checkValidity.value = true;
     isDropDownVisible.value = false;
   });
 };
 
-
-const handleInput = (event) => {
-  emits('update:modelValue', event.target.value);
+/*
+  handle focus
+*/
+const handleFocus = () => {
   isDropDownVisible.value = true;
-};
+  searchValue.value = '';
+}
 
 /*
    show options
 */
 const searchValues = computed(() => props.data.filter(timeZone => timeZone.toLowerCase()
-  .includes(props.modelValue.toLocaleLowerCase()))
+  .includes(searchValue.value.toLocaleLowerCase()))
   .slice(0, 10)
   .sort((a, b) => a.localeCompare(b))
 );
@@ -77,7 +86,9 @@ const searchValues = computed(() => props.data.filter(timeZone => timeZone.toLow
 */
 const selectTimeZone = (val) => {
   emits('update:modelValue', val);
+  searchValue.value = val
   isDropDownVisible.value = false;
+  searchField.value.blur()
 };
 
 /*
@@ -85,7 +96,7 @@ const selectTimeZone = (val) => {
 */
 const isValidTImeZone = computed(() => {
   if (checkValidity.value) {
-    return !props.data.find(timeZone => timeZone === props.modelValue) ? 'Please select a valid time zone!' : null;
+    return !props.data.find(timeZone => timeZone === props.modelValue) ? 'Please select a valid time zone!' : false;
   } else {
     return null;
   }
@@ -94,7 +105,13 @@ const isValidTImeZone = computed(() => {
 </script>
 
 <style scoped lang="scss">
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
 ul {
+  width: 100%;
   position: absolute;
   flex-direction: column;
   padding: 0;
@@ -107,8 +124,12 @@ ul {
   button {
     width: 100%;
     padding: 1rem;
-    max-width: 212px;
-    min-width: 212px;
+    border-radius: 0;
+  }
+
+  .message-notFound {
+    width: 100%;
+    padding: 1rem;
   }
 }
 
@@ -118,5 +139,10 @@ ul {
   background-repeat: no-repeat;
   background-position: right calc(.375em + .1875rem) center;
   background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.selected {
+  background: gray;
+  color: white
 }
 </style>

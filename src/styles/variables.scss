@@ -38,6 +38,7 @@ $welcome-message-color:rgb(19, 25, 105);
 
 @mixin modal-style {
     position: fixed;
+    overflow: auto;
     top: 0;
     left: 0;
     height: 100%;

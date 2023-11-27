@@ -1,6 +1,6 @@
 <template>
     <label class="form-label">{{ label }}</label>
-    <Field v-if="type !== 'select'" :value="value" :name="name" :readonly="readonly" class="form-control" :type="type" :placeholder="placeholder"/>
+    <Field v-if="type !== 'select'" :value="value" :name="name" :readonly="readonly" class="form-control" :type="type" :class="{ 'is-invalid': meta.touched && !meta.valid }" :placeholder="placeholder"/>
     <Field v-if="type === 'select'" class="form-control" :as="'select'" :name="name" :value="value"
         :class="{ 'is-invalid': meta.touched && !meta.valid }">
         <option v-for="option in selectOptions" :value="option.value">{{ option.label }}</option>

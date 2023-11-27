@@ -2,6 +2,7 @@
 
 exports[`matches snapshot 1`] = `
 <div class="alert alert-danger" role="alert">
-  <p>Error message</p>
+  <h4 class="fw-bold text-danger text-center">Error occured!</h4>
+  <p class="text-danger text-center">Error message</p>
 </div>
 `;

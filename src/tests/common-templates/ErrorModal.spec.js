@@ -18,4 +18,3 @@ const wrapper = mount(ErrorModal, {
 it('matches snapshot', async () => {
     expect(wrapper.html()).toMatchSnapshot();
 });
-

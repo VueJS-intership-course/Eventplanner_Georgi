@@ -1,10 +1,7 @@
 <template>
   <div class="input-container">
-    <!-- <BasicInput type="text" name="search" ref="searchField" :value="props.modelValue" v-model="searchValue" label="Time Zone"
-      :events="{ onblur: handleBlur, onfocus: handleFocus }" /> -->
-    <label for="time-zone" class="form-label">{{ label }}</label>
-    <input class="form-control" ref="searchField" type="text" id="search" autocomplete="off"
-      :class="{ invalid: isValidTImeZone }" v-model="searchValue" @focus="handleFocus" @blur="handleBlur" />
+    <BasicInput type="text" name="search" autocomplete="off" ref="searchField" :value="props.modelValue" :label="label"
+      :events="{ onblur: handleBlur, onfocus: handleFocus, oninput: (e) => searchValue = e.target.value }" />
     <ul v-show="isDropDownVisible">
       <li v-for="timeZone in searchValues" :key="timeZone">
         <button class="btn btn-light" :class="{ 'selected': modelValue === timeZone }"
@@ -93,8 +90,8 @@ const selectTimeZone = (val) => {
   emits('update:modelValue', val);
   searchValue.value = val;
   isDropDownVisible.value = false;
-  searchField.value.blur()
-  // searchField.value.element.blur()
+  // searchField.value.blur()
+  searchField.value.element.blur()
 };
 
 /*

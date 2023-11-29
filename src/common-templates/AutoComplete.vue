@@ -28,6 +28,9 @@ import { ref, computed, nextTick } from 'vue';
 */
 const emits = defineEmits(['update:modelValue']);
 
+/*
+  template input ref
+*/
 const searchField = ref(null)
 
 /*

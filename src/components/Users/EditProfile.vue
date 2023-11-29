@@ -11,7 +11,6 @@
                     <BasicInput type="text" name="username" :value="store.currentUser.username" label="Username"/>
                 </div>
                 <div class="form-group">
-                    <label>TimeZone: </label>
                     <auto-complete v-model="selectedTimeZone" :data="constants.allTimeZones"></auto-complete>
                 </div>
                 <div class="form-group mt-4 text-center">

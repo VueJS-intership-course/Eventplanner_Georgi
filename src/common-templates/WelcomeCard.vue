@@ -17,9 +17,7 @@
 <style lang="scss" scoped>
 
 img {
-    filter: blur(1px);
-    -webkit-filter: blur(3px);
-    
+    filter: blur(1px);    
 }
 
 .card-title {

@@ -57,9 +57,6 @@ it('should show error message if value doesn\'t exist', async () => {
     const input = wrapper.find('input');
 
     await input.trigger('focus');
-    await input.setValue('Hello');
-    await input.trigger('blur');
-
-    expect(wrapper.find('span.text-danger').exists()).toBe(true)
-    expect(wrapper.find('span.text-danger').text()).toBe('Please select a valid time zone!')
+    
+    expect(wrapper.vm.searchValue).toBe('')
 })

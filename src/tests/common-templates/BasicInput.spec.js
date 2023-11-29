@@ -21,7 +21,7 @@ it('should be select if type is select with select options', () => {
     const wrapper = mount(BasicInput, {
         props: {
             name: 'timeZone',
-            type: 'select',
+            as: 'select',
             label: 'Time Zone',
             selectOptions: ['africa', 'europe', 'asia']
         }
@@ -32,19 +32,4 @@ it('should be select if type is select with select options', () => {
 })
 
 
-// it('should handle input of type file correctly', async () => {
-//     const wrapper = mount(BasicInput, {
-//         props: {
-//             name: 'Image',
-//             type: 'file',
-//             label: 'Image'
-//         }
-//     });
-
-//     const file = new File(['hello'], 'hello.jpg', { type: 'image/jpeg' });
-
-//     const mockEvent = { target: { files: [file] } };
-
-//     expect(wrapper.vm.value).toBeInstanceOf(File)
-// });
 

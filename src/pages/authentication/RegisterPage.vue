@@ -19,7 +19,8 @@
                 <BasicInput name="country" type="text" label="Country" />
             </div>
             <div class="mb-4">
-                <auto-complete label="Time Zone" v-model="timeZoneSelcted" :data="constants.allTimeZones"></auto-complete>
+                <auto-complete name="timeZone" label="Time Zone" v-model="timeZoneSelcted"
+                    :data="constants.allTimeZones"></auto-complete>
             </div>
             <div class="controls">
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -72,9 +73,13 @@ const { handleSubmit } = useForm({
             .string()
             .required("This field is required!")
             .oneOf([yup.ref("password")], "Passwords does not match!"),
-        country: yup.
-            string()
-            .required('This field is required!')
+        country: yup
+            .string()
+            .required('This field is required!'),
+        timeZone: yup
+            .string()
+            .oneOf([...constants.allTimeZones], 'Invalid Time Zone')
+            .required('This field is required!'),
     })
 })
 
@@ -86,19 +91,13 @@ const timeZoneSelcted = ref('');
 const errorMsg = ref(null)
 
 const signUp = handleSubmit(async (values) => {
-
-    if (!constants.allTimeZones.find(tz => tz === timeZoneSelcted.value)) {
-        throw new Error('Please select valid time zone!')
-    }
-
     try {
         const userInfo = {
             email: values.email,
             username: values.username,
             password: values.password,
-            timeZone: timeZoneSelcted.value,
+            timeZone: values.timeZone,
         };
-
 
         await store.signUp(userInfo)
 

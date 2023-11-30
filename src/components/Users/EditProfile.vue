@@ -11,7 +11,7 @@
                     <BasicInput type="text" name="username" :value="store.currentUser.username" label="Username"/>
                 </div>
                 <div class="form-group">
-                    <auto-complete v-model="selectedTimeZone" :data="constants.allTimeZones"></auto-complete>
+                    <auto-complete name="timeZone" v-model="selectedTimeZone" :data="constants.allTimeZones"></auto-complete>
                 </div>
                 <div class="form-group mt-4 text-center">
                     <button class="btn btn-lg btn-primary btn-block mx-auto" type="submit">Save</button>
@@ -47,7 +47,8 @@ const store = authStore();
 const {handleSubmit} = useForm({
     validationSchema: yup.object({
         email: yup.string(),
-        username: yup.string().required('This field is required')
+        username: yup.string().required('This field is required'),
+        timeZone: yup.string().oneOf([...constants.allTimeZones], 'Invalid Time Zone').required('This field is required')
     })
 })
 
@@ -72,7 +73,7 @@ const handleEdit = handleSubmit((values) => {
         const user = {
             email: values.email,
             username: values.username,
-            timeZone: selectedTimeZone.value
+            timeZone: values.timeZone
         }
 
         const isConfirmed = confirm('Are you sure you want to change your profile information?')

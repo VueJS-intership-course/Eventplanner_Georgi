@@ -1,6 +1,7 @@
 <template>
   <div class="input-container">
-    <BasicInput type="text" name="search" autocomplete="off" ref="searchField" :value="props.modelValue" :label="label"
+    <BasicInput type="text" :name="name" autocomplete="off" ref="searchField" :value="props.modelValue"
+      v-model="searchValue" :label="label"
       :events="{ onblur: handleBlur, onfocus: handleFocus, oninput: (e) => searchValue = e.target.value }" />
     <ul v-show="isDropDownVisible">
       <li v-for="timeZone in searchValues" :key="timeZone">
@@ -10,7 +11,6 @@
       </li>
       <li v-if="!searchValues.length" class="message-notFound bg-light">Result not found</li>
     </ul>
-    <span v-if="isValidTImeZone && checkValidity" class="text-danger">{{ isValidTImeZone }}</span>
   </div>
 </template>
 
@@ -45,6 +45,10 @@ const props = defineProps({
   label: {
     type: String,
     default: 'Auto Complete'
+  },
+  name: {
+    type: String,
+    required: true
   }
 });
 
@@ -53,7 +57,6 @@ const props = defineProps({
    handling custom autocomplete dropdown
 */
 const isDropDownVisible = ref(false);
-const checkValidity = ref(false);
 const searchValue = ref(props.modelValue);
 /*
    handle blur
@@ -61,7 +64,6 @@ const searchValue = ref(props.modelValue);
 const handleBlur = () => {
   nextTick(() => {
     searchValue.value = props.modelValue
-    checkValidity.value = true;
     isDropDownVisible.value = false;
   });
 };
@@ -90,21 +92,8 @@ const selectTimeZone = (val) => {
   emits('update:modelValue', val);
   searchValue.value = val;
   isDropDownVisible.value = false;
-  // searchField.value.blur()
   searchField.value.element.blur()
 };
-
-/*
-  handle time zone validation
-*/
-const isValidTImeZone = computed(() => {
-  if (checkValidity.value) {
-    return !props.data.find(timeZone => timeZone === props.modelValue) ? 'Please select a valid time zone!' : false;
-  } else {
-    return null;
-  }
-});
-
 </script>
 
 <style scoped lang="scss">
